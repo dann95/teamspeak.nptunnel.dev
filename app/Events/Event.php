@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace NpTS\Events;
 
 abstract class Event
 {
