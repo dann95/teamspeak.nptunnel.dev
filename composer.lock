@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c6026b96e6fa11a641b51a6ba976f5e",
-    "content-hash": "5bd58fd976f1ee3e9611bc37c006ec46",
+    "hash": "44f31a4545c322042a65a18a3cecc863",
+    "content-hash": "3b00f0c5e0584bf345a8a63e6528f502",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -942,6 +942,42 @@
                 "shell"
             ],
             "time": "2015-07-16 15:26:57"
+        },
+        {
+            "name": "st-gc/teamspeak-php-framework",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/st-gc/teamspeak-php-framework.git",
+                "reference": "7b023bf6870237f62e2119c0173cb16e5a50285b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/st-gc/teamspeak-php-framework/zipball/7b023bf6870237f62e2119c0173cb16e5a50285b",
+                "reference": "7b023bf6870237f62e2119c0173cb16e5a50285b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "TeamSpeak": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Scherer",
+                    "email": "aaron@st-gc.org"
+                }
+            ],
+            "description": "PHP 5.3+ TeamSpeak 3 Framework",
+            "time": "2013-10-13 22:12:33"
         },
         {
             "name": "swiftmailer/swiftmailer",
