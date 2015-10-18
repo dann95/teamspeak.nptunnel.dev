@@ -10,6 +10,6 @@ Route::group([
     'prefix' => 'teste'
 ] , function(){
     Route::get('cliente' , function(){
-        return view('welcome');
+        return view('Client.Layout.default');
     });
 });
