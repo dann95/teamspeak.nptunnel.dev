@@ -144,6 +144,8 @@ return [
         NpTS\Providers\AuthServiceProvider::class,
         NpTS\Providers\EventServiceProvider::class,
         NpTS\Providers\RouteServiceProvider::class,
+        NpTS\Domain\Client\ClientServiceProvider::class,
+        NpTS\Domain\Admin\AdminServiceProvider::class,
 
     ],
 
