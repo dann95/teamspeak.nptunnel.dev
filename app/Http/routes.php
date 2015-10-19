@@ -1,7 +1,7 @@
 <?php
 
 use NpTS\Domain\TeamSpeak\Manager;
-
+use NpTS\Domain\Admin\Repositories\Contracts\ServerRepositoryContract;
 
 Route::get('/' , 'FrontController@index');
 
@@ -21,5 +21,9 @@ Route::group(['prefix' => 'teste'] , function(){
 
         $manager->startServerBySid(2);
 
+    });
+
+    Route::get('server' , function(ServerRepositoryContract $repo){
+        dd($repo->delete(55));
     });
 });

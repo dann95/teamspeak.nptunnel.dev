@@ -3,6 +3,9 @@
 namespace NpTS\Domain\Admin;
 
 use Illuminate\Support\ServiceProvider;
+use NpTS\Domain\Admin\Repositories\ServerRepository;
+use NpTS\Domain\Admin\Repositories\Contracts\ServerRepositoryContract;
+
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -14,8 +17,6 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /**
-         * @todo blind all repositories
-         */
+        $this->app->bind(ServerRepositoryContract::class , ServerRepository::class);
     }
 }
