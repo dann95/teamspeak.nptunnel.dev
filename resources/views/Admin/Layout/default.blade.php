@@ -129,7 +129,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="profile.html"><img src="/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="profile.html"><img src="/img/avatar/thusk-avatar.png" style="margin-left:-50px;" class="img-rounded" width="128"></a></p>
                 <h5 class="centered">Thomas Girafales</h5>
 
                 <li class="sub-menu">
@@ -149,6 +149,40 @@
                         <li><a  href="{{ route('plan.create') }}">Inserir</a></li>
                     </ul>
                 </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-server"></i>
+                        <span>Servers</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="{{ route('plan.index') }}">Listar</a></li>
+                        <li><a  href="{{ route('plan.create') }}">Inserir</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-male"></i>
+                        <span>Clientes</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="{{ route('plan.index') }}">Listar</a></li>
+                        <li><a  href="{{ route('plan.create') }}">Inserir</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" >
+                        <i class="fa fa-sitemap"></i>
+                        <span>Virtual Servers</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="{{ route('plan.index') }}">Listar</a></li>
+                        <li><a  href="{{ route('plan.create') }}">Inserir</a></li>
+                    </ul>
+                </li>
+
             </ul>
             <!-- sidebar menu end-->
         </div>
