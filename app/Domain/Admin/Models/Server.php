@@ -19,4 +19,9 @@ class Server extends Model
         'slots',
         'max_slots',
     ];
+
+    public function getUsageAttribute()
+    {
+        return $this->slots."/".$this->max_slots;
+    }
 }
