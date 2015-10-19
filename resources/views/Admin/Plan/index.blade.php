@@ -9,9 +9,9 @@
                     <hr>
                     <thead>
                     <tr>
-                        <th><i class="fa fa-diamond"></i> Name</th>
+                        <th><i class="fa fa-diamond"></i> Nome</th>
                         <th class="hidden-phone"><i class="fa fa-child"></i> Slots</th>
-                        <th><i class="fa fa-usd"></i> Price</th>
+                        <th><i class="fa fa-usd"></i> Preço</th>
                         <th><i class=" fa fa-edit"></i> Status</th>
                         <th></th>
                     </tr>
