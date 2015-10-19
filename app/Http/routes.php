@@ -2,6 +2,9 @@
 
 use NpTS\Domain\TeamSpeak\Manager;
 
+
+Route::get('/' , 'FrontController@index');
+
 Route::group(['prefix' => 'teste'] , function(){
     Route::get('cliente' , function(){
         return view('Client.Layout.default');
@@ -11,8 +14,8 @@ Route::group(['prefix' => 'teste'] , function(){
     Route::get('ts',function(){
        $credentials = [
            'user' => 'serveradmin',
-           'password' => 'password',
-           'ip' => 'ip',
+           'password' => env('tomaspwd'),
+           'ip' => env('tomasip'),
        ];
         $manager = new Manager($credentials);
 
