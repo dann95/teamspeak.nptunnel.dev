@@ -46,7 +46,7 @@ class PlanController extends Controller
     {
         $this->repository
         ->create($request
-        ->only('slots','price')
+        ->only('slots','price','name')
         );
         return redirect()->route('plan.index');
     }

@@ -24,6 +24,7 @@ class AdminCreatePlanRequest extends Request
     public function rules()
     {
         return [
+            'name'      =>  ['required' , 'min:3', 'max:20'],
             'slots'     =>  ['required' , 'int'],
             'price'     =>  ['required' , 'numeric'],
         ];
@@ -32,7 +33,10 @@ class AdminCreatePlanRequest extends Request
     public function messages()
     {
         return [
-            'slots.required'    => 'Você deve inserir uma quantidade de slots!',
+            'name.required'     =>  'Você deve inserir um nome para o plano!',
+            'name.min'          =>  'O nome do plano deve conter mínimo 3 caracteres.',
+            'name.max'          =>  'O nome do plano deve conter no máximo 20 caracteres',
+            'slots.required'    =>  'Você deve inserir uma quantidade de slots!',
             'slots.int'         =>  'A quantidade de slots deve ser um número!',
 
             'price.required'    =>  'Você deve inserir um preço!',

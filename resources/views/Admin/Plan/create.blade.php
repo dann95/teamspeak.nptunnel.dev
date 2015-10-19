@@ -9,6 +9,9 @@
                 <form class="form-inline" role="form" method="POST" action="{{ route('plan.store') }}">
                     {{ csrf_field() }}
                     <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Nome do plano" value="{{ old('name') }}">
+                    </div>
+                    <div class="form-group">
                         <input type="text" class="form-control" name="slots" placeholder="Número de slots" value="{{ old('slots') }}">
                     </div>
                     <div class="form-group">

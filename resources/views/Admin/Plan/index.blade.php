@@ -19,7 +19,7 @@
                     <tbody>
                     @foreach($plans as $plan)
                     <tr>
-                        <td></td>
+                        <td>{{ $plan->name }}</td>
                         <td>{{ $plan->slots }}</td>
                         <td>R${{ $plan->price }} </td>
                         <td><span class="label label-info label-mini">Due</span></td>
