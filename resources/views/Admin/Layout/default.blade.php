@@ -149,55 +149,6 @@
                         <li><a  href="{{ route('plan.create') }}">Inserir</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
-                    <a href="javascript:;" >
-                        <i class="fa fa-usd"></i>
-                        <span>Financeiro</span>
-                    </a>
-                    <ul class="sub">
-                        <li class="active"><a  href="blank.html">Blank Page</a></li>
-                        <li><a  href="login.html">Login</a></li>
-                        <li><a  href="lock_screen.html">Lock Screen</a></li>
-                        <li><a  href="profile.html">Profile</a></li>
-                        <li><a  href="invoice.html">Invoice</a></li>
-                        <li><a  href="pricing_table.html">Pricing Table</a></li>
-                        <li><a  href="faq.html">FAQ</a></li>
-                    </ul>
-                </li>
-
-                <li class="sub-menu">
-                    <a href="javascript:;" >
-                        <i class="fa fa-spinner"></i>
-                        <span>Teamspeak Garnera</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="#"><i class="fa fa-cogs"></i>Configurações</a></li>
-                        <li><a  href="#"><i class="fa fa-key"></i>Privilege keys</a></li>
-                        <li><a  href="#"><i class="fa fa-list-alt"></i>Ban list</a></li>
-                        <li><a  href="#"><i class="fa fa-rocket"></i>TSbot</a></li>
-                    </ul>
-                </li>
-
-                <li class="sub-menu">
-                    <a href="javascript:;" >
-                        <i class="fa fa-spinner"></i>
-                        <span>Teamspeak Solera</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="#"><i class="fa fa-cogs"></i>Configurações</a></li>
-                        <li><a  href="#"><i class="fa fa-key"></i>Privilege keys</a></li>
-                        <li><a  href="#"><i class="fa fa-list-alt"></i>Ban list</a></li>
-                        <li><a  href="#"><i class="fa fa-rocket"></i>TSbot</a></li>
-                    </ul>
-                </li>
-
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-comments-o"></i>
-                        <span>Atendimento Online</span>
-                    </a>
-                </li>
-
             </ul>
             <!-- sidebar menu end-->
         </div>
