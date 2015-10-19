@@ -1,6 +1,6 @@
 <?php
 
-namespace NpTS\Domain\Admin\Models;
+namespace NpTS;
 
 use Illuminate\Database\Eloquent\Model;
 
