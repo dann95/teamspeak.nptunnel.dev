@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
 use NpTS\Domain\Admin\Repositories\Contracts\ServerRepositoryContract;
+use NpTS\Domain\Admin\Requests\AdminCreateServerRequest;
 
 class ServerController extends Controller
 {
@@ -43,9 +44,19 @@ class ServerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminCreateServerRequest $request)
     {
-        //
+        $this->repository
+            ->create($request
+            ->only([
+                'name',
+                'ip',
+                'dns',
+                'user',
+                'password',
+                'max_slots'
+            ]));
+        return redirect()->route('server.index');
     }
 
     /**

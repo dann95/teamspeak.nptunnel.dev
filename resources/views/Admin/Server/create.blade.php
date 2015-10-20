@@ -6,7 +6,8 @@
         <div class="col-lg-6">
             <div class="form-panel">
                 <h4 class="mb"><i class="fa fa-angle-right"></i> Preencha o formulario</h4>
-                <form class="form-horizontal style-form" method="get">
+                <form class="form-horizontal style-form" method="POST" action="{{ route('server.store') }}">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Nome</label>
                         <div class="col-sm-10">
@@ -38,14 +39,14 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" name="name" class="form-control" value="{{ old('password') }}">
+                            <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                             <span class="help-block">Senha do usuario de ServerQuery.</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Slots</label>
                         <div class="col-sm-10">
-                            <input type="text" name="slots" class="form-control" value="{{ old('slots') }}">
+                            <input type="text" name="max_slots" class="form-control" value="{{ old('max_slots') }}">
                             <span class="help-block">Quantidade de slots associados a esse host.</span>
                         </div>
                     </div>
