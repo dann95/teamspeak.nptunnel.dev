@@ -33,7 +33,9 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
 
     Route::group(['prefix' => 'server' , 'as' => 'server.'] , function(){
         Route::get('/' , ['uses' => 'ServerController@index' , 'as' => 'index']);
+
         Route::get('/create' , ['uses' => 'ServerController@create' , 'as' => 'create']);
+        Route::post('/store' ,['uses' => 'ServerController@store' , 'as' => 'store']);
     });
 
 });
