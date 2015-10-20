@@ -2,7 +2,7 @@
 
 namespace NpTS\Http\Controllers\Auth;
 
-use NpTS\User;
+use NpTS\Domain\Client\Models\User;
 use Validator;
 use NpTS\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;

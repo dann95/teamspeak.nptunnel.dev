@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => NpTS\User::class,
+    'model' => NpTS\Domain\Client\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------

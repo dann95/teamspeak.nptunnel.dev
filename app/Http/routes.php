@@ -35,3 +35,23 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
     });
 
 });
+
+Route::group(['prefix' => 'account', 'namespace' => 'Client'] , function(){
+    //
+});
+
+Route::group(['prefix' => 'auth'], function(){
+    //
+});
+
+/**
+ * From laravel doc(auth)
+ */
+// Authentication routes...
+Route::get('auth/login', ['uses' => 'Auth\AuthController@getLogin' , 'as' => 'auth.login']);
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
