@@ -34,7 +34,7 @@ class ServerController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.Server.create');
     }
 
     /**

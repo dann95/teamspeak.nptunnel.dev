@@ -157,7 +157,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="{{ route('server.index') }}">Listar</a></li>
-                        <li><a  href="{{ route('plan.create') }}">Inserir</a></li>
+                        <li><a  href="{{ route('server.create') }}">Inserir</a></li>
                     </ul>
                 </li>
 
