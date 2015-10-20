@@ -4,13 +4,14 @@ namespace NpTS\Domain\Admin\Repositories;
 
 use NpTS\Domain\Admin\Models\Server;
 use NpTS\Domain\Admin\Repositories\Contracts\ServerRepositoryContract;
+use NpTS\Abstracts\Repository\Repository;
 
-class ServerRepository implements ServerRepositoryContract
+class ServerRepository extends Repository implements ServerRepositoryContract
 {
     /**
      * @var Server
      */
-    private $model;
+    protected $model;
 
     /**
      * @param Server $model
@@ -28,14 +29,6 @@ class ServerRepository implements ServerRepositoryContract
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function all()
-    {
-        return $this->model->all();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
     public function actives()
     {
         return $this->model->where('active',1)->get();
@@ -48,50 +41,5 @@ class ServerRepository implements ServerRepositoryContract
     {
         return $this->model->where('active_sales',1)->get();
     }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function find($id)
-    {
-        $id = (int) $id;
-        return $this->model->find($id);
-    }
-
-    /**
-     * @param $id
-     * @param array $options
-     * @return bool
-     */
-    public function update($id , array $options)
-    {
-        $id = (int) $id;
-
-        $model = $this->find($id);
-
-        if($model)
-            return $model->update($options);
-
-        return false;
-
-    }
-
-    /**
-     * @param $id
-     * @return bool
-     */
-    public function delete($id)
-    {
-        $id = (int) $id;
-
-        $model = $this->find($id);
-
-        if($model)
-            return $model->delete();
-
-        return false;
-    }
-
 
 }
