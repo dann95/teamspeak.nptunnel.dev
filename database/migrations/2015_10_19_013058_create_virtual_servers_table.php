@@ -14,6 +14,7 @@ class CreateVirtualServersTable extends Migration
     {
         Schema::create('virtual_servers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->unsignedInteger('server_id');
             $table->unsignedInteger('v_sid');
             $table->unsignedInteger('plan_id');

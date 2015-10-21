@@ -8,4 +8,5 @@ interface PlanRepositoryContract
     public function create(array $options);
     public function find($id);
     public function delete($id);
+    public function actives();
 }

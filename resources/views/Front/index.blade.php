@@ -10,12 +10,9 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <select class="form-control">
-                            <option value="10">10 slots</option>
-                            <option value="15">15 slots</option>
-                            <option value="25">25 slots</option>
-                            <option value="50">50 slots</option>
-                            <option value="100">100 slots</option>
-                            <option value="150">150 slots</option>
+                            @foreach($planos as $plano)
+                            <option value="{{ $plano->id }}">{{ $plano->slots }} slots ({{ $plano->name }})</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
