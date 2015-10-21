@@ -17,4 +17,6 @@ interface ServerRepositoryContract
     public function update($id , array $options);
 
     public function delete($id);
+
+    public function randomEmptyServer($forSlots);
 }

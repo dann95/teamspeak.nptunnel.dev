@@ -42,4 +42,15 @@ class ServerRepository extends Repository implements ServerRepositoryContract
         return $this->model->where('active_sales',1)->get();
     }
 
+    /**
+     * @param $forSlots
+     * @return \NpTS\Domain\Admin\Models\Server
+     */
+    public function randomEmptyServer($forSlots)
+    {
+        return $this->activesForSale()
+            ->filter(function($item) use($forSlots){
+            return $item->freeSlots > $forSlots;
+        })->random();
+    }
 }

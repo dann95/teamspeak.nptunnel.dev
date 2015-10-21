@@ -20,8 +20,40 @@ class Server extends Model
         'max_slots',
     ];
 
+    /**
+     * shortcut to put usage on view.
+     * @return string
+     */
     public function getUsageAttribute()
     {
         return $this->slots."/".$this->max_slots;
     }
+
+    /**
+     * How many slots this server got free?
+     * @return int
+     */
+    public function getFreeSlotsAttribute()
+    {
+        $number = $this->max_slots-$this->slots;
+
+        if($number > 0)
+            return $number;
+
+        return 0;
+    }
+
+    /**
+     * Credentials to login in this server as serveradmin.
+     * @return array
+     */
+    public function getCredentialsAttribute()
+    {
+        return [
+            'ip'        =>  $this->ip,
+            'user'      =>  $this->user,
+            'password'  =>  $this->password,
+        ];
+    }
+
 }

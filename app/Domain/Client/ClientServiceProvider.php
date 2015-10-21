@@ -4,6 +4,9 @@ namespace NpTS\Domain\Client;
 
 use Illuminate\Support\ServiceProvider;
 
+use NpTS\Domain\Client\Repositories\Contracts\VirtualServerRepositoryContract;
+use NpTS\Domain\Client\Repositories\VirtualServerRepository;
+
 class ClientServiceProvider extends ServiceProvider
 {
 
@@ -14,8 +17,6 @@ class ClientServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /**
-         * @todo blind all repositories
-         */
+        $this->app->bind(VirtualServerRepositoryContract::class , VirtualServerRepository::class);
     }
 }

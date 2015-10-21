@@ -16,6 +16,11 @@ class Manager
         $this->ts = $this->connect($credentials);
     }
 
+    /**
+     * @param $credentials
+     * @param null $port
+     * @return \TeamSpeak3\Adapter\AbstractAdapter
+     */
     private function connect($credentials , $port = NULL)
     {
         if ($port == NULL)
@@ -25,21 +30,13 @@ class Manager
         return TeamSpeak3::factory('serverquery://'.$credentials['user'].':'.$credentials['password'].'@'.$credentials['ip'].':10011/?server_port='.$port.'#no_query_clients');
     }
 
-
-
-
+    /**
+     * @param array $options
+     * @return array
+     */
     public function createServer(array $options)
     {
-        /**
-         * @todo try create a new server
-         */
-        return $this->ts->serverCreate(array(
-            "virtualserver_name" => "My TeamSpeak 3 Server",
-            "virtualserver_maxclients" => 64,
-            "virtualserver_hostbutton_tooltip" => "My Company",
-            "virtualserver_hostbutton_url" => "http://www.example.com",
-            "virtualserver_hostbutton_gfx_url" => "http://www.example.com/buttons/button01_24x24.jpg",
-        ));
+        return $this->ts->serverCreate($options);
     }
 
     public function selectServer($port)
