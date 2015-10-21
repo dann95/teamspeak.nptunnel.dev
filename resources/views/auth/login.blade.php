@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +44,7 @@ MAIN CONTENT
                 <input type="password" class="form-control" name="password" placeholder="Senha">
                 <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> Esqueceu a senha?</a>
+		                    <a data-toggle="modal" href="#myModal"> Esqueceu a senha?</a>
 
 		                </span>
                 </label>
@@ -54,7 +53,7 @@ MAIN CONTENT
 
                 <div class="registration">
                     Ainda não possui conta com a gente?<br/>
-                    <a class="" href="#">
+                    <a class="" href="{{ route('auth.register') }}">
                         Quero me registrar
                     </a>
                 </div>
