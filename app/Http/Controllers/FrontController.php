@@ -24,6 +24,7 @@ class FrontController extends Controller
      */
     public function index()
     {
+        $planos = $this->planRepository->actives();
         return view('Front.index' , compact('planos'));
     }
 }
