@@ -45,9 +45,9 @@ class VirtualServerRepository extends Repository implements VirtualServerReposit
         $virtualServer = $manager->createServer($this->mergeOptionsOfVirtualServer($options['plan']));
 
         // Create register of virtual server on database:
-        $db = $this->addVirtualServerToDatabase($options , $server , $virtualServer);
+        $virtualServerDb = $this->addVirtualServerToDatabase($options , $server , $virtualServer);
 
-        dd($db);
+        return $virtualServerDb;
 
 
 
