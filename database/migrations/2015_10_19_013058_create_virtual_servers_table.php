@@ -18,6 +18,7 @@ class CreateVirtualServersTable extends Migration
             $table->unsignedInteger('server_id');
             $table->unsignedInteger('v_sid');
             $table->unsignedInteger('plan_id');
+            $table->unsignedInteger('user_id');
             $table->smallInteger('port');
             $table->timestamps();
         });
