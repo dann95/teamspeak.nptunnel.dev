@@ -33,6 +33,10 @@ class VirtualServerRepository extends Repository implements VirtualServerReposit
         return $this->createVirtualServer($options);
     }
 
+    /**
+     * @param array $options
+     * @return \NpTS\Domain\Client\Models\VirtualServer
+     */
     private function createVirtualServer(array $options)
     {
         // select an server empty server to create the virtual server..

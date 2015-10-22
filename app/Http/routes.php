@@ -1,14 +1,13 @@
 <?php
 
-Route::get('/' , 'FrontController@index');
-
-Route::group(['prefix' => 'teste'] , function(){
-
-});
-
 
 /**
- * Rotas Definitivas:
+ * Rotas da loja:
+ */
+Route::get('/' , ['uses' => 'StoreController@index' , 'as' => 'index']);
+
+/**
+ * Rotas do Admin:
  */
 
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
@@ -36,12 +35,10 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
 
 });
 
-Route::group(['prefix' => 'account', 'namespace' => 'Client'] , function(){
-    //
-});
+Route::group(['prefix' => 'account', 'namespace' => 'Client' , 'as' => 'account.'] , function(){
+    Route::get('/',['as' => 'index' , 'uses' => function(){
 
-Route::group(['prefix' => 'auth'], function(){
-    //
+    }]);
 });
 
 /**
@@ -55,3 +52,5 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 // Registration routes...
 Route::get('auth/register', ['uses'=>'Auth\AuthController@getRegister', 'as' => 'auth.register']);
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+Route::get('/auth/logout' , ['uses' => 'Auth\AuthController@getLogout' , 'as' => 'auth.logout']);
