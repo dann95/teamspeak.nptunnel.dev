@@ -10,6 +10,7 @@ class VirtualServer extends Model
         'name',
         'server_id',
         'v_sid',
+        'user_id',
         'plan_id',
         'port'
     ];
