@@ -3,6 +3,7 @@
 namespace NpTS\Domain\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use NpTS\Domain\Client\Models\VirtualServer;
 
 class Server extends Model
 {
@@ -19,6 +20,15 @@ class Server extends Model
         'slots',
         'max_slots',
     ];
+
+    /**
+     * An server has many virtual servers.
+     * @return Collection
+     */
+    public function virtualServers()
+    {
+        return $this->hasMany(VirtualServer::class)->get();
+    }
 
     /**
      * shortcut to put usage on view.
