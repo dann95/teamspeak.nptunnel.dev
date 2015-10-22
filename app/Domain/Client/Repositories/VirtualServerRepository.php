@@ -65,6 +65,7 @@ class VirtualServerRepository extends Repository implements VirtualServerReposit
             'plan_id'       =>  $options['plan']->id,
             'server_id'     =>  $server->id,
             'v_sid'         =>  $virtualServer['sid'],
+            'user_id'       =>  $this->guard->user()->id,
             'port'          =>  $virtualServer['virtualserver_port'],
             'name'          =>  $options['name'],
         ]);
