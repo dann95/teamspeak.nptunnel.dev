@@ -24,17 +24,6 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $planos = $this->planRepository->actives();
-
-        $plano = $planos->random();
-
-
-        $options = [
-            'plan'  =>  $plano,
-            'name'  =>  'Ts do thomas',
-        ];
-        $this->virtualServerRepository->create($options);
-
         return view('Front.index' , compact('planos'));
     }
 }
