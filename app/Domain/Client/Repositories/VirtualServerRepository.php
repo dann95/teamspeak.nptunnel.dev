@@ -48,15 +48,6 @@ class VirtualServerRepository extends Repository implements VirtualServerReposit
         $virtualServerDb = $this->addVirtualServerToDatabase($options , $server , $virtualServer);
 
         return $virtualServerDb;
-
-
-
-        /**
-         * @todo all you can read ! XD \/
-         */
-        // we must relate the virtual server to a server, the virtual server to an user on the database!
-        // and also, the virtual server to an plan!
-
     }
 
     private function addVirtualServerToDatabase(array $options , Server $server , array $virtualServer)
