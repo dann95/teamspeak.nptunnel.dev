@@ -21,13 +21,9 @@ class Manager
      * @param null $port
      * @return \TeamSpeak3\Adapter\AbstractAdapter
      */
-    private function connect($credentials , $port = NULL)
+    private function connect($credentials)
     {
-        if ($port == NULL)
-            return TeamSpeak3::factory('serverquery://'.$credentials['user'].':'.$credentials['password'].'@'.$credentials['ip'].':10011/#no_query_clients');
-
-
-        return TeamSpeak3::factory('serverquery://'.$credentials['user'].':'.$credentials['password'].'@'.$credentials['ip'].':10011/?server_port='.$port.'#no_query_clients');
+        return TeamSpeak3::factory('serverquery://'.$credentials['user'].':'.$credentials['password'].'@'.$credentials['ip'].':10011/#no_query_clients');
     }
 
     /**
@@ -39,10 +35,15 @@ class Manager
         return $this->ts->serverCreate($options);
     }
 
-    public function selectServer($port)
+    public function selectServer($sid)
     {
-        $this->ts = $this->connect($this->credentials , (int) $port);
-        return $this;
+        foreach($this->ts->serverList() as $server)
+        {
+            if($server->virtualserver_id == $sid)
+            {
+                return $server;
+            }
+        }
     }
 
     /**
