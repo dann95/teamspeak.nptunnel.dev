@@ -1,6 +1,6 @@
 <?php
 
-namespace NpTS\Http\Controllers;
+namespace NpTS\Http\Controllers\Client;
 
 use Illuminate\Http\Request;
 use NpTS\Http\Requests;
