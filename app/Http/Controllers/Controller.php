@@ -12,8 +12,10 @@ use Jenssegers\Agent\Agent;
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    public function __construct(Guard $auth , Agent $agent)
+    public function __construct()
     {
+        $auth = app()->make(Guard::class);
+        $agent = app()->make(Agent::class);
         view()->share([
             'auth'      =>  $auth,
             'agent'     =>  $agent,
