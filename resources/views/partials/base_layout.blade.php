@@ -87,6 +87,7 @@
             <h3><i class="fa fa-angle-right"></i> @yield('title')</h3>
             <div class="row mt">
                 <div class="col-lg-12">
+                    @include('partials.error_display')
                     @yield('content')
                 </div>
             </div>

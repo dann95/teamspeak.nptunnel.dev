@@ -39,6 +39,10 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
 
     Route::group(['prefix' => 'account', 'namespace' => 'Client' , 'as' => 'account.' , 'middleware' => ['auth']] , function(){
         Route::get('/',['uses' => 'AccountController@index' , 'as' => 'index']);
+        Route::get('/virtual/{id}/settings' , ['uses' => 'VirtualServerController@settings' , 'as' => 'virtual.settings']);
+        Route::get('/virtual/{id}/privilege-keys' , ['uses' => 'VirtualServerController@privilegeKeys' , 'as' => 'virtual.keys']);
+        Route::get('/virtual/{id}/ban-list' , ['uses' => 'VirtualServerController@banList' , 'as' => 'virtual.ban']);
+        Route::get('/virtual/{id}/ts-bot' , ['uses' => 'VirtualServerController@tsBot' , 'as' => 'virtual.bot']);
 
 });
 

@@ -26,10 +26,10 @@
             <span>{{ $virtualServer->name }}</span>
         </a>
         <ul class="sub">
-            <li><a  href="#git "><i class="fa fa-cogs"></i>Configurações</a></li>
-            <li><a  href="#"><i class="fa fa-key"></i>Privilege keys</a></li>
-            <li><a  href="#"><i class="fa fa-list-alt"></i>Ban list</a></li>
-            <li><a  href="#"><i class="fa fa-rocket"></i>TSbot</a></li>
+            <li><a  href="{{ route('account.virtual.settings' , ['id' => $virtualServer->id]) }}"><i class="fa fa-cogs"></i>Configurações</a></li>
+            <li><a  href="{{ route('account.virtual.keys' , ['id' => $virtualServer->id]) }}"><i class="fa fa-key"></i>Privilege keys</a></li>
+            <li><a  href="{{ route('account.virtual.ban' , ['id' => $virtualServer->id]) }}"><i class="fa fa-list-alt"></i>Ban list</a></li>
+            <li><a  href="{{ route('account.virtual.bot' , ['id' => $virtualServer->id]) }}"><i class="fa fa-rocket"></i>TSbot</a></li>
         </ul>
     </li>
     @endforeach
