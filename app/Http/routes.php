@@ -44,6 +44,9 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
         Route::get('/virtual/{id}/ban-list' , ['uses' => 'VirtualServerController@banList' , 'as' => 'virtual.ban']);
         Route::get('/virtual/{id}/ts-bot' , ['uses' => 'VirtualServerController@tsBot' , 'as' => 'virtual.bot']);
 
+        Route::get('/virtual/{id}/power-on' , ['uses' => 'VirtualServerController@powerOn' , 'as' => 'virtual.powerOn']);
+        Route::get('/virtual/{id}/power-off' , ['uses' => 'VirtualServerController@powerOff' , 'as' => 'virtual.powerOff']);
+
 });
 
 /**

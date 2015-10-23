@@ -41,6 +41,7 @@ class Manager
         {
             if($server->virtualserver_id == $sid)
             {
+
                 return $server;
             }
         }

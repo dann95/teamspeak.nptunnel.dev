@@ -35,6 +35,15 @@ class VirtualServerController extends Controller
                 'name'  =>  $server["virtualserver_name"],
                 'status'    =>  [
                     'state' =>  $server["virtualserver_status"],
+                    'ip'        =>  $host.":".$port,
+                ],
+            ],
+
+        ];
+        if($server['virtualserver_status'] == "online")
+        {
+            $configs_online = ['server' => [
+                'status' => [
                     'slots' =>  $server['virtualserver_clientsonline']-$server['virtualserver_queryclientsonline']. "/" .$server['virtualserver_maxclients'],
                     'uptime'    =>  $server['virtualserver_uptime'],
                 ],
@@ -47,11 +56,12 @@ class VirtualServerController extends Controller
                     'hostBanner'  =>  $server['virtualserver_hostbanner_url'],
                     'hostBannerGfx' =>  $server['virtualserver_hostbanner_gfx_url'],
                 ]
-            ],
+            ]];
 
-        ];
+            $configs = array_merge_recursive($configs,$configs_online);
+        }
 
-        return view('Client.VirtualServer.settings' , compact('configs'));
+        return view('Client.VirtualServer.settings' , compact('configs','virtualServer'));
 
     }
     public function privilegeKeys($id)
@@ -74,5 +84,26 @@ class VirtualServerController extends Controller
         if($virtualServer && $virtualServer->user_id == $this->auth->user()->id)
             return $virtualServer;
         abort(403);
+    }
+
+    public function powerOn($id)
+    {
+        $virtualServer = $this->getVirtualServer($id);
+        $sid = $virtualServer->v_sid;
+        $credentials = $virtualServer->server()->credentials;
+        $manager = new Manager($credentials);
+        $manager->startServerBySid($sid);
+        return redirect()->route('account.virtual.settings',['id' => $virtualServer->id]);
+    }
+
+    public function powerOff($id)
+    {
+        $virtualServer = $this->getVirtualServer($id);
+        $sid = $virtualServer->v_sid;
+        $credentials = $virtualServer->server()->credentials;
+        $manager = new Manager($credentials);
+        $server = $manager->selectServer($sid);
+        $server->stop();
+        return redirect()->route('account.virtual.settings',['id' => $virtualServer->id]);
     }
 }
