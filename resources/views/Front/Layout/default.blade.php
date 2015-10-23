@@ -8,13 +8,13 @@
     </li>
 
     <li class="sub-menu">
-        <a href="{{ route('index') }}" >
+        <a href="{{ route('planos') }}" >
             <i class="fa fa-cubes"></i>
             <span>Planos</span>
         </a>
     </li>
     <li class="sub-menu">
-        <a href="{{ route('index') }}" >
+        <a href="{{ route('porque') }}" >
             <i class="fa fa-question-circle"></i>
             <span>Por que nos escolher?</span>
         </a>

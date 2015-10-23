@@ -5,6 +5,8 @@
  * Rotas da loja:
  */
 Route::get('/' , ['uses' => 'StoreController@index' , 'as' => 'index']);
+Route::get('/por-que-nos-escolher' , ['uses' => 'StoreController@porque' , 'as' => 'porque']);
+Route::get('/nossos-planos' , ['uses' => 'StoreController@planos' , 'as' => 'planos']);
 
 /**
  * Rotas do Admin:
@@ -35,10 +37,9 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
 
 });
 
-Route::group(['prefix' => 'account', 'namespace' => 'Client' , 'as' => 'account.'] , function(){
-    Route::get('/',['as' => 'index' , 'uses' => function(){
+    Route::group(['prefix' => 'account', 'namespace' => 'Client' , 'as' => 'account.' , 'middleware' => ['auth']] , function(){
+        Route::get('/',['uses' => 'AccountController@index' , 'as' => 'index']);
 
-    }]);
 });
 
 /**
