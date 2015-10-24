@@ -43,6 +43,10 @@ class VirtualServerController extends Controller
         if($server['virtualserver_status'] == "online")
         {
             $configs_online = ['server' => [
+                'password'  =>  [
+                    'flag'  =>  $server["virtualserver_flag_password"],
+                    'pwd'   =>  $server['virtualserver_password'],
+                ],
                 'status' => [
                     'slots' =>  $server['virtualserver_clientsonline']-$server['virtualserver_queryclientsonline']. "/" .$server['virtualserver_maxclients'],
                     'uptime'    =>  $server['virtualserver_uptime'],
@@ -105,5 +109,10 @@ class VirtualServerController extends Controller
         $server = $manager->selectServer($sid);
         $server->stop();
         return redirect()->route('account.virtual.settings',['id' => $virtualServer->id]);
+    }
+
+    public function password(Request $request)
+    {
+        dd($request->all());
     }
 }

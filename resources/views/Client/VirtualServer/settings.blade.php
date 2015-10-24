@@ -39,9 +39,16 @@
             <div class="col-lg-12">
                 <div class="form-panel">
                     <h4 class="mb"><i class="fa fa-angle-right"></i> Senha</h4>
-                    <div class="form-horizontal style-form">
-
-                    </div>
+                    <form class="form-inline" role="form" method="POST" action="{{ route('account.virtual.password' , ['id' => $virtualServer->id]) }}">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Senha</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Senha">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Trocar senha</button>
+                    </form>
                 </div>
             </div>
         @endif
