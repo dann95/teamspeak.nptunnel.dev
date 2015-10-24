@@ -9,6 +9,8 @@ use NpTS\Domain\Client\Repositories\Contracts\VirtualServerRepositoryContract;
 use Illuminate\Auth\Guard;
 use NpTS\Domain\TeamSpeak\Manager;
 
+use NpTS\Domain\Client\Requests\ChangeVirtualServerPasswordRequest;
+
 class VirtualServerController extends Controller
 {
     private $repository;
@@ -111,8 +113,15 @@ class VirtualServerController extends Controller
         return redirect()->route('account.virtual.settings',['id' => $virtualServer->id]);
     }
 
-    public function password(Request $request)
+    public function password($id , ChangeVirtualServerPasswordRequest $request)
     {
-        dd($request->all());
+        $virtualServer = $this->getVirtualServer($id);
+        $sid = $virtualServer->v_sid;
+        $credentials = $virtualServer->server()->credentials;
+        $manager = new Manager($credentials);
+        $server = $manager->selectServer($sid);
+        $server['virtualserver_password'] = $request->only(['password'])['password'];
+        return redirect()->route('account.virtual.settings',['id'=> $id]);
+
     }
 }
