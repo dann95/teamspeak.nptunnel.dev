@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
         Route::get('/virtual/{id}/power-on' , ['uses' => 'VirtualServerController@powerOn' , 'as' => 'virtual.powerOn']);
         Route::get('/virtual/{id}/power-off' , ['uses' => 'VirtualServerController@powerOff' , 'as' => 'virtual.powerOff']);
         Route::post('/virtual/{id}/change-password' , ['uses' => 'VirtualServerController@password' , 'as' => 'virtual.password']);
+        Route::post('/virtual/{id}/change-messages' , ['uses' => 'VirtualServerController@messages' , 'as'  =>  'virtual.messages']);
 
 });
 

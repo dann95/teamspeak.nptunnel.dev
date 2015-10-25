@@ -23,7 +23,8 @@ class Manager
      */
     private function connect($credentials)
     {
-        return TeamSpeak3::factory('serverquery://'.$credentials['user'].':'.$credentials['password'].'@'.$credentials['ip'].':10011/#no_query_clients');
+        $nick = (isset($credentials['nick'])) ? $credentials['nick'] : 'GameSpeak.com.br';
+        return TeamSpeak3::factory('serverquery://'.$credentials['user'].':'.$credentials['password'].'@'.$credentials['ip'].':10011/?nickname='.$nick.'#no_query_clients');
     }
 
     /**

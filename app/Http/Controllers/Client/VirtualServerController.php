@@ -10,6 +10,7 @@ use Illuminate\Auth\Guard;
 use NpTS\Domain\TeamSpeak\Manager;
 
 use NpTS\Domain\Client\Requests\ChangeVirtualServerPasswordRequest;
+use NpTS\Domain\Client\Requests\ChangeVirtualServerMessagesRequest;
 
 class VirtualServerController extends Controller
 {
@@ -54,6 +55,9 @@ class VirtualServerController extends Controller
                     'uptime'    =>  $server['virtualserver_uptime'],
                 ],
                 'descriptions'  =>  [
+                    'name'      =>  $server['virtualserver_name'],
+                    'hostMsg'   =>  $server['virtualserver_hostmessage'],
+                    'hostMsgMode'   =>  $server['virtualserver_hostmessage_mode'],
                     'plataform' =>  $server['virtualserver_platform'],
                     'created'   =>  $server['virtualserver_created'],
                     'version'   =>  $server['virtualserver_version'],
@@ -123,5 +127,22 @@ class VirtualServerController extends Controller
         $server['virtualserver_password'] = $request->only(['password'])['password'];
         return redirect()->route('account.virtual.settings',['id'=> $id]);
 
+    }
+
+    public function messages($id , ChangeVirtualServerMessagesRequest $request)
+    {
+        $virtualServer = $this->getVirtualServer($id);
+        $sid = $virtualServer->v_sid;
+        $credentials = $virtualServer->server()->credentials;
+        $manager = new Manager($credentials);
+        $server = $manager->selectServer($sid);
+        $server->modify($request->only([
+                "virtualserver_name",
+                "virtualserver_welcomemessage",
+                "virtualserver_hostmessage",
+                "virtualserver_hostmessage_mode",
+            ]
+        ));
+        return redirect()->route('account.virtual.settings',['id'=> $id]);
     }
 }
