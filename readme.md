@@ -13,6 +13,11 @@
         1.  List all VirtualServers related to an server
         2.  Change state of an server
         2.  Change serverquery credentials of an server.
+    4.  **Clients**
+        1.  List clients
+        2.  add bonus for a client
+        3.  modify settings of a client and virtualservers he owns
+        4.  ban an account.
 2.  Client
     1.  **VirtualServer**
         1.  Change plan
