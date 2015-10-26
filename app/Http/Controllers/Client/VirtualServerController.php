@@ -129,12 +129,9 @@ class VirtualServerController extends Controller
      */
     public function powerOn($id)
     {
-        $virtualServer = $this->getVirtualServer($id);
-        $sid = $virtualServer->v_sid;
-        $credentials = $virtualServer->server()->credentials;
-        $manager = new Manager($credentials);
-        $manager->startServerBySid($sid);
-        return redirect()->route('account.virtual.settings',['id' => $virtualServer->id]);
+        $this->serverManager($id)
+            ->start();
+        return redirect()->route('account.virtual.settings',['id' => $id]);
     }
 
     /**
