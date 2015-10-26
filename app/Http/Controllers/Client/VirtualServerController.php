@@ -12,6 +12,7 @@ use NpTS\Domain\TeamSpeak\Manager;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerPasswordRequest;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerMessagesRequest;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerBannerRequest;
+use NpTS\Domain\Client\Models\VirtualServer;
 
 class VirtualServerController extends Controller
 {
@@ -143,13 +144,9 @@ class VirtualServerController extends Controller
      */
     public function powerOff($id)
     {
-        $virtualServer = $this->getVirtualServer($id);
-        $sid = $virtualServer->v_sid;
-        $credentials = $virtualServer->server()->credentials;
-        $manager = new Manager($credentials);
-        $server = $manager->selectServer($sid);
-        $server->stop();
-        return redirect()->route('account.virtual.settings',['id' => $virtualServer->id]);
+        $this->serverManager($id)
+            ->stop();
+        return redirect()->route('account.virtual.settings',['id' => $id]);
     }
 
     /**
@@ -160,47 +157,61 @@ class VirtualServerController extends Controller
      */
     public function password($id , ChangeVirtualServerPasswordRequest $request)
     {
-        $virtualServer = $this->getVirtualServer($id);
-        $sid = $virtualServer->v_sid;
-        $credentials = $virtualServer->server()->credentials;
-        $manager = new Manager($credentials);
-        $server = $manager->selectServer($sid);
-        $server['virtualserver_password'] = $request->only(['password'])['password'];
+        $this->serverManager($id)
+            ->modify(
+                ['virtualserver_password' => $request->only(['password'])['password'] ]
+            );
         return redirect()->route('account.virtual.settings',['id'=> $id]);
-
     }
 
+    /**
+     * Change host message , welcome message.. and others..
+     * @param $id
+     * @param ChangeVirtualServerMessagesRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function messages($id , ChangeVirtualServerMessagesRequest $request)
     {
-        $virtualServer = $this->getVirtualServer($id);
-        $sid = $virtualServer->v_sid;
-        $credentials = $virtualServer->server()->credentials;
-        $manager = new Manager($credentials);
-        $server = $manager->selectServer($sid);
-        $server->modify($request->only([
-                "virtualserver_name",
-                "virtualserver_welcomemessage",
-                "virtualserver_hostmessage",
-                "virtualserver_hostmessage_mode",
-            ]
-        ));
+        $this->serverManager($id)
+            ->modify(
+                $request->only([
+                    "virtualserver_name",
+                    "virtualserver_welcomemessage",
+                    "virtualserver_hostmessage",
+                    "virtualserver_hostmessage_mode",
+                ])
+            );
         return redirect()->route('account.virtual.settings',['id'=> $id]);
     }
 
+    /**
+     * Change the banner information of an VitualServer
+     * @param $id
+     * @param ChangeVirtualServerBannerRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function banner($id , ChangeVirtualServerBannerRequest $request)
     {
-        $virtualServer = $this->getVirtualServer($id);
-        $sid = $virtualServer->v_sid;
-        $credentials = $virtualServer->server()->credentials;
-        $manager = new Manager($credentials);
-        $server = $manager->selectServer($sid);
-        $server->modify($request->only([
-                "virtualserver_hostbanner_url",
-                "virtualserver_hostbanner_gfx_url",
-                "virtualserver_hostbanner_gfx_interval",
-                "virtualserver_hostbanner_mode",
-            ]
-        ));
+        $this->serverManager($id)
+            ->modify(
+                $request->only([
+                    "virtualserver_hostbanner_url",
+                    "virtualserver_hostbanner_gfx_url",
+                    "virtualserver_hostbanner_gfx_interval",
+                    "virtualserver_hostbanner_mode",
+                ])
+            );
         return redirect()->route('account.virtual.settings',['id'=> $id]);
+    }
+
+    /**
+     * Select Virtual Server by the credentials saved on database.
+     * @param $id
+     * @return \TeamSpeak3\Node\Server
+     */
+    private function serverManager($id)
+    {
+        $virtualServer = $this->getVirtualServer($id);
+        return (new Manager($virtualServer->server()->credentials))->selectServer($virtualServer->v_sid);
     }
 }
