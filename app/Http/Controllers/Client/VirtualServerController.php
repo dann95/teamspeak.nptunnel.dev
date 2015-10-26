@@ -8,11 +8,10 @@ use NpTS\Http\Controllers\Controller;
 use NpTS\Domain\Client\Repositories\Contracts\VirtualServerRepositoryContract;
 use Illuminate\Auth\Guard;
 use NpTS\Domain\TeamSpeak\Manager;
-
 use NpTS\Domain\Client\Requests\ChangeVirtualServerPasswordRequest;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerMessagesRequest;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerBannerRequest;
-use NpTS\Domain\Client\Models\VirtualServer;
+
 
 class VirtualServerController extends Controller
 {
@@ -44,56 +43,9 @@ class VirtualServerController extends Controller
      */
     public function settings($id)
     {
+        $configs = $this->getVirtualServerSettings($id);
         $virtualServer = $this->getVirtualServer($id);
-        $sid = $virtualServer->v_sid;
-        $host = $virtualServer->server()->dns;
-        $port = $virtualServer->port;
-        $credentials = $virtualServer->server()->credentials;
-        $manager = new Manager($credentials);
-        $server = $manager->selectServer($sid);
-
-        $configs = [
-            'server'    =>[
-                'name'  =>  $server["virtualserver_name"],
-                'status'    =>  [
-                    'state' =>  $server["virtualserver_status"],
-                    'ip'        =>  $host.":".$port,
-                ],
-            ],
-
-        ];
-        if($server['virtualserver_status'] == "online")
-        {
-            $configs_online = ['server' => [
-                'password'  =>  [
-                    'flag'  =>  $server["virtualserver_flag_password"],
-                    'pwd'   =>  $server['virtualserver_password'],
-                ],
-                'status' => [
-                    'slots' =>  $server['virtualserver_clientsonline']-$server['virtualserver_queryclientsonline']. "/" .$server['virtualserver_maxclients'],
-                    'uptime'    =>  $server['virtualserver_uptime'],
-                ],
-                'descriptions'  =>  [
-                    'name'      =>  $server['virtualserver_name'],
-                    'hostMsg'   =>  $server['virtualserver_hostmessage'],
-                    'hostMsgMode'   =>  $server['virtualserver_hostmessage_mode'],
-                    'plataform' =>  $server['virtualserver_platform'],
-                    'created'   =>  $server['virtualserver_created'],
-                    'version'   =>  $server['virtualserver_version'],
-                    'welcome'   =>  $server['virtualserver_welcomemessage'],
-                    'minClientVersion'  =>  $server['virtualserver_min_client_version'],
-                    'hostBanner'  =>  $server['virtualserver_hostbanner_url'],
-                    'hostBannerGfx' =>  $server['virtualserver_hostbanner_gfx_url'],
-                    'hostBannerTime'    =>  $server['virtualserver_hostbanner_gfx_interval'],
-                    'hostBannerResize'  =>  $server['virtualserver_hostbanner_mode'],
-                ]
-            ]];
-
-            $configs = array_merge_recursive($configs,$configs_online);
-        }
-
         return view('Client.VirtualServer.settings' , compact('configs','virtualServer'));
-
     }
     public function privilegeKeys($id)
     {
@@ -156,7 +108,7 @@ class VirtualServerController extends Controller
     {
         $this->serverManager($id)
             ->modify(
-                ['virtualserver_password' => $request->only(['password'])['password'] ]
+                $request->only(['virtualserver_password'])
             );
         return redirect()->route('account.virtual.settings',['id'=> $id]);
     }
@@ -210,5 +162,48 @@ class VirtualServerController extends Controller
     {
         $virtualServer = $this->getVirtualServer($id);
         return (new Manager($virtualServer->server()->credentials))->selectServer($virtualServer->v_sid);
+    }
+
+    /**
+     * Settings of an VirtualServer for the @settings
+     * @param $id
+     * @return array
+     */
+    private function getVirtualServerSettings($id)
+    {
+        $virtualServer  = $this->getVirtualServer($id);
+        $manager = $this->serverManager($id);
+        $onlineConfigs = [];
+
+        $configs = [
+            "virtualserver_name"        =>  $manager["virtualserver_name"],
+            "virtualserver_status"      =>  $manager["virtualserver_status"],
+            "host"                      =>  $virtualServer->host,
+        ];
+
+        if($manager['virtualserver_status'] == "online")
+        {
+            $onlinePermissions = [
+                'virtualserver_password',
+                'virtualserver_uptime',
+                'virtualserver_hostmessage',
+                'virtualserver_hostmessage_mode',
+                'virtualserver_platform',
+                'virtualserver_created',
+                'virtualserver_version',
+                'virtualserver_welcomemessage',
+                'virtualserver_min_client_version',
+                'virtualserver_hostbanner_url',
+                'virtualserver_hostbanner_gfx_url',
+                'virtualserver_hostbanner_gfx_interval',
+                'virtualserver_hostbanner_mode',
+            ];
+            foreach($onlinePermissions as $permission)
+            {
+                $onlineConfigs[$permission] = $manager[$permission];
+            }
+        }
+
+        return array_merge_recursive($configs , $onlineConfigs , ['slots'   =>  $manager['virtualserver_clientsonline']-$manager['virtualserver_queryclientsonline']. "/" .$manager['virtualserver_maxclients']]);
     }
 }

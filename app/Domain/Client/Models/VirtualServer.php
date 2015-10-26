@@ -44,4 +44,13 @@ class VirtualServer extends Model
     {
         return $this->belongsTo(Server::class)->get()->first();
     }
+
+    /**
+     * Get the dns:port to connect to an virtual server
+     * @return string
+     */
+    public function getHostAttribute()
+    {
+        return $this->server()->dns.":".$this->port;
+    }
 }
