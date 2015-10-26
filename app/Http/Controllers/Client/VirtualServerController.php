@@ -11,11 +11,24 @@ use NpTS\Domain\TeamSpeak\Manager;
 
 use NpTS\Domain\Client\Requests\ChangeVirtualServerPasswordRequest;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerMessagesRequest;
+use NpTS\Domain\Client\Requests\ChangeVirtualServerBannerRequest;
 
 class VirtualServerController extends Controller
 {
+    /**
+     * @var VirtualServerRepositoryContract
+     */
     private $repository;
+
+    /**
+     * @var Guard
+     */
     private $auth;
+
+    /**
+     * @param VirtualServerRepositoryContract $repository
+     * @param Guard $auth
+     */
     public function __construct(VirtualServerRepositoryContract $repository , Guard $auth)
     {
         parent::__construct();
@@ -23,6 +36,11 @@ class VirtualServerController extends Controller
         $this->auth = $auth;
     }
 
+    /**
+     * Display the forms to change settings..
+     * @param $id
+     * @return \Illuminate\View\View
+     */
     public function settings($id)
     {
         $virtualServer = $this->getVirtualServer($id);
@@ -65,6 +83,8 @@ class VirtualServerController extends Controller
                     'minClientVersion'  =>  $server['virtualserver_min_client_version'],
                     'hostBanner'  =>  $server['virtualserver_hostbanner_url'],
                     'hostBannerGfx' =>  $server['virtualserver_hostbanner_gfx_url'],
+                    'hostBannerTime'    =>  $server['virtualserver_hostbanner_gfx_interval'],
+                    'hostBannerResize'  =>  $server['virtualserver_hostbanner_mode'],
                 ]
             ]];
 
@@ -87,6 +107,11 @@ class VirtualServerController extends Controller
 
     }
 
+    /**
+     * Get the entity of a server by your id.
+     * @param $id
+     * @return \NpTS\Domain\Client\Models\VirtualServer
+     */
     private function getVirtualServer($id)
     {
         $virtualServer = $this->repository->find($id);
@@ -96,6 +121,11 @@ class VirtualServerController extends Controller
         abort(403);
     }
 
+    /**
+     * Start an Server
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function powerOn($id)
     {
         $virtualServer = $this->getVirtualServer($id);
@@ -106,6 +136,11 @@ class VirtualServerController extends Controller
         return redirect()->route('account.virtual.settings',['id' => $virtualServer->id]);
     }
 
+    /**
+     * PowerOff an VirtualServer
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function powerOff($id)
     {
         $virtualServer = $this->getVirtualServer($id);
@@ -117,6 +152,12 @@ class VirtualServerController extends Controller
         return redirect()->route('account.virtual.settings',['id' => $virtualServer->id]);
     }
 
+    /**
+     * Change Password of a VirtualServer
+     * @param $id
+     * @param ChangeVirtualServerPasswordRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function password($id , ChangeVirtualServerPasswordRequest $request)
     {
         $virtualServer = $this->getVirtualServer($id);
@@ -141,6 +182,23 @@ class VirtualServerController extends Controller
                 "virtualserver_welcomemessage",
                 "virtualserver_hostmessage",
                 "virtualserver_hostmessage_mode",
+            ]
+        ));
+        return redirect()->route('account.virtual.settings',['id'=> $id]);
+    }
+
+    public function banner($id , ChangeVirtualServerBannerRequest $request)
+    {
+        $virtualServer = $this->getVirtualServer($id);
+        $sid = $virtualServer->v_sid;
+        $credentials = $virtualServer->server()->credentials;
+        $manager = new Manager($credentials);
+        $server = $manager->selectServer($sid);
+        $server->modify($request->only([
+                "virtualserver_hostbanner_url",
+                "virtualserver_hostbanner_gfx_url",
+                "virtualserver_hostbanner_gfx_interval",
+                "virtualserver_hostbanner_mode",
             ]
         ));
         return redirect()->route('account.virtual.settings',['id'=> $id]);

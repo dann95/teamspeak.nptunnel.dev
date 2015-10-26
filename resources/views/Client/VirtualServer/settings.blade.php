@@ -135,6 +135,67 @@
             <!-- /password -->
         @endif
 
+        @if($configs['server']['status']['state'] == "online")
+            <div class="col-lg-12">
+                <div class="form-panel">
+                    <h4 class="mb"><i class="fa fa-angle-right"></i> Banner</h4>
+                    <form class="form-horizontal style-form" method="POST" action="{{ route('account.virtual.banner' , ['id' => $virtualServer->id]) }}">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Url</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="virtualserver_hostbanner_url" value="{{ $configs['server']['descriptions']['hostBanner'] }}">
+                                <span class="help-block">Url a qual o banner vai levar.</span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Url do banner</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="virtualserver_hostbanner_gfx_url" value="{{ $configs['server']['descriptions']['hostBannerGfx'] }}">
+                                <span class="help-block">Url da imagem do banner.</span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tempo do banner</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="virtualserver_hostbanner_gfx_interval" value="{{ $configs['server']['descriptions']['hostBannerTime'] }}">
+                                <span class="help-block">Tempo da animação.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Tempo do banner</label>
+                            <div class="col-sm-10">
+                                <select name="virtualserver_hostbanner_mode" class="form-control">
+                                    <option value="0"@if($configs['server']['descriptions']['hostBannerResize'] == 0){{ ' selected' }}@endif>Não re-ajustar</option>
+                                    <option value="1"@if($configs['server']['descriptions']['hostBannerResize'] == 1){{ ' selected' }}@endif>Re-ajustar e manter ratio</option>
+                                    <option value="2"@if($configs['server']['descriptions']['hostBannerResize'] == 2){{ ' selected' }}@endif>Re-ajustar e ignorar ratio</option>
+                                </select>
+                                <span class="help-block">Modo de re-ajuste da imagem.</span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-9">
+
+                            </div>
+                            <div id="col-sm-3">
+                                <button type="submit" class="btn btn-primary">Atulizar Banner</button>
+                            </div>
+                        </div>
+
+
+
+                    </form>
+                </div>
+            </div>
+        @endif
+
     </div>
     <!-- /right -->
 </div>
