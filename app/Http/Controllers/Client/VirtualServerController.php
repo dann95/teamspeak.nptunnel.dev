@@ -2,6 +2,7 @@
 
 namespace NpTS\Http\Controllers\Client;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
@@ -11,7 +12,7 @@ use NpTS\Domain\TeamSpeak\Manager;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerPasswordRequest;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerMessagesRequest;
 use NpTS\Domain\Client\Requests\ChangeVirtualServerBannerRequest;
-
+use TeamSpeak3\Ts3Exception;
 
 class VirtualServerController extends Controller
 {
@@ -70,7 +71,15 @@ class VirtualServerController extends Controller
 
     public function banList($id)
     {
-
+        try {
+            $bans = $this->serverManager($id)->banList();
+        } catch(Ts3Exception $e)
+        {
+            $bans = [];
+        }
+        Carbon::setLocale('pt_BR');
+        //dd($bans);
+        return view('Client.VirtualServer.ban',compact('bans','carbon'));
     }
     public function tsBot($id)
     {
