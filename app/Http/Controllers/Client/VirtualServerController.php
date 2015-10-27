@@ -47,10 +47,27 @@ class VirtualServerController extends Controller
         $virtualServer = $this->getVirtualServer($id);
         return view('Client.VirtualServer.settings' , compact('configs','virtualServer'));
     }
+
     public function privilegeKeys($id)
     {
-
+        $manager = $this->serverManager($id);
+        $groups = $manager->serverGroupList(['type' =>  1]);
+        $keys = $manager->privilegeKeyList();
+        $groupsById = [];
+        foreach($groups as $group)
+        {
+            $groupsById[$group['sgid']] = $group;
+        }
+        return view('Client.VirtualServer.keys' , compact('groups','id','keys','groupsById'));
     }
+
+    public function createPrivilegeKey($id , Request $request)
+    {
+        $manager = $this->serverManager($id);
+        $manager->serverGroupGetById($request->input('sgid'))->privilegeKeyCreate();
+        return redirect()->route('account.virtual.keys',['id' => $id]);
+    }
+
     public function banList($id)
     {
 

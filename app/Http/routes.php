@@ -49,6 +49,8 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
         Route::post('/virtual/{id}/change-password' , ['uses' => 'VirtualServerController@password' , 'as' => 'virtual.password']);
         Route::post('/virtual/{id}/change-messages' , ['uses' => 'VirtualServerController@messages' , 'as'  =>  'virtual.messages']);
         Route::post('/virtual/{id}/change-banner' , ['uses' => 'VirtualServerController@banner' , 'as'  =>  'virtual.banner']);
+        Route::post('/virtual/{id}/create-privilege-key' , ['uses' => 'VirtualServerController@createPrivilegeKey' , 'as' => 'virtual.keys.create']);
+
 
 });
 
