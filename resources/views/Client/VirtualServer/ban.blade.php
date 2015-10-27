@@ -25,7 +25,7 @@
                         <td>{{ $ban['invokername'] }}</td>
                         <td>@if($ban['duration']){{\Carbon\Carbon::now()->timestamp($ban['created']+$ban['duration'])->diffForHumans() }}@else permanente @endif</td>
                         <td>
-                            <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                            <a href="{{ route('account.virtual.ban.del' , [ 'id' => $id , 'banId' => $ban['banid'] ]) }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
                         </td>
                     </tr>
                     @endforeach

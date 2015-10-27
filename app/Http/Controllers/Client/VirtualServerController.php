@@ -78,9 +78,34 @@ class VirtualServerController extends Controller
             $bans = [];
         }
         Carbon::setLocale('pt_BR');
-        //dd($bans);
-        return view('Client.VirtualServer.ban',compact('bans','carbon'));
+        return view('Client.VirtualServer.ban',compact('bans','carbon','id'));
     }
+
+    public function delBan($id , $banId)
+    {
+        $manager = $this->serverManager($id);
+        try{
+            $bans = $manager->banList();
+        }
+        catch(Ts3Exception $e)
+        {
+            $bans = [];
+        }
+
+        $serverBansId = [];
+        foreach($bans as $ban)
+        {
+            $serverBansId[] = $ban['banid'];
+        }
+        if(in_array($banId,$serverBansId))
+        {
+            $manager->banDelete($banId);
+            return redirect()->route('account.virtual.ban',['id' => $id]);
+        }
+        return abort(403);
+
+    }
+
     public function tsBot($id)
     {
 
@@ -200,13 +225,13 @@ class VirtualServerController extends Controller
         $virtualServer  = $this->getVirtualServer($id);
         $manager = $this->serverManager($id);
         $onlineConfigs = [];
+        $slots = [];
 
         $configs = [
             "virtualserver_name"        =>  $manager["virtualserver_name"],
             "virtualserver_status"      =>  $manager["virtualserver_status"],
             "host"                      =>  $virtualServer->host,
         ];
-
         if($manager['virtualserver_status'] == "online")
         {
             $onlinePermissions = [
@@ -228,8 +253,8 @@ class VirtualServerController extends Controller
             {
                 $onlineConfigs[$permission] = $manager[$permission];
             }
+            $slots = ['slots'   =>  $manager['virtualserver_clientsonline']-$manager['virtualserver_queryclientsonline']. "/" .$manager['virtualserver_maxclients']];
         }
-
-        return array_merge_recursive($configs , $onlineConfigs , ['slots'   =>  $manager['virtualserver_clientsonline']-$manager['virtualserver_queryclientsonline']. "/" .$manager['virtualserver_maxclients']]);
+        return array_merge_recursive($configs , $onlineConfigs , $slots );
     }
 }
