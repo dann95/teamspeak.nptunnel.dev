@@ -41,6 +41,9 @@
         <!--logo start-->
         <a href="" class="logo"><b>GameSpeak</b></a>
         <!--logo end-->
+
+
+
         @if($auth->check())
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
@@ -51,6 +54,14 @@
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
                     <li><a class="logout" href="{{ route('auth.login') }}">Entrar</a></li>
+                </ul>
+            </div>
+        @endif
+
+        @if(Session::get('cart')->count())
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="">Carrinho</a></li>
                 </ul>
             </div>
         @endif

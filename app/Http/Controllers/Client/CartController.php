@@ -14,6 +14,9 @@ class CartController extends Controller
      */
     public function add(Request $request)
     {
+        $cart = \Session::get('cart')
+            ->add()
+            ->save();
         return redirect()->route('account.cart.index');
     }
 
