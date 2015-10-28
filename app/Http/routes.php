@@ -8,6 +8,9 @@ Route::get('/' , ['uses' => 'StoreController@index' , 'as' => 'index']);
 Route::get('/por-que-nos-escolher' , ['uses' => 'StoreController@porque' , 'as' => 'porque']);
 Route::get('/nossos-planos' , ['uses' => 'StoreController@planos' , 'as' => 'planos']);
 
+Route::get('create/server/plan/{id}' , ['uses' => 'StoreController@planSelect' , 'as' => 'plan.select' , 'middleware' => 'auth']);
+
+
 /**
  * Rotas do Admin:
  */
@@ -20,17 +23,13 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
 
     Route::group(['prefix' => 'plan' , 'as' => 'plan.'] , function(){
         Route::get('/' , ['uses' => 'PlanController@index' , 'as' => 'index']);
-
         Route::get('create' , ['uses' => 'PlanController@create' , 'as' => 'create']);
         Route::post('store' , ['uses' => 'PlanController@store' , 'as' => 'store']);
-
         Route::get('delete/{id}' , ['uses' => 'PlanController@destroy' , 'as' => 'delete']);
-
     });
 
     Route::group(['prefix' => 'server' , 'as' => 'server.'] , function(){
         Route::get('/' , ['uses' => 'ServerController@index' , 'as' => 'index']);
-
         Route::get('/create' , ['uses' => 'ServerController@create' , 'as' => 'create']);
         Route::post('/store' ,['uses' => 'ServerController@store' , 'as' => 'store']);
     });
@@ -38,22 +37,41 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
 });
 
     Route::group(['prefix' => 'account', 'namespace' => 'Client' , 'as' => 'account.' , 'middleware' => ['auth']] , function(){
+
+        /**
+         * Index Account
+         */
         Route::get('/',['uses' => 'AccountController@index' , 'as' => 'index']);
-        Route::get('/virtual/{id}/settings' , ['uses' => 'VirtualServerController@settings' , 'as' => 'virtual.settings']);
-        Route::get('/virtual/{id}/privilege-keys' , ['uses' => 'VirtualServerController@privilegeKeys' , 'as' => 'virtual.keys']);
-        Route::get('/virtual/{id}/ban-list' , ['uses' => 'VirtualServerController@banList' , 'as' => 'virtual.ban']);
-        Route::get('/virtual/{id}/del-ban/{banId}' , ['uses' => 'VirtualServerController@delBan' , 'as' => 'virtual.ban.del'])->where(
-            ['banId' => '[0-9]+']
-        );
-        Route::get('/virtual/{id}/ts-bot' , ['uses' => 'VirtualServerController@tsBot' , 'as' => 'virtual.bot']);
 
-        Route::get('/virtual/{id}/power-on' , ['uses' => 'VirtualServerController@powerOn' , 'as' => 'virtual.powerOn']);
-        Route::get('/virtual/{id}/power-off' , ['uses' => 'VirtualServerController@powerOff' , 'as' => 'virtual.powerOff']);
-        Route::post('/virtual/{id}/change-password' , ['uses' => 'VirtualServerController@password' , 'as' => 'virtual.password']);
-        Route::post('/virtual/{id}/change-messages' , ['uses' => 'VirtualServerController@messages' , 'as'  =>  'virtual.messages']);
-        Route::post('/virtual/{id}/change-banner' , ['uses' => 'VirtualServerController@banner' , 'as'  =>  'virtual.banner']);
-        Route::post('/virtual/{id}/create-privilege-key' , ['uses' => 'VirtualServerController@createPrivilegeKey' , 'as' => 'virtual.keys.create']);
+        /**
+         * Virtual Server routes:
+         */
+        Route::group(['prefix' => 'virtual/{id}' , 'as' => 'virtual.'] , function(){
+            Route::get('settings' , ['uses' => 'VirtualServerController@settings' , 'as' => 'settings']);
+            Route::get('privilege-keys' , ['uses' => 'VirtualServerController@privilegeKeys' , 'as' => 'keys']);
+            Route::get('ban-list' , ['uses' => 'VirtualServerController@banList' , 'as' => 'ban']);
+            Route::get('del-ban/{banId}' , ['uses' => 'VirtualServerController@delBan' , 'as' => 'ban.del'])->where(
+                ['banId' => '[0-9]+']
+            );
+            Route::get('ts-bot' , ['uses' => 'VirtualServerController@tsBot' , 'as' => 'bot']);
+            Route::get('power-on' , ['uses' => 'VirtualServerController@powerOn' , 'as' => 'powerOn']);
+            Route::get('power-off' , ['uses' => 'VirtualServerController@powerOff' , 'as' => 'powerOff']);
+            /**
+             * post methods!
+             */
+            Route::post('change-password' , ['uses' => 'VirtualServerController@password' , 'as' => 'password']);
+            Route::post('change-messages' , ['uses' => 'VirtualServerController@messages' , 'as'  =>  'messages']);
+            Route::post('change-banner' , ['uses' => 'VirtualServerController@banner' , 'as'  =>  'banner']);
+            Route::post('create-privilege-key' , ['uses' => 'VirtualServerController@createPrivilegeKey' , 'as' => 'keys.create']);
+        });
 
+        /**
+         * Cart Routes:
+         */
+        Route::group(['prefix' => 'cart' , 'as' => 'cart.'] , function(){
+            Route::get('/',['uses' => 'CartController@index' , 'as' => 'index']);
+            Route::post('add' , ['uses' => 'CartController@add' , 'as' => 'add']);
+        });
 
 });
 
