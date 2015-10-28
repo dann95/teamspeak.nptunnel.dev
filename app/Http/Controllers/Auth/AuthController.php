@@ -12,6 +12,7 @@ class AuthController extends Controller
 {
 
     private $redirectPath = 'account';
+    protected $redirectTo = 'account';
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
