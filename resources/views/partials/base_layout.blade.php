@@ -39,7 +39,7 @@
         </div>
         @endif
         <!--logo start-->
-        <a href="" class="logo"><b>GameSpeak</b></a>
+        <a href="{{ route('index') }}" class="logo"><b>GameSpeak</b></a>
         <!--logo end-->
 
 
@@ -61,7 +61,7 @@
         @if(Session::get('cart')->count())
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="">Carrinho</a></li>
+                    <li><a class="logout" href=""><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
                 </ul>
             </div>
         @endif

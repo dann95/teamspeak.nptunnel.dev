@@ -24,4 +24,10 @@ class PlanRepository extends Repository implements PlanRepositoryContract
     {
         return $this->model->where('active',1)->get();
     }
+
+    public function findActiveById($id)
+    {
+        $plan = $this->model->find($id);
+        return ($plan->active) ? $plan : FALSE;
+    }
 }

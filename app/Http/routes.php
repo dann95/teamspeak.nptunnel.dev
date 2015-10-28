@@ -70,6 +70,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
          */
         Route::group(['prefix' => 'cart' , 'as' => 'cart.'] , function(){
             Route::get('/',['uses' => 'CartController@index' , 'as' => 'index']);
+            Route::get('del/{id}' , ['uses' => 'CartController@del' , 'as' => 'del']);
             Route::post('add' , ['uses' => 'CartController@add' , 'as' => 'add']);
         });
 
