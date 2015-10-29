@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
             Route::get('/',['uses' => 'CartController@index' , 'as' => 'index']);
             Route::get('del/{id}' , ['uses' => 'CartController@del' , 'as' => 'del']);
             Route::post('add' , ['uses' => 'CartController@add' , 'as' => 'add']);
+            Route::get('checkout' , ['uses' => 'CheckoutController@index' , 'as' => 'checkout']);
         });
 
 });
