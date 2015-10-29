@@ -77,7 +77,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
                 @if($auth->check())
-                    <p class="centered"><a href="{{ route('account.index') }}"><img src="/img/avatar/thusk-avatar.png" style="margin-left:-60px;" width="128"></p>
+                    <p class="centered">@if($auth->user()->is_admin)<a href="{{ route('admin.index') }}"> @else <a href="{{ route('account.index') }}"> @endif <img src="/img/avatar/thusk-avatar.png" style="margin-left:-60px;" width="128"></p>
                     <h5 class="centered">{{ $auth->user()->name }}</h5></a>
                 @endif
 

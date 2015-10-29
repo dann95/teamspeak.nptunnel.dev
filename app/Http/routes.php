@@ -15,12 +15,9 @@ Route::get('create/server/plan/{id}' , ['uses' => 'StoreController@planSelect' ,
  * Rotas do Admin:
  */
 
-Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'] ,function(){
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'auth.admin'] ,function(){
 
-    Route::get('/' , function(){
-        return 123;
-    });
-
+    Route::get('/' , ['as' => 'admin.index' , 'uses' => 'AdminController@index']);
     Route::group(['prefix' => 'plan' , 'as' => 'plan.'] , function(){
         Route::get('/' , ['uses' => 'PlanController@index' , 'as' => 'index']);
         Route::get('create' , ['uses' => 'PlanController@create' , 'as' => 'create']);

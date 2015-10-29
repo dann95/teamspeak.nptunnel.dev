@@ -14,6 +14,7 @@ class ServerController extends Controller
     private $repository;
     public function __construct(ServerRepositoryContract $repository)
     {
+        parent::__construct();
         $this->repository = $repository;
     }
 

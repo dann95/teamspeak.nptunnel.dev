@@ -13,6 +13,7 @@ class PlanController extends Controller
     private $repository;
     public function __construct(PlanRepositoryContract $repository)
     {
+        parent::__construct();
         $this->repository = $repository;
     }
     /**
