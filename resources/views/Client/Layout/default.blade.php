@@ -14,10 +14,13 @@
         </a>
     </li>
     <li class="sub-menu">
-        <a href="{{ route('porque') }}" >
+        <a href="" >
             <i class="fa fa-usd"></i>
             <span>Financeiro</span>
         </a>
+        <ul class="sub">
+            <li><a  href="{{ route('account.invoices') }}"><i class="fa fa-folder-open"></i>Meus pedidos</a></li>
+        </ul>
     </li>
     @foreach($auth->user()->virtualServers() as $virtualServer)
     <li class="sub-menu">

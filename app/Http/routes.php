@@ -40,6 +40,13 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
          */
         Route::get('/',['uses' => 'AccountController@index' , 'as' => 'index']);
 
+
+        /**
+         * Invoices
+         */
+        Route::get('/meus-pedidos' , ['uses' => 'AccountController@invoices' , 'as' => 'invoices']);
+
+
         /**
          * Virtual Server routes:
          */

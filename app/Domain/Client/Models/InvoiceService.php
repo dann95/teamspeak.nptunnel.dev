@@ -21,6 +21,6 @@ class InvoiceService extends Model
 
     public function plan()
     {
-        return $this->belongsTo(Plan::class)->get();
+        return $this->belongsTo(Plan::class)->get()->first();
     }
 }

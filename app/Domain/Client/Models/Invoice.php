@@ -15,7 +15,7 @@ class Invoice extends Model
 
     public function items()
     {
-        return $this->hasMany(InvoiceService::class);
+        return $this->hasMany(InvoiceService::class)->get();
     }
 
     public function user()
@@ -23,9 +23,19 @@ class Invoice extends Model
         return $this->belongsTo(User::class)->get();
     }
 
-    public function status()
+    public function getTotalAttribute()
     {
-        return $this->belongsTo(InvoiceStatus::class)->get()->status;
+        $total = 0;
+        foreach($this->items() as $item)
+        {
+            $total += $item->plan()->price;
+        }
+        return "R$ ".number_format($total,2);
+    }
+
+    public function getStatusAttribute()
+    {
+        return $this->belongsTo(InvoiceStatus::class , 'invoice_status_id')->get()->first()->status;
     }
 
 }

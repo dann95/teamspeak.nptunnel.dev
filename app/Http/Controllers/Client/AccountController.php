@@ -10,6 +10,13 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return view('Client.index');
+        return view('Client.Account.index');
     }
+
+    public function invoices()
+    {
+        return view('Client.Account.invoices');
+    }
+
+
 }
