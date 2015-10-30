@@ -13,7 +13,10 @@ class CheckoutController extends Controller
     public function __construct(InvoiceRepositoryContract $invoiceRepository)
     {
         parent::__construct();
+
         $this->invoiceRepository = $invoiceRepository;
+
+
     }
     public function index()
     {
@@ -23,10 +26,24 @@ class CheckoutController extends Controller
     }
     public function checkout()
     {
+        // Armazenando o carrinho em uma var.
+        $cart = \Session::get('cart');
+        // Abortar caso carrinho esteja vazio.
+        if(! $cart->count())
+            return redirect()->route('account.cart.index')->withErrors(['O carrinho está vazio! :(']);
+
         // TODO: Payment Logic
 
-        // TODO: Create Invoice
+        // Create Invoice
+        $invoice = $this->invoiceRepository->create(
+            $cart->finish()
+        );
+        // Reset the cart:
+        $cart->reset()
+            ->save();
 
         // TODO: Show the invoice and fire email.
+
+        return view('Client.Checkout.success_invoice' , compact('invoice'));
     }
 }

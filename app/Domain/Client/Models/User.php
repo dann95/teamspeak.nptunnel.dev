@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use NpTS\Domain\Client\Models\VirtualServer;
+use NpTS\Domain\Client\Models\Invoice;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -47,5 +48,10 @@ class User extends Model implements AuthenticatableContract,
     public function virtualServers()
     {
         return $this->hasMany(VirtualServer::class)->get();
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class)->get();
     }
 }

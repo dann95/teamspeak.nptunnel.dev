@@ -9,6 +9,8 @@ class Cart implements CartContract
 {
 
     private $cart = [];
+    private $voucher = [];
+    private $cupom = [];
 
     public function __construct()
     {
@@ -99,6 +101,24 @@ class Cart implements CartContract
      */
     private function getNextId()
     {
-        return $this->count()+1;
+        $keys = array_keys($this->cart);
+        $end = end($keys);
+        if(! $end)
+        {
+            return 1;
+        }
+        else
+        {
+            return $end+1;
+        }
+    }
+
+    public function finish()
+    {
+        return [
+            'items' =>  collect($this->cart),
+            'cupoms'    =>  $this->cupom,
+            'vouchers'  =>  $this->voucher,
+        ];
     }
 }

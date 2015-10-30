@@ -13,4 +13,5 @@ interface CartContract
     public function reset();
     public function count();
     public function save();
+    public function finish();
 }
