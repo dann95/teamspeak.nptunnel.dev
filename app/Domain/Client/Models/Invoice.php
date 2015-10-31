@@ -15,7 +15,7 @@ class Invoice extends Model
 
     public function items()
     {
-        return $this->hasMany(InvoiceService::class)->get();
+        return $this->hasMany(InvoiceService::class);
     }
 
     public function user()
@@ -26,7 +26,7 @@ class Invoice extends Model
     public function getTotalAttribute()
     {
         $total = 0;
-        foreach($this->items() as $item)
+        foreach($this->items()->get() as $item)
         {
             $total += $item->plan()->price;
         }

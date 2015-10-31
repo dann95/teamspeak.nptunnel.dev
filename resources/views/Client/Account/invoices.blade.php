@@ -17,7 +17,7 @@
                 <tbody>
                 @foreach($auth->user()->invoices() as $invoice)
                 <tr>
-                    <td>pedido #{{ $invoice->id }}</td>
+                    <td><a href="{{ route('account.invoice.show' , ['id' => $invoice->id]) }}">pedido #{{ $invoice->id }}</a></td>
                     <td>{{ $invoice->total }}</td>
                     <td>{{ $invoice->created_at }}</td>
                     <td>{{ $invoice->status }}</td>
