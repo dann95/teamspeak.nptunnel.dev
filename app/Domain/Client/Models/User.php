@@ -12,6 +12,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use NpTS\Domain\Client\Models\VirtualServer;
 use NpTS\Domain\Client\Models\Invoice;
+use NpTS\Domain\Client\Models\Subscription;
+use NpTS\Domain\Client\Repositories\Contracts\SubscriptionRepositoryContract;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -53,5 +55,15 @@ class User extends Model implements AuthenticatableContract,
     public function invoices()
     {
         return $this->hasMany(Invoice::class , 'user_id')->get();
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class)->get();
+    }
+
+    public function activeSubscriptions()
+    {
+        return app(SubscriptionRepositoryContract::class)->findActiveSubscriptionsByUserId($this->id);
     }
 }

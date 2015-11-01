@@ -7,6 +7,8 @@ use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
 use NpTS\Domain\Client\Repositories\Contracts\InvoiceRepositoryContract;
 
+use NpTS\Domain\Client\Service\VirtualServer;
+
 class CheckoutController extends Controller
 {
     private $invoiceRepository;
@@ -43,6 +45,13 @@ class CheckoutController extends Controller
             ->save();
 
         // TODO: Show the invoice and fire email.
+
+        // @TEST
+        $test = app(VirtualServer::class);
+        $test->create(
+            $invoice
+        );
+        // /@TEST
 
         return view('Client.Checkout.success_invoice' , compact('invoice'));
     }

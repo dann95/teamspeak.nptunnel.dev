@@ -9,19 +9,16 @@ use NpTS\Domain\Admin\Models\Plan;
 use NpTS\Domain\Client\Repositories\Contracts\VirtualServerRepositoryContract;
 use NpTS\Domain\Client\Models\VirtualServer;
 use NpTS\Domain\Admin\Repositories\Contracts\ServerRepositoryContract;
-use Illuminate\Auth\Guard;
 use NpTS\Abstracts\TeamSpeak\DefaultVirtualServerValues;
 use NpTS\Domain\TeamSpeak\Manager;
 
 class VirtualServerRepository extends Repository implements VirtualServerRepositoryContract
 {
     protected $model;
-    private $guard;
     private $serverRepository;
-    public function __construct(VirtualServer $virtualServer , Guard $guard , ServerRepositoryContract $serverRepository)
+    public function __construct(VirtualServer $virtualServer , ServerRepositoryContract $serverRepository)
     {
         $this->model = $virtualServer;
-        $this->guard = $guard;
         $this->serverRepository = $serverRepository;
     }
 
@@ -64,7 +61,7 @@ class VirtualServerRepository extends Repository implements VirtualServerReposit
             'plan_id'       =>  $options['plan']->id,
             'server_id'     =>  $server->id,
             'v_sid'         =>  $virtualServer['sid'],
-            'user_id'       =>  $this->guard->user()->id,
+            'user_id'       =>  $options['user_id'],
             'port'          =>  $virtualServer['virtualserver_port'],
             'name'          =>  $options['name'],
         ]);
