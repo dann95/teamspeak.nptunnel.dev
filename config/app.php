@@ -147,7 +147,7 @@ return [
         NpTS\Domain\Client\ClientServiceProvider::class,
         NpTS\Domain\Admin\AdminServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
-        Brouwers\Bbcodes\BbcodesServiceProvider::class,
+
 
     ],
 
