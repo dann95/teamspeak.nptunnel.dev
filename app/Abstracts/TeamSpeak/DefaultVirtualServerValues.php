@@ -21,6 +21,11 @@ class DefaultVirtualServerValues
             "virtualserver_name"    =>  "GameSpeak.com.br - Qualidade em TeamSpeak",
             "virtualserver_gfx_url" =>  "http://i.imgur.com/hvkjRBd.jpg",
             "virtualserver_hostbutton_tooltip"  =>  "GameSpeak",
+            "virtualserver_hostbanner_url" => "http://www.nptunne.com",
+            "virtualserver_hostbanner_gfx_url" => "http://i.imgur.com/JeAmgcK.jpg",
+            "virtualserver_hostbanner_gfx_interval" => 0,
+            "virtualserver_hostbanner_mode" => 1,
+
 
         ];
     }

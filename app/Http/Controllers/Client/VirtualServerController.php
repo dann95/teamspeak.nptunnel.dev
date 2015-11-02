@@ -53,7 +53,11 @@ class VirtualServerController extends Controller
     {
         $manager = $this->serverManager($id);
         $groups = $manager->serverGroupList(['type' =>  1]);
+        try{
         $keys = $manager->privilegeKeyList();
+        }catch(Ts3Exception $e){
+            $keys = [];
+        }
         $groupsById = [];
         foreach($groups as $group)
         {

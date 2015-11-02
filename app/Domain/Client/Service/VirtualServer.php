@@ -36,7 +36,7 @@ class VirtualServer
                 'active'    =>  1
             ]);
         });
-        $invoice->status_id = 3;
+        $invoice->invoice_status_id = 3;
         $invoice->save();
         return true;
     }
