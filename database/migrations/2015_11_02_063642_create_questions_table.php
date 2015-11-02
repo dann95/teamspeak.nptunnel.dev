@@ -16,6 +16,8 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('status_id');
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('service_id');
             $table->boolean('visualized');
             $table->string('title');
             $table->text('body');
