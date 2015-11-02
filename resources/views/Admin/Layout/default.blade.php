@@ -35,8 +35,7 @@
             <span>Clientes</span>
         </a>
         <ul class="sub">
-            <li><a  href="{{ route('plan.index') }}">Listar</a></li>
-            <li><a  href="{{ route('plan.create') }}">Inserir</a></li>
+            <li><a  href="{{ route('client.index') }}">Listar</a></li>
         </ul>
     </li>
 

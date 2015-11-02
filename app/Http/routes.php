@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
     });
 
     Route::group(['prefix' => 'client' , 'as' => 'client.'] , function(){
-
+        Route::get('/', ['uses' => 'ClientController@index' , 'as' => 'index']);
     });
 
 
