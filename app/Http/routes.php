@@ -23,6 +23,9 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
         Route::get('create' , ['uses' => 'PlanController@create' , 'as' => 'create']);
         Route::post('store' , ['uses' => 'PlanController@store' , 'as' => 'store']);
         Route::get('power/{id}' , ['uses' => 'PlanController@power' , 'as' => 'power']);
+
+        Route::get('edit/{id}' , ['uses' => 'PlanController@edit' , 'as' => 'edit']);
+        Route::post('update/{id}' , ['uses' => 'PlanController@update' , 'as' => 'update']);
     });
 
     Route::group(['prefix' => 'server' , 'as' => 'server.'] , function(){

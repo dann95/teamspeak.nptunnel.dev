@@ -71,7 +71,8 @@ class PlanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plan = $this->repository->find($id);
+        return view('Admin.Plan.edit' , compact('plan'));
     }
 
     /**
@@ -83,7 +84,21 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request , [
+            'name' => ['required','min:3','max:20'],
+            'price' => ['required','numeric'],
+            'slots' => ['required','int']
+        ],
+            [
+                'slots.int' => 'Slots deve ser um numero!',
+                'name.required' => 'Insira um nome!',
+                'price.required' => 'Insira um preço!',
+                'slots.required' => 'Insira uma quantidade de slots!',
+                'price.numeric' =>  'Preço deve ser numerico!',
+            ]
+        );
+        $this->repository->update($id , $request->only(['name','price','slots','active']));
+        return redirect()->route('plan.index');
     }
 
     /**

@@ -24,7 +24,7 @@
                         <td>R${{ $plan->price }} </td>
                         <td>@if($plan->active) <span class="label label-success label-mini">Ativo</span> @else <span class="label label-danger label-mini">Inativo</span> @endif </td>
                         <td>
-                            <a href="{{ route('plan.index' , ['id' => $plan->id]) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                            <a href="{{ route('plan.edit' , ['id' => $plan->id]) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
                             <a href="{{ route('plan.power' , ['id' => $plan->id]) }}"><button class="btn @if($plan->active) btn-danger @else btn-success @endif btn-xs"><i class="fa fa-power-off "></i></button></a>
                         </td>
                     </tr>

@@ -29,8 +29,8 @@
                             <td>{{ $server->active }}</td>
                             <td>{{ $server->active_sales }}</td>
                             <td>
-                                <a href="{{ route('plan.delete' , ['id' => 1]) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                <a href="{{ route('plan.delete' , ['id' => 1]) }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
+                                <a href="{{ route('plan.index' , ['id' => 1]) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                <a href="{{ route('plan.index' , ['id' => 1]) }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
                             </td>
                         </tr>
                         @endforeach
