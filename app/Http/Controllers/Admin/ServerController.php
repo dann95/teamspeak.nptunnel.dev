@@ -94,14 +94,36 @@ class ServerController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function active($id)
     {
-        //
+        $server = $this->repository->find($id);
+        if($server && $server->active)
+        {
+            $server->active = 0;
+            $server->save();
+        }
+        elseif($server && !($server->active))
+        {
+            $server->active = 1;
+            $server->save();
+        }
+        return redirect()->route('server.index');
+    }
+
+    public function activeSales($id)
+    {
+        $server = $this->repository->find($id);
+        if($server && $server->active_sales)
+        {
+            $server->active_sales = 0;
+            $server->save();
+        }
+        elseif($server && !($server->active_sales))
+        {
+            $server->active_sales = 1;
+            $server->save();
+        }
+        return redirect()->route('server.index');
     }
 }

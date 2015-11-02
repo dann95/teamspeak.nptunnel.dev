@@ -32,6 +32,11 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
         Route::get('/' , ['uses' => 'ServerController@index' , 'as' => 'index']);
         Route::get('/create' , ['uses' => 'ServerController@create' , 'as' => 'create']);
         Route::post('/store' ,['uses' => 'ServerController@store' , 'as' => 'store']);
+
+
+        Route::get('edit/{id}' , ['uses' => 'ServerController@edit' , 'as' => 'edit']);
+        Route::get('active/{id}' , ['uses' => 'ServerController@active' , 'as' => 'active']);
+        Route::get('active-sales/{id}' , ['uses' => 'ServerController@activeSales' , 'as' => 'active.sales']);
     });
 
     Route::group(['prefix' => 'virtual-server' , 'as' => 'virtual.'] , function(){

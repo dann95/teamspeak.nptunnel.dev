@@ -26,11 +26,12 @@
                             <td>{{ $server->usage }}</td>
                             <td>{{ $server->ip }}</td>
                             <td>{{ $server->dns }}</td>
-                            <td>{{ $server->active }}</td>
-                            <td>{{ $server->active_sales }}</td>
+                            <td>@if($server->active) <span class="label label-success label-mini">Ativo</span> @else <span class="label label-danger label-mini">Inativo</span> @endif</td>
+                            <td>@if($server->active_sales) <span class="label label-success label-mini">Ativo</span> @else <span class="label label-danger label-mini">Inativo</span> @endif</td>
                             <td>
-                                <a href="{{ route('plan.index' , ['id' => 1]) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
-                                <a href="{{ route('plan.index' , ['id' => 1]) }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
+                                <a href="{{ route('plan.edit' , ['id' => 1]) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                                <a href="{{ route('server.active.sales' , ['id' => 1]) }}"><button class="btn @if($server->active_sales) btn-danger @else btn-success @endif btn-xs"><i class="fa fa-usd "></i></button></a>
+                                <a href="{{ route('server.active' , ['id' => 1]) }}"><button class="btn @if($server->active) btn-danger @else btn-success @endif btn-xs"><i class="fa fa-power-off "></i></button></a>
                             </td>
                         </tr>
                         @endforeach
