@@ -1,6 +1,6 @@
 <?php
 
-namespace NpTS\Providers;
+namespace NpTS\Domain\Bot;
 
 use Illuminate\Support\ServiceProvider;
 

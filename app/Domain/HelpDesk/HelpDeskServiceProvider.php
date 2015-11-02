@@ -1,6 +1,6 @@
 <?php
 
-namespace NpTS\Providers;
+namespace NpTS\Domain\HelpDesk;
 
 use Illuminate\Support\ServiceProvider;
 
