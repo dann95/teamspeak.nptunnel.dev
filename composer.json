@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "fkubis/teamspeak-php-framework": "dev-master",
-        "jenssegers/agent": "^2.2"
+        "jenssegers/agent": "^2.2",
+        "brouwers/bbcodes": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -4,9 +4,108 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2444b24fc940017d8082a3f46591121d",
-    "content-hash": "e36424c7e818d12aadcadea3159370d6",
+    "hash": "cd8c4715baad67c551b7b1b84d77a87b",
+    "content-hash": "5e14fed11d03639843937ebcdeae7825",
     "packages": [
+        {
+            "name": "brouwers/bbcodes",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/patrickbrouwers/Laravel-BBcodes.git",
+                "reference": "1179a7a02df0b96c6755e36820c68c9b21829b66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/patrickbrouwers/Laravel-BBcodes/zipball/1179a7a02df0b96c6755e36820c68c9b21829b66",
+                "reference": "1179a7a02df0b96c6755e36820c68c9b21829b66",
+                "shasum": ""
+            },
+            "require": {
+                "brouwers/shortcodes": "1.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "orchestra/testbench": "~2.2.0@dev",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "tests/BbcodeTestCase.php"
+                ],
+                "psr-0": {
+                    "Brouwers\\Bbcodes": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Brouwers",
+                    "email": "patrickbrouwers@live.nl"
+                }
+            ],
+            "description": "BBcodes for Laravel",
+            "keywords": [
+                "bbcode",
+                "laravel",
+                "shortcodes"
+            ],
+            "time": "2014-07-13 13:41:35"
+        },
+        {
+            "name": "brouwers/shortcodes",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/patrickbrouwers/Laravel-Shortcodes.git",
+                "reference": "a35dc13a67e88f477d3429cc1bf0a2eee2297128"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/patrickbrouwers/Laravel-Shortcodes/zipball/a35dc13a67e88f477d3429cc1bf0a2eee2297128",
+                "reference": "a35dc13a67e88f477d3429cc1bf0a2eee2297128",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "orchestra/testbench": "~2.2.0@dev",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "tests/TestCase.php"
+                ],
+                "psr-0": {
+                    "Brouwers\\Shortcodes": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Brouwers",
+                    "email": "patrickbrouwers@live.nl"
+                }
+            ],
+            "description": "Wordpress like shortcodes for Laravel 4.2",
+            "keywords": [
+                "laravel",
+                "shortcodes",
+                "wordpress"
+            ],
+            "time": "2014-12-06 18:45:35"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "2.0.0",
