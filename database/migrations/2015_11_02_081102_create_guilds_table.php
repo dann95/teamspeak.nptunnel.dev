@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionCategoriesTable extends Migration
+class CreateGuildsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,12 @@ class CreateQuestionCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_categories', function (Blueprint $table) {
+        Schema::create('guilds', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->unsignedInteger('tibia_list_id');
+            $table->boolean('default_poke_die');
+            $table->boolean('default_msg_die');
+            $table->smallInteger('position');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateQuestionCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('question_categories');
+        Schema::drop('guilds');
     }
 }
