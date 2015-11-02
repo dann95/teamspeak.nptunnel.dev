@@ -48,12 +48,19 @@
             <li><a  href="{{ route('virtual.index') }}">Listar</a></li>
         </ul>
     </li>
-
     <li class="sub-menu">
         <a href="javascript:;" >
-            <i class="fa fa-life-ring"></i>
+            <i class="fa fa-life-saver"></i>
             <span>Helpdesk</span>
         </a>
+        <ul class="sub">
+            <li><a  href="#">Não Visualizados</a></li>
+            <li><a  href="#">Em Aberto</a></li>
+            <li><a  href="#">Financeiro</a></li>
+            <li><a  href="#">Suporte</a></li>
+        </ul>
     </li>
+
+
 
 @endsection
