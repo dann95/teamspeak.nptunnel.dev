@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
 
 
         Route::get('edit/{id}' , ['uses' => 'ServerController@edit' , 'as' => 'edit']);
+        Route::post('update/{id}' , ['uses' => 'ServerController@update' , 'as' => 'update']);
         Route::get('active/{id}' , ['uses' => 'ServerController@active' , 'as' => 'active']);
         Route::get('active-sales/{id}' , ['uses' => 'ServerController@activeSales' , 'as' => 'active.sales']);
     });
