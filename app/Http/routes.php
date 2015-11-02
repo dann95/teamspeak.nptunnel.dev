@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
     });
 
     Route::group(['prefix' => 'virtual-server' , 'as' => 'virtual.'] , function(){
-
+        Route::get('/' , ['uses' => 'VirtualServerController@index' , 'as' => 'index']);
     });
 
     Route::group(['prefix' => 'help' , 'as' => 'help'] , function(){
