@@ -146,6 +146,8 @@ return [
         NpTS\Providers\RouteServiceProvider::class,
         NpTS\Domain\Client\ClientServiceProvider::class,
         NpTS\Domain\Admin\AdminServiceProvider::class,
+        NpTS\Domain\Bot\BotServiceProvider::class,
+        NpTS\Domain\HelpDesk\HelpDeskServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Golonka\BBCode\BBCodeParserServiceProvider::class,
 
