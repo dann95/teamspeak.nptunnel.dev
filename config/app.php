@@ -147,6 +147,7 @@ return [
         NpTS\Domain\Client\ClientServiceProvider::class,
         NpTS\Domain\Admin\AdminServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        Golonka\BBCode\BBCodeParserServiceProvider::class,
 
 
     ],
@@ -197,6 +198,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'BBCode' => Golonka\BBCode\Facades\BBCodeParser::class,
 
     ],
 

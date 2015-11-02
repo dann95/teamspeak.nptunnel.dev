@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2444b24fc940017d8082a3f46591121d",
-    "content-hash": "e36424c7e818d12aadcadea3159370d6",
+    "hash": "6434a1887adf641a6551c79ea2046601",
+    "content-hash": "2599ab5ae53763f2b8cbed5419630d7d",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -259,6 +259,56 @@
                 "teamspeak3"
             ],
             "time": "2014-03-11 00:02:22"
+        },
+        {
+            "name": "golonka/bbcodeparser",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/golonka/BBCodeParser.git",
+                "reference": "f6de6d7576979a549f4cb6dbe33949e293dd9c60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/golonka/BBCodeParser/zipball/f6de6d7576979a549f4cb6dbe33949e293dd9c60",
+                "reference": "f6de6d7576979a549f4cb6dbe33949e293dd9c60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4",
+                "squizlabs/php_codesniffer": "~2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Golonka\\BBCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joseph Landberg",
+                    "email": "joseph.landberg@gmail.com",
+                    "homepage": "http://github.com/golonka/"
+                }
+            ],
+            "description": "Parse your BBCode easy with this library.",
+            "homepage": "http://github.com/golonka/bbcodeparser",
+            "keywords": [
+                "PSR-1",
+                "PSR-2",
+                "PSR-4",
+                "bbcode",
+                "laravel",
+                "parser"
+            ],
+            "time": "2015-09-07 17:43:55"
         },
         {
             "name": "jakub-onderka/php-console-color",
