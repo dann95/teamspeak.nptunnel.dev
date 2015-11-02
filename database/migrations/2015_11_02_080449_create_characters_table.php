@@ -15,6 +15,7 @@ class CreateCharactersTable extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tibia_list_id');
+            $table->boolean('online');
             $table->smallInteger('position');
             $table->unsignedInteger('vocation_id');
             $table->unsignedInteger('world_id');
