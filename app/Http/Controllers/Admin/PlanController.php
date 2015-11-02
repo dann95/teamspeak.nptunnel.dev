@@ -87,7 +87,7 @@ class PlanController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Change status of an plan.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
