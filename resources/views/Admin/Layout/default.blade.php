@@ -1,7 +1,7 @@
 @extends('partials.base_layout')
 @section('menu')
     <li class="sub-menu">
-        <a href="javascript:;" >
+        <a href="{{ route('admin.index') }}" >
             <i class="fa fa-desktop"></i>
             <span>Início</span>
         </a>
@@ -50,4 +50,12 @@
             <li><a  href="{{ route('plan.create') }}">Inserir</a></li>
         </ul>
     </li>
+
+    <li class="sub-menu">
+        <a href="javascript:;" >
+            <i class="fa fa-life-ring"></i>
+            <span>Helpdesk</span>
+        </a>
+    </li>
+
 @endsection

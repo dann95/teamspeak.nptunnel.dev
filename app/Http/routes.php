@@ -22,7 +22,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
         Route::get('/' , ['uses' => 'PlanController@index' , 'as' => 'index']);
         Route::get('create' , ['uses' => 'PlanController@create' , 'as' => 'create']);
         Route::post('store' , ['uses' => 'PlanController@store' , 'as' => 'store']);
-        Route::get('delete/{id}' , ['uses' => 'PlanController@destroy' , 'as' => 'delete']);
+        Route::get('power/{id}' , ['uses' => 'PlanController@power' , 'as' => 'power']);
     });
 
     Route::group(['prefix' => 'server' , 'as' => 'server.'] , function(){
@@ -30,6 +30,20 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
         Route::get('/create' , ['uses' => 'ServerController@create' , 'as' => 'create']);
         Route::post('/store' ,['uses' => 'ServerController@store' , 'as' => 'store']);
     });
+
+    Route::group(['prefix' => 'virtual-server' , 'as' => 'virtual.'] , function(){
+
+    });
+
+    Route::group(['prefix' => 'help' , 'as' => 'help'] , function(){
+
+    });
+
+    Route::group(['prefix' => 'client' , 'as' => 'client.'] , function(){
+
+    });
+
+
 
 });
 

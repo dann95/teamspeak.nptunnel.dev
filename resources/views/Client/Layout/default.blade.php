@@ -40,6 +40,13 @@
 
     <li class="sub-menu">
         <a href="javascript:;">
+            <i class="fa fa-life-ring"></i>
+            <span>Helpdesk</span>
+        </a>
+    </li>
+
+    <li class="sub-menu">
+        <a href="javascript:;">
             <i class="fa fa-comments-o"></i>
             <span>Atendimento Online</span>
         </a>

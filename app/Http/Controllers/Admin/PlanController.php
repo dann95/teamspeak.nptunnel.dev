@@ -92,9 +92,20 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function power($id)
     {
-        $this->repository->delete($id);
+        $plan = $this->repository->find($id);
+
+        if($plan && $plan->active)
+        {
+            $plan->active = 0;
+            $plan->save();
+        }
+        elseif($plan && !($plan->active))
+        {
+            $plan->active = 1;
+            $plan->save();
+        }
         return redirect()->route('plan.index');
     }
 }
