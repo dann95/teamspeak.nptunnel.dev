@@ -103,6 +103,12 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
             Route::post('checkout' , ['uses' => 'CheckoutController@checkout']);
         });
 
+        Route::group(['prefix' => 'help-desk' , 'as' => 'help.'] , function(){
+            Route::get('/' , ['uses' => 'HelpDeskController@index' , 'as' => 'index']);
+            Route::get('{id}' , ['uses' => 'HelpDeskController@show' , 'as' => 'show']);
+            Route::post('{id}/post-repply' , ['uses' => 'HelpDeskController@storeAnswer' , 'as' => 'answer']);
+        });
+
 });
 
 /**

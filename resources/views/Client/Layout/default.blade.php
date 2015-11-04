@@ -39,7 +39,7 @@
     @endforeach
 
     <li class="sub-menu">
-        <a href="javascript:;">
+        <a href="{{ route('account.help.index') }}">
             <i class="fa fa-life-ring"></i>
             <span>Helpdesk</span>
         </a>

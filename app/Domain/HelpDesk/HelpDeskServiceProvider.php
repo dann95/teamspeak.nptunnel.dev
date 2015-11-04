@@ -4,6 +4,9 @@ namespace NpTS\Domain\HelpDesk;
 
 use Illuminate\Support\ServiceProvider;
 
+use NpTS\Domain\HelpDesk\Repositories\Contracts\QuestionRepositoryContract;
+use NpTS\Domain\HelpDesk\Repositories\QuestionRepository;
+
 class HelpDeskServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +16,7 @@ class HelpDeskServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->bind(QuestionRepositoryContract::class , QuestionRepository::class);
     }
 
     /**
