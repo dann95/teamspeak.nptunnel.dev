@@ -40,6 +40,26 @@ class HelpDeskController extends Controller
         return view('Client.HelpDesk.create');
     }
 
+    public function store(Request $request)
+    {
+        $this->validate($request , [
+            'title' => ['required','min:3','max:20'],
+            'body'  =>  ['required','min:3']
+        ] , [
+            'title.required' => "Insira um título",
+            'title.min' =>  'O título deve ter pelomenos 3 digitos',
+            'title.max' =>  'O título só pode ter até 20 digitos',
+            'body.required'  =>  'Insira uma mensagem!',
+            'body.min'  =>  'A mensagem deve ter pelomenos 3 digitos!'
+        ]);
+        $question = $this->guard->user()->questions()->create([
+            'category_id' => $request->only('category_id')['category_id'],
+            'title' =>  $request->only('title')['title'],
+            'body'  =>  htmlentities($request->only(['body'])['body'])
+            ]);
+        return redirect()->route('account.help.show', ['id' => $question->id]);
+    }
+
     /**
      * @param $id
      * @param Request $request
@@ -57,7 +77,7 @@ class HelpDeskController extends Controller
         {
             $question->answers()->create([
                 'user_id' => $this->guard->user()->id,
-                'body'    => $request->only(['comment'])['comment']
+                'body'    => htmlentities($request->only(['comment'])['comment'])
             ]);
             return redirect()->route('account.help.show',['id' => $id]);
         }

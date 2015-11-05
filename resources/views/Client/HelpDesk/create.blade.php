@@ -13,10 +13,10 @@
             </select>
         </div>
         <div class="form-group">
-            <input class="form-control" name="title" placeholder="Titulo">
+            <input class="form-control" name="title" placeholder="Titulo" value="{{ old('title') }}">
         </div>
         <div class="form-group">
-            <textarea name="body" class="form-control" rows="3"></textarea>
+            <textarea name="body" class="form-control" rows="3">{{ old('body') }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">responder</button>
     </form>

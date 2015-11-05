@@ -26,7 +26,7 @@
 
                         <div class="media-body">
                             <p>
-                                 {{{ $question->body }}}
+                                 {!! BBCode::parse($question->body) !!}
                             </p>
                             <div class="comment-meta">
 
@@ -60,7 +60,7 @@
 
                             <div class="media-body">
                                 <p>
-                                    {{{ $answer->body }}}
+                                    {!! BBCode::parse($answer->body) !!}
                                 </p>
                                 <div class="comment-meta">
                                     @if($answer->user->is_admin)
