@@ -24,7 +24,7 @@
                         <td>{{ $customer->name }}</td>
                         <td>{{ $customer->email }}</td>
                         <td>{{ count($customer->subscriptions()) }}</td>
-                        <td>não disponivel</td>
+                        <td>{{ count($customer->questions()->get()) }}</td>
                         <td>
                             <a href="#"><button class="btn  btn-primary  btn-xs"><i class="fa fa-search "></i></button></a>
                             <a href="#"><button class="btn  btn-primary  btn-xs"><i class="fa fa-envelope "></i></button></a>
