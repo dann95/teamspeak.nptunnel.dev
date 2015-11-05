@@ -70,7 +70,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function questions()
     {
-        return $this->hasMany(Question::class)->get();
+        return $this->hasMany(Question::class);
     }
 
     public function getSignatureAttribute()

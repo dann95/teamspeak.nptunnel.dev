@@ -9,7 +9,7 @@
         </h3>
 
         <div class="list-group">
-            @foreach($auth->user()->questions() as $question)
+            @foreach($auth->user()->questions()->get() as $question)
             <a href="{{ route('account.help.show', ['id' => $question->id]) }}" class="list-group-item"><div class="truncate pull-left"><strong>{{ $question->created_at->diffForHumans() }}</strong> {{ $question->title }}</div><span class="badge">{{ count($question->answers()->get()) }} respostas</span></a>
             @endforeach
         </div>

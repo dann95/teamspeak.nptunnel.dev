@@ -9,6 +9,11 @@ use NpTS\Domain\Client\Models\User;
 
 class Question extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'title',
+        'body'
+    ];
     public function answers()
     {
         return $this->hasMany(Answer::class);
