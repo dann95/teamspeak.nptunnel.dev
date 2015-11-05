@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     public function run()
     {
 
-        factory(NpTS\Domain\Client\Models\User::class , 30)->create()->each(function($user){
+        factory(NpTS\Domain\Client\Models\User::class , 100)->create()->each(function($user){
             $n = mt_rand(0,10);
             if($n)
             {
