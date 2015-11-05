@@ -25,7 +25,7 @@ class InvoiceStatusSeeder extends Seeder
             InvoiceStatus::create([
                 'id' => $i,
                 'status' => $status[$i]
-            ]);
+            ])->save();
         }
     }
 }

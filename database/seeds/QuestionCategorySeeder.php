@@ -21,7 +21,7 @@ class QuestionCategorySeeder extends Seeder
         {
             QuestionCategory::create([
                 'name' => $category
-            ]);
+            ])->save();
         }
     }
 }
