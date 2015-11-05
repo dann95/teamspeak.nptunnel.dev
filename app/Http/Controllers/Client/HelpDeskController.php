@@ -37,7 +37,7 @@ class HelpDeskController extends Controller
      */
     public function create()
     {
-        //
+        return view('Client.HelpDesk.create');
     }
 
     /**

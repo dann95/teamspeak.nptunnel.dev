@@ -104,6 +104,8 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
         });
 
         Route::group(['prefix' => 'help-desk' , 'as' => 'help.'] , function(){
+            Route::get('create' , ['uses' => 'HelpDeskController@create' , 'as' => 'create']);
+            Route::post('store' , ['uses' => 'HelpDeskController@store' , 'as' => 'store']);
             Route::get('/' , ['uses' => 'HelpDeskController@index' , 'as' => 'index']);
             Route::get('{id}' , ['uses' => 'HelpDeskController@show' , 'as' => 'show']);
             Route::post('{id}/post-repply' , ['uses' => 'HelpDeskController@storeAnswer' , 'as' => 'answer']);
