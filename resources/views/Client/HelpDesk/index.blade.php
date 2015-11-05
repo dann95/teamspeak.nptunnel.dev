@@ -5,7 +5,7 @@
         <a href="{{ route('account.help.create') }}" class="btn btn-primary pull-right">criar ticket</a><br>
         <h3 class="title">
             Meus tickets
-            <a href="#" class="btn btn-xs btn-primary pull-right">{{ count($auth->user()->questions()) }} tickets</a>
+            <a href="#" class="btn btn-xs btn-primary pull-right">{{ count($auth->user()->questions()->get()) }} tickets</a>
         </h3>
 
         <div class="list-group">
