@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
-
+        $this->call(InvoiceStatusSeeder::class);
+        $this->call(QuestionCategory::class);
         Model::reguard();
     }
 }

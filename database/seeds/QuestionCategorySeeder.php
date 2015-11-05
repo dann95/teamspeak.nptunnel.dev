@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use NpTS\Domain\HelpDesk\Models\QuestionCategory;
 
 class QuestionCategorySeeder extends Seeder
 {
@@ -11,6 +12,16 @@ class QuestionCategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        $categories = [
+            'Financeiro',
+            'Suporte',
+            'Vendas'
+        ];
+        foreach($categories as $category)
+        {
+            QuestionCategory::create([
+                'name' => $category
+            ]);
+        }
     }
 }

@@ -13,7 +13,7 @@ class CreateInvoiceStatusesTable extends Migration
     public function up()
     {
         Schema::create('invoice_statuses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->unsignedInteger('id')->unique();
             $table->string('status');
             $table->timestamps();
         });
