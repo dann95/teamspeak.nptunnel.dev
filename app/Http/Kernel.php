@@ -32,5 +32,6 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \NpTS\Http\Middleware\RedirectIfAuthenticated::class,
         'active' => \NpTS\Http\Middleware\AccountMustBeActive::class,
+        'banned' => \NpTS\Http\Middleware\AccountMustBeNotBanned::class,
     ];
 }
