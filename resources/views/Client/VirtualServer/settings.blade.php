@@ -1,4 +1,4 @@
-@extends('client.layout.default')
+@extends('Client.Layout.default')
 @section('title' , 'Editar configurações do servidor')
 @section('content')
 <div class="row mt">
