@@ -19,6 +19,8 @@ class Server extends Model
         'password',
         'slots',
         'max_slots',
+        'active',
+        'active_sales',
     ];
 
     /**

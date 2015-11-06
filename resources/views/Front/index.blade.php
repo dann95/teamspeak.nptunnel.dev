@@ -1,4 +1,4 @@
-@extends('front.layout.default')
+@extends('Front.Layout.default')
 @section('title' , 'GameSpeak.com.br')
 @section('content')
     GameSpeak é uma empresa Brasileira de Hospedagem de servidores de TeamSpeak

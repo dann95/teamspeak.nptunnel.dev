@@ -1,4 +1,4 @@
-@extends('front.layout.default')
+@extends('Front.Layout.default')
 @section('title' , 'Nossos planos:')
 @section('content')
     <div class="col-lg-8">
