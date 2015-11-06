@@ -1,4 +1,4 @@
-@extends('Client.Layout.Default')
+@extends('Client.Layout.default')
 @section('title','Helpdesk')
 @section('content')
     <div class="col-md-6 list-category text-primary">

@@ -1,4 +1,4 @@
-@extends('Client.Layout.Default')
+@extends('Client.Layout.default')
 @section('title','Ticket # 1')
 @section('content')
     <div class="container">
