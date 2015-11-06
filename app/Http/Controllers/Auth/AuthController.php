@@ -7,6 +7,9 @@ use Validator;
 use NpTS\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use NpTS\Domain\Client\Repositories\Contracts\UserRepositoryContract;
+use Illuminate\Auth\Guard;
+
 
 class AuthController extends Controller
 {
@@ -21,9 +24,15 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+    private $repository;
+    private $guard;
+    public function __construct(UserRepositoryContract $repository , Guard $guard)
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        parent::__construct();
+        $this->middleware('guest', ['except' => ['getLogout','activateUser']]);
+        $this->repository = $repository;
+        $this->guard = $guard;
     }
 
     /**
@@ -39,7 +48,9 @@ class AuthController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
             'cpassword' =>  ['required','same:password'],
-        ]);
+        ], [
+            //
+            ]);
     }
 
     /**
@@ -50,10 +61,16 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        return $this->repository->create($data);
+    }
+
+    public function activateUser($key)
+    {
+        $user = $this->repository->activateByKey($key);
+        if(! $user)
+        {
+            return view('auth.login')->withErrors(['Ocorreu um erro ao tentar confirmar essa conta!']);
+        }
+        return redirect()->route('account.index');
     }
 }

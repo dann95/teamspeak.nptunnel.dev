@@ -31,5 +31,6 @@ class Kernel extends HttpKernel
         'auth.admin' => \NpTS\Http\Middleware\AuthenticateAdmin::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \NpTS\Http\Middleware\RedirectIfAuthenticated::class,
+        'active' => \NpTS\Http\Middleware\AccountMustBeActive::class,
     ];
 }

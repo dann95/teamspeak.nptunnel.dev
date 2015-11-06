@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
 
 });
 
-    Route::group(['prefix' => 'account', 'namespace' => 'Client' , 'as' => 'account.' , 'middleware' => ['auth']] , function(){
+    Route::group(['prefix' => 'account', 'namespace' => 'Client' , 'as' => 'account.' , 'middleware' => ['auth','active']] , function(){
 
         /**
          * Index Account
@@ -116,6 +116,9 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
 /**
  * From laravel doc(auth)
  */
+
+Route::get('auth/active/{key}' , ['as' => 'auth.activate' , 'uses' => 'Auth\AuthController@activateUser' ]);
+
 // Authentication routes...
 Route::get('auth/login', ['uses' => 'Auth\AuthController@getLogin' , 'as' => 'auth.login']);
 Route::post('auth/login', 'Auth\AuthController@postLogin');

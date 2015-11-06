@@ -13,8 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'NpTS\Events\SomeEvent' => [
-            'NpTS\Listeners\EventListener',
+        'NpTS\Domain\Client\Events\UserWasCreated' => [
+            'NpTS\Domain\Client\Listeners\CreateActivationKey',
+            'NpTS\Domain\Client\Listeners\SendEmailToUser',
         ],
     ];
 

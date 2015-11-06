@@ -13,6 +13,9 @@ use NpTS\Domain\Client\Repositories\InvoiceRepository;
 use NpTS\Domain\Client\Repositories\Contracts\SubscriptionRepositoryContract;
 use NpTS\Domain\Client\Repositories\SubscriptionRepository;
 
+use NpTS\Domain\Client\Repositories\Contracts\UserRepositoryContract;
+use NpTS\Domain\Client\Repositories\UserRepository;
+
 use NpTS\Domain\Client\Cart\Cart;
 use NpTS\Domain\Client\Cart\Contract\CartContract;
 
@@ -30,5 +33,6 @@ class ClientServiceProvider extends ServiceProvider
         $this->app->bind(CartContract::class , Cart::class);
         $this->app->bind(InvoiceRepositoryContract::class , InvoiceRepository::class);
         $this->app->bind(SubscriptionRepositoryContract::class , SubscriptionRepository::class);
+        $this->app->bind(UserRepositoryContract::class , UserRepository::class);
     }
 }
