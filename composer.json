@@ -7,9 +7,10 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "fkubis/teamspeak-php-framework": "dev-master",
+        "thusk/ts3-php": "dev-master",
         "jenssegers/agent": "^2.2",
-        "golonka/bbcodeparser": "^2.2"
+        "golonka/bbcodeparser": "^2.2",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
