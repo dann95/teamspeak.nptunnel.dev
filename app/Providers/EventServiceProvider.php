@@ -17,6 +17,9 @@ class EventServiceProvider extends ServiceProvider
             'NpTS\Domain\Client\Listeners\CreateActivationKey',
             'NpTS\Domain\Client\Listeners\SendEmailToUser',
         ],
+        'NpTS\Domain\HelpDesk\Events\UserCreatedAQuestion' => [
+            'NpTS\Domain\HelpDesk\Listeners\SendEmailToUser'
+        ]
     ];
 
     /**

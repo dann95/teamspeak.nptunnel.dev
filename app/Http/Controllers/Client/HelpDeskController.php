@@ -7,6 +7,7 @@ use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
 use NpTS\Domain\HelpDesk\Repositories\Contracts\QuestionRepositoryContract;
 use Illuminate\Auth\Guard;
+use NpTS\Domain\HelpDesk\Requests\UserCreateQuestionRequest;
 
 class HelpDeskController extends Controller
 {
@@ -40,23 +41,14 @@ class HelpDeskController extends Controller
         return view('Client.HelpDesk.create');
     }
 
-    public function store(Request $request)
+    public function store(UserCreateQuestionRequest $request)
     {
-        $this->validate($request , [
-            'title' => ['required','min:3','max:20'],
-            'body'  =>  ['required','min:3']
-        ] , [
-            'title.required' => "Insira um título",
-            'title.min' =>  'O título deve ter pelomenos 3 digitos',
-            'title.max' =>  'O título só pode ter até 20 digitos',
-            'body.required'  =>  'Insira uma mensagem!',
-            'body.min'  =>  'A mensagem deve ter pelomenos 3 digitos!'
-        ]);
-        $question = $this->guard->user()->questions()->create([
+        $options = [
             'category_id' => $request->only('category_id')['category_id'],
             'title' =>  $request->only('title')['title'],
             'body'  =>  htmlentities($request->only(['body'])['body'])
-            ]);
+        ];
+        $question = $this->questionRepository->userCreateQuestion($this->guard->user() , $options);
         return redirect()->route('account.help.show', ['id' => $question->id]);
     }
 
