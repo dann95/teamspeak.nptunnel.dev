@@ -63,6 +63,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
          */
         Route::get('/',['uses' => 'AccountController@index' , 'as' => 'index']);
 
+        Route::get('/settings', ['uses' => 'AccountController@settings' , 'as' => 'settings']);
 
         /**
          * Invoices

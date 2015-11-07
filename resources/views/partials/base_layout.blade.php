@@ -46,8 +46,22 @@
 
         @if($auth->check())
             <div class="top-menu">
-                <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="{{ route('auth.logout') }}">Deslogar</a></li>
+                <ul class="nav pull-right top-menu" style="padding-top:13px; padding-right:30px;">
+                    <li>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">{{ $auth->user()->name }}</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ route('account.settings') }}"><i class="fa fa-smile-o"></i> Minha conta</a></li>
+                                <li><a href="{{ route('account.help.index') }}"><i class="fa fa-life-ring"></i> Suporte</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ route('auth.logout') }}"><i class="fa fa-sign-out"></i> Deslogar</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
         @else

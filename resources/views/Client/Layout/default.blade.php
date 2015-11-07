@@ -8,9 +8,9 @@
     </li>
 
     <li class="sub-menu">
-        <a href="{{ route('planos') }}" >
-            <i class="fa fa-cogs"></i>
-            <span>Configurações</span>
+        <a href="{{ route('account.settings') }}" >
+            <i class="fa fa-smile-o"></i>
+            <span>Minha conta</span>
         </a>
     </li>
     <li class="sub-menu">

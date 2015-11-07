@@ -30,6 +30,11 @@ class AccountController extends Controller
         return view('Client.Account.invoices');
     }
 
+    public function settings()
+    {
+        return view('Client.Account.settings');
+    }
+
     public function showInvoice($id)
     {
         $invoice = $this->invoiceRepository
