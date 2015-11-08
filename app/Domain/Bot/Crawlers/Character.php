@@ -2,79 +2,112 @@
 
 namespace NpTS\Domain\Bot\Crawlers;
 
-use NpTS\Domain\Bot\Web\Grabber;
 
-class Character
+use NpTS\Abstracts\Bot\Crawlers\AbstractTibiaCrawler;
+
+class Character extends AbstractTibiaCrawler
 {
 
-    private $grabber;
     private $name;
     const baseUrl = 'https://secure.tibia.com/community/?subtopic=characters&name=';
 
-    public function __construct(Grabber $grabber)
-    {
-        $this->grabber = $grabber;
-    }
 
+    /**
+     * Select a Character.
+     * @param $name
+     * @return $this
+     */
     public function select($name)
     {
         $this->name = $this->encodeName($name);
         return $this;
     }
 
-    public function encodeName($name)
-    {
-        $name = str_replace(' ' , '%20' , $name);
-        $name = str_replace("'" , '%27' , $name);
-        return $name;
-    }
-
-    public function getHtml($url)
-    {
-        return $this->grabber->grab($url);
-    }
-
+    /**
+     * Get Character name..
+     * @param $html
+     * @return string
+     */
     private function extractName($html)
     {
-        // Name:</td><td>Dann iel <div
-        $name = explode('Name:</td><td>' , $html);
-        $name = $name[1];
-        $name = explode(' <div' , $name);
-        $name = $name[0];
-        return $name;
+        // Name:</td><td>Dann iel <div>
+        return $this->dataBetweenKnowTags('Name:</td><td>' , ' <div' , $html);
     }
 
+    /**
+     * Get Character Vocation..
+     * @param $html
+     * @return string
+     */
     private function extractVocation($html)
     {
         // Vocation:</td><td>Elite Knight</td>
-        $vocation = explode('Vocation:</td><td>' , $html);
-        $vocation = $vocation[1];
-        $vocation = explode('</td>',$vocation);
-        $vocation = $vocation[0];
-        return $vocation;
+        return $this->dataBetweenKnowTags('Vocation:</td><td>' , '</td>' , $html);
     }
 
-
+    /**
+     * Get Character Level
+     * @param $html
+     * @return string
+     */
     private function extractLevel($html)
     {
         // <td>Level:</td><td>429</td>
-        $level = explode('Level:</td><td>' , $html);
-        $level = $level[1];
-        $level = explode('</td>' , $level);
-        $level = $level[0];
-        return $level;
+        return $this->dataBetweenKnowTags('Level:</td><td>' , '</td>' , $html);
     }
 
+    /**
+     * Get Character Residence
+     * @param $html
+     * @return string
+     */
     private function extractResidence($html)
     {
         //<td>Residence:</td><td>Roshamuul</td>
-        $residence = explode('Residence:</td><td>' , $html);
-        $residence = $residence[1];
-        $residence = explode('</td>' , $residence);
-        $residence = $residence[0];
-        return $residence;
+        return $this->dataBetweenKnowTags('Residence:</td><td>' , '</td>' , $html);
     }
 
+    /**
+     * Get Character World
+     * @param $html
+     * @return string
+     */
+    private function extractWorld($html)
+    {
+        //<td>World:</td><td>Garnera</td>
+        return $this->dataBetweenKnowTags('World:</td><td>' , '</td>' ,$html);
+    }
+
+    /**
+     * Get Character Last Death (30 days)
+     * @param $html
+     * @return null|string
+     */
+    private function extractLastDeath($html)
+    {
+        if(! $this->hasDeaths($html))
+        {
+            return NULL;
+        }
+
+        return $this->dataBetweenKnowTags('<td width="25%" valign="top" >' , '</td>' , $html);
+    }
+
+    /**
+     * Did the character has deaths on the page?
+     * @param $html
+     * @return bool
+     */
+    private function hasDeaths($html)
+    {
+        $explode = explode('<b>Character Deaths</b></td>' , $html);
+        return (count($explode) > 1) ? TRUE : FALSE;
+    }
+
+    /**
+     * Get all attributes of a character in a array.
+     * @return array
+     */
     public function attributes()
     {
         $html = $this->getHtml(self::baseUrl.$this->name);
@@ -84,9 +117,9 @@ class Character
             'vocation'      => $this->extractVocation($html),
             'level'         => $this->extractLevel($html),
             'residence'     => $this->extractResidence($html),
+            'world'         => $this->extractWorld($html),
+            'last_death'    => $this->extractLastDeath($html),
         ];
-
-        dd($attributes);
         return $attributes;
     }
 

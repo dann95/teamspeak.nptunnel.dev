@@ -133,6 +133,6 @@ Route::get('/auth/logout' , ['uses' => 'Auth\AuthController@getLogout' , 'as' =>
 
 Route::get('/test' , function(){
     $char = app(\NpTS\Domain\Bot\Crawlers\Character::class);
-    $char->select('dann iel');
+    $char->select('tsurigake');
     $char->attributes();
 });
