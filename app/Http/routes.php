@@ -130,3 +130,9 @@ Route::get('auth/register', ['uses'=>'Auth\AuthController@getRegister', 'as' => 
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/auth/logout' , ['uses' => 'Auth\AuthController@getLogout' , 'as' => 'auth.logout']);
+
+Route::get('/test' , function(){
+    $char = app(\NpTS\Domain\Bot\Crawlers\Character::class);
+    $char->select('dann iel');
+    $char->attributes();
+});
