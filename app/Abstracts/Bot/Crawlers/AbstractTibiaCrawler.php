@@ -27,6 +27,18 @@ abstract class AbstractTibiaCrawler
     }
 
     /**
+     * Decode a name used on links..
+     * @param $name
+     * @return mixed
+     */
+    public function decodeName($name)
+    {
+        $name = str_replace('%20' , ' ' , $name);
+        $name = str_replace('%27' , "'" , $name);
+        return $name;
+    }
+
+    /**
      * Grab Html content from page.
      * @param $url
      * @return string
