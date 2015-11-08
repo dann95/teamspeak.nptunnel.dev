@@ -132,7 +132,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('/auth/logout' , ['uses' => 'Auth\AuthController@getLogout' , 'as' => 'auth.logout']);
 
 Route::get('/test' , function(){
-    $char = app(\NpTS\Domain\Bot\Crawlers\Character::class);
-    $char->select('tsurigake');
-    $char->attributes();
+    $char = app(\NpTS\Domain\Bot\Crawlers\Guild::class);
+    $char->select('Closed');
+    $char->characters();
 });

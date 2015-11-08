@@ -35,6 +35,7 @@ abstract class AbstractTibiaCrawler
     {
         $name = str_replace('%20' , ' ' , $name);
         $name = str_replace('%27' , "'" , $name);
+        $name = str_replace('+' , ' ', $name);
         return $name;
     }
 
@@ -61,6 +62,23 @@ abstract class AbstractTibiaCrawler
         $data = $data[1];
         $data = explode($endTag , $data);
         $data = $data[0];
+        return $data;
+    }
+
+    /**
+     * Get array With Elements between know tags like <td>:data1:</td> <td>:data2:</td>
+     * @param $startTag
+     * @param $endTag
+     * @param $content
+     * @return array
+     */
+    public function arrayDataByKnowTags($startTag , $endTag , $content)
+    {
+        $dataAll = explode($startTag , $content);
+        for ($i = 1; $i <= count($dataAll)-1; $i++)
+        {
+            $data[] = explode($endTag , $dataAll[$i])[0];
+        }
         return $data;
     }
 }
