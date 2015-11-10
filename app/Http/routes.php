@@ -132,7 +132,6 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('/auth/logout' , ['uses' => 'Auth\AuthController@getLogout' , 'as' => 'auth.logout']);
 
 Route::get('/test' , function(){
-    $char = app(\NpTS\Domain\Bot\Crawlers\Guild::class);
-    $char->select('Closed');
-    $char->characters();
+    $x = app(NpTS\Domain\Bot\Web\Grabber::class);
+    return $x->grab('http://www.meuip.com.br');
 });
