@@ -16,6 +16,7 @@ class GameSpeakSeeder extends Seeder
         $this->questionCategory();
         $this->plan();
         $this->server();
+        $this->ipCralwer();
     }
 
     private function users()
@@ -97,5 +98,18 @@ class GameSpeakSeeder extends Seeder
             'active'    =>  1,
             'active_sales'  =>  1,
         ]);
+    }
+
+    private function ipCralwer()
+    {
+        $ips = config('ips');
+        foreach($ips as $ip)
+        {
+            \NpTS\Domain\Bot\Models\CrawlerIp::create(
+                ['ip' => $ip ,
+                'usage' => 0
+                ]
+            );
+        }
     }
 }
