@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use NpTS\Domain\Client\Models\User;
 use NpTS\Domain\Admin\Models\Plan;
 use NpTS\Domain\Admin\Models\Server;
+use NpTS\Domain\Bot\Models\TsBot;
 
 class VirtualServer extends Model
 {
@@ -52,5 +53,10 @@ class VirtualServer extends Model
     public function getHostAttribute()
     {
         return $this->server()->dns.":".$this->port;
+    }
+
+    public function bot()
+    {
+        return $this->hasOne(TsBot::class , 'vserver_id');
     }
 }

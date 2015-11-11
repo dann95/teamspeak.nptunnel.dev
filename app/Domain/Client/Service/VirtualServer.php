@@ -19,8 +19,6 @@ class VirtualServer
 
     public function create(Invoice $invoice)
     {
-        // TODO: check if is not created and paid.
-
         // TODO: Separe each service
         $services = $invoice->items;
         // TODO: create each service
@@ -34,6 +32,12 @@ class VirtualServer
                 'user_id' => $invoice->user_id,
                 'virtual_server_id' =>  $server->id,
                 'active'    =>  1
+            ]);
+            // TODO: create the tsBot and TibiaList..
+            $server->bot()->create([
+
+            ])->tibiaList()->create([
+
             ]);
         });
         $invoice->invoice_status_id = 3;
