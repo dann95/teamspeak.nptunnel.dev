@@ -151,27 +151,13 @@
 
 <!--custom tagsinput-->
 <script src="/assets/js/jquery.tagsinput.js"></script>
-
-<!--custom checkbox & radio-->
-
-<script type="text/javascript" src="/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="/assets/js/bootstrap-daterangepicker/date.js"></script>
-<script type="text/javascript" src="/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-
 <script type="text/javascript" src="/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 
 
 <script src="/assets/js/form-component.js"></script>
 
 
-<script>
-    //custom select box
 
-    $(function(){
-        $('select.styled').customSelect();
-    });
-
-</script>
 
 @yield('js-scripts')
 

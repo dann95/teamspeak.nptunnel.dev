@@ -81,7 +81,6 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
             Route::get('del-ban/{banId}' , ['uses' => 'VirtualServerController@delBan' , 'as' => 'ban.del'])->where(
                 ['banId' => '[0-9]+']
             );
-            Route::get('ts-bot' , ['uses' => 'VirtualServerController@tsBot' , 'as' => 'bot']);
             Route::get('power-on' , ['uses' => 'VirtualServerController@powerOn' , 'as' => 'powerOn']);
             Route::get('power-off' , ['uses' => 'VirtualServerController@powerOff' , 'as' => 'powerOff']);
             /**
@@ -91,6 +90,11 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
             Route::post('change-messages' , ['uses' => 'VirtualServerController@messages' , 'as'  =>  'messages']);
             Route::post('change-banner' , ['uses' => 'VirtualServerController@banner' , 'as'  =>  'banner']);
             Route::post('create-privilege-key' , ['uses' => 'VirtualServerController@createPrivilegeKey' , 'as' => 'keys.create']);
+
+            Route::group(['prefix' => 'ts-bot' , 'as' => 'bot.'] , function(){
+                Route::get('/', ['uses' => 'TsBOTController@index' , 'as' => 'index']);
+            });
+
         });
 
         /**
@@ -112,6 +116,8 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
             Route::post('{id}/post-repply' , ['uses' => 'HelpDeskController@storeAnswer' , 'as' => 'answer']);
         });
 
+
+
 });
 
 /**
@@ -130,8 +136,3 @@ Route::get('auth/register', ['uses'=>'Auth\AuthController@getRegister', 'as' => 
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/auth/logout' , ['uses' => 'Auth\AuthController@getLogout' , 'as' => 'auth.logout']);
-
-Route::get('/test' , function(){
-    $x = app(NpTS\Domain\Bot\Web\Grabber::class);
-    return $x->grab('http://www.meuip.com.br');
-});

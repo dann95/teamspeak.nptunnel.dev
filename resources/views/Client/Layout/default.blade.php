@@ -33,7 +33,7 @@
                 <li><a  href="{{ route('account.virtual.settings' , ['id' => $subscription->virtualServer()->id]) }}"><i class="fa fa-cogs"></i>Configurações</a></li>
                 <li><a  href="{{ route('account.virtual.keys' , ['id' => $subscription->virtualServer()->id]) }}"><i class="fa fa-key"></i>Privilege keys</a></li>
                 <li><a  href="{{ route('account.virtual.ban' , ['id' => $subscription->virtualServer()->id]) }}"><i class="fa fa-list-alt"></i>Ban list</a></li>
-                <li><a  href="{{ route('account.virtual.bot' , ['id' => $subscription->virtualServer()->id]) }}"><i class="fa fa-rocket"></i>TSbot</a></li>
+                <li><a  href="{{ route('account.virtual.bot.index' , ['id' => $subscription->virtualServer()->id]) }}"><i class="fa fa-rocket"></i>TSbot</a></li>
             </ul>
         </li>
     @endforeach
