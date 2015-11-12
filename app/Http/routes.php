@@ -93,6 +93,23 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
 
             Route::group(['prefix' => 'ts-bot' , 'as' => 'bot.'] , function(){
                 Route::get('/', ['uses' => 'TsBOTController@index' , 'as' => 'index']);
+                Route::group(['prefix' => 'friend' , 'as' => 'friend.'] , function(){
+                   Route::get('/' , ['uses' => 'TsBOTController@listFriends' , 'as' => 'index']);
+                   Route::get('/guilds' , ['uses' => 'TsBOTController@listGuildsFriend' , 'as' => 'guild.index']);
+                   Route::get('/add',['uses' => 'TsBOTController@add' , 'as' => 'add']);
+                   Route::get('/guild/add' , ['uses' => 'TsBOTController@addGuild' , 'as' => 'guild.add']);
+                   Route::get('remove' , ['uses' => 'TsBOTController@del' , 'as' => 'del']);
+                   Route::get('/guild/remove' , ['uses' => 'TsBOTController@delGuild' , 'as' => 'guild.del']);
+                });
+                Route::group(['prefix' => 'enemy' , 'as' => 'enemy.'] , function(){
+                    Route::get('/' , ['uses' => 'TsBOTController@listEnemies' , 'as' => 'index']);
+                    Route::get('/guilds' , ['uses' => 'TsBOTController@listGuildsEnemy' , 'as' => 'guild.index']);
+                    Route::get('/add',['uses' => 'TsBOTController@addEnemy' , 'as' => 'add']);
+                    Route::get('/guild/add' , ['uses' => 'TsBOTController@addGuildEnemy' , 'as' => 'guild.add']);
+                    Route::get('remove' , ['uses' => 'TsBOTController@delEnemy' , 'as' => 'del']);
+                    Route::get('/guild/remove' , ['uses' => 'TsBOTController@delGuildEnemy' , 'as' => 'guild.del']);
+                });
+
             });
 
         });
