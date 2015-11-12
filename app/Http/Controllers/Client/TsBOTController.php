@@ -19,14 +19,38 @@ class TsBOTController extends Controller
         $this->vserverRepository = $repo;
         $this->guard = $guard;
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index($id)
     {
-        $bot = $this->vserverRepository->find($id);
-        if(! $bot or ! ($this->guard->user()->id == $bot->user_id))
+        $bot = $this->getBot($id);
+        return view('Client.Bot.index' , compact('bot'));
+    }
+
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function listFriends($id)
+    {
+        $bot = $this->getBot($id);
+        return view('Client.Bot.list_friends' , compact('bot'));
+    }
+
+    /**
+     * @param $vserverId
+     */
+    private function getBot($vserverId)
+    {
+        $vserver = $this->vserverRepository->find($vserverId);
+        if(! $vserver or ! ($this->guard->user()->id == $vserver->user_id))
         {
             return abort(403);
         }
-        $bot = $bot->bot;
-        return view('Client.Bot.index' , compact('bot'));
+        return $vserver->bot;
     }
 }

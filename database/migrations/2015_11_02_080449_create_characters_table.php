@@ -23,6 +23,7 @@ class CreateCharactersTable extends Migration
             $table->string('last_death');
             $table->smallInteger('register_lvl');
             $table->smallInteger('lvl');
+            $table->string('name');
             $table->timestamps();
         });
     }
