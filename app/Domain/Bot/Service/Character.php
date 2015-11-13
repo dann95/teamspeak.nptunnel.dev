@@ -52,6 +52,7 @@ class Character
             'lvl'           => $char['level'],
             'register_lvl'  => $char['level'],
             'name'          => $char['name'],
+            'residence'     => $char['residence'],
             'last_death'    => $char['last_death'],
         ]);
 
