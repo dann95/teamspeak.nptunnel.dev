@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \NpTS\Console\Commands\Inspire::class,
+        \NpTS\Domain\Bot\Commands\UpdateCharactersOnline::class,
     ];
 
     /**
@@ -24,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        $schedule->command('r2d2:updateCharacters')
+            ->everyMinute();
     }
 }

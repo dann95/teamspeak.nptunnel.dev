@@ -2,15 +2,12 @@
 
 namespace NpTS\Http\Controllers\Client;
 
-use Illuminate\Http\Request;
-
 use NpTS\Domain\Bot\Service\Exceptions\CharacterDosntExists;
 use NpTS\Domain\Bot\Service\Exceptions\CharacterAlreadyInThisList;
 use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
 use NpTS\Domain\Client\Repositories\Contracts\VirtualServerRepositoryContract;
 use Illuminate\Auth\Guard;
-
 use NpTS\Domain\Bot\Requests\InsertCharacterRequest;
 use NpTS\Domain\Bot\Service\Character;
 
