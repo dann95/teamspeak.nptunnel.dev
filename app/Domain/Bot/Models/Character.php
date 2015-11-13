@@ -8,6 +8,18 @@ use NpTS\Domain\Bot\Models\World;
 
 class Character extends Model
 {
+    protected $fillable = [
+        'tibia_list_id',
+        'online',
+        'position',
+        'vocation_id',
+        'world_id',
+        'residence',
+        'last_death',
+        'register_lvl',
+        'lvl',
+        'name'
+    ];
     /**
      * An Character belongs to a vocation.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

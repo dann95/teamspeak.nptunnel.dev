@@ -24,6 +24,17 @@ class Character extends AbstractTibiaCrawler
     }
 
     /**
+     * See if this character exists..
+     * @return bool
+     */
+    public function exists()
+    {
+        $html = $this->getHtml(self::baseUrl.$this->name);
+        $existExp = explode('<B>Could not find character</B>', $html);
+        return (count($existExp) > 1) ? FALSE : TRUE;
+    }
+
+    /**
      * Get Character name..
      * @param $html
      * @return string
@@ -87,7 +98,7 @@ class Character extends AbstractTibiaCrawler
     {
         if(! $this->hasDeaths($html))
         {
-            return NULL;
+            return '';
         }
 
         return $this->dataBetweenKnowTags('<td width="25%" valign="top" >' , '</td>' , $html);

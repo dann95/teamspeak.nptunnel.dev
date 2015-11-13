@@ -97,6 +97,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin' , 'middleware' => 'au
                    Route::get('/' , ['uses' => 'TsBOTController@listFriends' , 'as' => 'index']);
                    Route::get('/guilds' , ['uses' => 'TsBOTController@listGuildsFriend' , 'as' => 'guild.index']);
                    Route::get('/add',['uses' => 'TsBOTController@add' , 'as' => 'add']);
+                   Route::post('/add' ,['uses' => 'TsBOTController@storeFriend' , 'as' => 'store']);
                    Route::get('/guild/add' , ['uses' => 'TsBOTController@addGuild' , 'as' => 'guild.add']);
                    Route::get('remove' , ['uses' => 'TsBOTController@del' , 'as' => 'del']);
                    Route::get('/guild/remove' , ['uses' => 'TsBOTController@delGuild' , 'as' => 'guild.del']);
