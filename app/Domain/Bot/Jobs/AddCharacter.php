@@ -30,7 +30,6 @@ class AddCharacter extends Job implements SelfHandling, ShouldQueue
         $this->tibiaList = $tibiaList;
         $this->char = $char;
         $this->position = $position;
-        $this->characterService = app(Character::class);
     }
 
     /**
@@ -38,11 +37,10 @@ class AddCharacter extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(Character $service)
     {
-
         try{
-            $this->characterService->insert($this->tibiaList , $this->char , $this->position);
+            $service->insert($this->tibiaList , $this->char , $this->position);
         }catch (CharacterDosntExists $e){
 
         }catch(CharacterAlreadyInThisList $e)
