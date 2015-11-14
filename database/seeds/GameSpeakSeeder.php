@@ -132,7 +132,7 @@ class GameSpeakSeeder extends Seeder
         $vocs = [
             'None',
             'Elder Druid',
-            'Master Sorecerer',
+            'Master Sorcerer',
             'Royal Paladin',
             'Elite Knight',
             'Druid',
