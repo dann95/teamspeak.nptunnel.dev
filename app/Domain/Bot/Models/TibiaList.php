@@ -11,22 +11,22 @@ class TibiaList extends Model
 
     public function onlineFriends()
     {
-        return $this->friends()->where('online',1);
+        return $this->friends()->where('online','1');
     }
 
     public function onlineEnemies()
     {
-        return $this->enemies()->where('online',1);
+        return $this->enemies()->where('online','1');
     }
 
     public function friends()
     {
-        return $this->characters->where('position',1);
+        return $this->characters->where('position','1');
     }
 
     public function enemies()
     {
-        return $this->characters()->where('position',0);
+        return $this->characters()->where('position','0');
     }
 
     /**
