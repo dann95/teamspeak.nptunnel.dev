@@ -20,6 +20,13 @@ class Guild extends AbstractTibiaCrawler
         return $this;
     }
 
+    public function exists()
+    {
+        $html = $this->getHtml(self::baseUrl.$this->name);
+        $expExists = explode('<td>An internal error has occurred. Please try again later!</td>' , $html);
+        return (count($expExists) > 1) ? TRUE : FALSE;
+    }
+
     private function extractCharacters($html)
     {
         // <A HREF="https://secure.tibia.com/community/?subtopic=characters&name=Tanksz+Bellator">Tanksz&#160;Bellator</A>

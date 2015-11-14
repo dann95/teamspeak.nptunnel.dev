@@ -4,6 +4,7 @@ namespace NpTS\Domain\Bot\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use NpTS\Domain\Bot\Models\Character;
+use NpTS\Domain\Bot\Models\Guild;
 
 class TibiaList extends Model
 {
@@ -34,5 +35,10 @@ class TibiaList extends Model
     public function characters()
     {
         return $this->hasMany(Character::class);
+    }
+
+    public function guilds()
+    {
+        return $this->hasMany(Guild::class);
     }
 }

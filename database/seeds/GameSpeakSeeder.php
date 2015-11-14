@@ -17,6 +17,8 @@ class GameSpeakSeeder extends Seeder
         $this->plan();
         $this->server();
         $this->ipCralwer();
+        $this->worlds();
+        $this->vocations();
     }
 
     private function users()
@@ -110,6 +112,40 @@ class GameSpeakSeeder extends Seeder
                 'usage' => 0
                 ]
             );
+        }
+    }
+    private function worlds()
+    {
+        \NpTS\Domain\Bot\Models\World::create([
+            'name' => 'Garnera'
+        ]);
+        \NpTS\Domain\Bot\Models\World::create([
+            'name' => 'Elera'
+        ]);
+        \NpTS\Domain\Bot\Models\World::create([
+            'name' => 'Silvera'
+        ]);
+    }
+
+    private function vocations()
+    {
+        $vocs = [
+            'None',
+            'Elder Druid',
+            'Master Sorecerer',
+            'Royal Paladin',
+            'Elite Knight',
+            'Druid',
+            'Sorcerer',
+            'Paladin',
+            'Knight'
+        ];
+
+        foreach($vocs as $voc)
+        {
+            \NpTS\Domain\Bot\Models\Vocation::create([
+                'name' => $voc
+            ]);
         }
     }
 }
