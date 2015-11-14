@@ -32,7 +32,7 @@ class Guild
         $chars->each(function($char) use($list , $position){
             try{
                 $this->characterCrawler->insert($list, $char , $position);
-                usleep(100);
+                usleep(mt_rand(99,333));
             }catch (CharacterAlreadyInThisList $e)
             {
 
