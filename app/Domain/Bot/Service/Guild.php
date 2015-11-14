@@ -2,12 +2,12 @@
 
 namespace NpTS\Domain\Bot\Service;
 
+use Illuminate\Support\Facades\Queue;
 use NpTS\Domain\Bot\Crawlers\Guild as GuildCrawler;
 use NpTS\Domain\Bot\Models\TibiaList;
 use NpTS\Domain\Bot\Service\Exceptions\CharacterAlreadyInThisList;
 use NpTS\Domain\Bot\Service\Exceptions\CharacterDosntExists;
 use NpTS\Domain\Bot\Service\Exceptions\GuildDosntExists;
-use NpTS\Domain\Bot\Service\Character;
 
 
 class Guild
@@ -17,7 +17,6 @@ class Guild
     public function __construct()
     {
         $this->crawler = app(GuildCrawler::class);
-        $this->characterCrawler = app(Character::class);
     }
 
     public function insert(TibiaList $list , $name , $position)
@@ -30,16 +29,7 @@ class Guild
         $chars = collect($this->crawler->characters());
 
         $chars->each(function($char) use($list , $position){
-            try{
-                $this->characterCrawler->insert($list, $char , $position);
-                usleep(mt_rand(99,333));
-            }catch (CharacterAlreadyInThisList $e)
-            {
-
-            }catch(CharacterDosntExists $e)
-            {
-
-            }
+            Queue::push(new \NpTS\Domain\Bot\Jobs\AddCharacter($list , $char , $position));
         });
     }
 }
