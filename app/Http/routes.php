@@ -95,6 +95,7 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
          */
         Route::group(['prefix' => 'ts-bot', 'as' => 'bot.'], function () {
             Route::get('/', ['uses' => 'TsBOTController@index', 'as' => 'index']);
+            Route::post('/settings' , ['uses' => 'TsBOTController@settings' , 'as' => 'settings']);
             Route::group(['prefix' => 'friend', 'as' => 'friend.'], function () {
                 Route::get('/', ['uses' => 'TsBOTController@listFriends', 'as' => 'index']);
                 Route::get('/guilds', ['uses' => 'TsBOTController@listGuildsFriend', 'as' => 'guild.index']);

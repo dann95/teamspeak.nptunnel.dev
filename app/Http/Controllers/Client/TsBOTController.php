@@ -2,6 +2,7 @@
 
 namespace NpTS\Http\Controllers\Client;
 
+use NpTS\Domain\Bot\Requests\ChangeTsBotSettingsRequest;
 use NpTS\Domain\Bot\Service\Exceptions\CharacterDosntExists;
 use NpTS\Domain\Bot\Service\Exceptions\CharacterAlreadyInThisList;
 use NpTS\Domain\Bot\Service\Exceptions\GuildDosntExists;
@@ -38,6 +39,13 @@ class TsBOTController extends Controller
     {
         $bot = $this->getBot($id);
         return view('Client.Bot.index', compact('bot'));
+    }
+
+    public function settings($id , ChangeTsBotSettingsRequest $request)
+    {
+        $bot = $this->getBot($id);
+        $bot->update($request->only(['tibia_list']));
+        return redirect()->route('account.virtual.bot.index',['id' => $id]);
     }
 
 

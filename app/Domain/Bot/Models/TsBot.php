@@ -8,6 +8,11 @@ use NpTS\Domain\Client\Models\VirtualServer;
 
 class TsBot extends Model
 {
+
+    protected $fillable = [
+        'tibia_list'
+    ];
+
     public function tibiaList()
     {
         return $this->hasOne(TibiaList::class , 'ts_bot_id');
