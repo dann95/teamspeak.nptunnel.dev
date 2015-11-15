@@ -28,5 +28,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('r2d2:updateCharacters')
             ->everyMinute();
+        $schedule->command('r2d2:updateLists')
+            ->everyMinute();
+
     }
 }

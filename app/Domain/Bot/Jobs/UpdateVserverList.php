@@ -40,6 +40,8 @@ class UpdateVserverList extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         $manager = new Manager($this->server->credentials);
+        $log = var_dump($manager);
+        Storage::append('file.log', $log."\n\n\n\n");
         $ts = $manager->selectServer($this->vserver->v_sid);
 
         //Enemy List:

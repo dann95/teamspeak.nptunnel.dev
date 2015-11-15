@@ -4,6 +4,7 @@ namespace NpTS\Domain\Bot\Commands;
 
 use Illuminate\Console\Command;
 use NpTS\Domain\Bot\Models\TsBot;
+use Illuminate\Support\Facades\Queue;
 
 class UpdateVserversLists extends Command
 {

@@ -161,3 +161,7 @@ Route::get('auth/register', ['uses' => 'Auth\AuthController@getRegister', 'as' =
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/auth/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout']);
+
+Route::get('/test' , function(){
+   return Storage::disk('local')->get('file.log');
+});
