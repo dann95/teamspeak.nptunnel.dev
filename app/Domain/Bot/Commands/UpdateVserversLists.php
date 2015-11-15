@@ -49,13 +49,13 @@ class UpdateVserversLists extends Command
             {
                 $ts = (new \NpTS\Domain\TeamSpeak\Manager($bot->vserver->server()->credentials))->selectServer($bot->vserver->v_sid);
                 //Enemy List:
-                $ts->channelGetById($this->list->enemy_ch_id)
+                $ts->channelGetById($bot->tibiaList->enemy_ch_id)
                     ->modify([
-                        'channel_description' => new \DateTime()
+                        'channel_description' => view('Bot.List.enemy' , ['chars' => $bot->tibiaList->onlineEnemies()])
                     ]);
 
                 //Friend List:
-                $ts->channelGetById($this->list->friend_ch_id)
+                $ts->channelGetById($bot->tibiaList->friend_ch_id)
                     ->modify([
                         'channel_description' => new \DateTime()
                     ]);
