@@ -70,10 +70,26 @@ class TsBOTController extends Controller
         return view('Client.Bot.list_friends', compact('bot'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function listEnemies($id)
+    {
+        $bot = $this->getBot($id);
+        return view('Client.Bot.list_enemies', compact('bot'));
+    }
+
     public function add($id)
     {
         $bot = $this->getBot($id);
         return view('Client.Bot.insert_friend', compact('bot'));
+    }
+
+    public function addEnemy($id)
+    {
+        $bot = $this->getBot($id);
+        return view('Client.Bot.insert_enemy', compact('bot'));
     }
 
     public function storeFriend($id, InsertCharacterRequest $request)
@@ -81,6 +97,19 @@ class TsBOTController extends Controller
         $bot = $this->getBot($id);
         try {
             $this->service->insert($bot->tibiaList, $request->only('name')['name'], 1);
+        } catch (CharacterDosntExists $e) {
+            return redirect()->route('account.virtual.bot.friend.add', ['id' => $id])->withErrors([$request->only('name')['name'] . ' Não existe!']);
+        } catch (CharacterAlreadyInThisList $e) {
+            return redirect()->route('account.virtual.bot.friend.add', ['id' => $id])->withErrors([$request->only('name')['name'] . ' Já está nessa lista!']);
+        }
+        return redirect()->route('account.virtual.bot.friend.index', ['id' => $id]);
+    }
+
+    public function storeEnemy($id, InsertCharacterRequest $request)
+    {
+        $bot = $this->getBot($id);
+        try {
+            $this->service->insert($bot->tibiaList, $request->only('name')['name'], 0);
         } catch (CharacterDosntExists $e) {
             return redirect()->route('account.virtual.bot.friend.add', ['id' => $id])->withErrors([$request->only('name')['name'] . ' Não existe!']);
         } catch (CharacterAlreadyInThisList $e) {
@@ -100,6 +129,25 @@ class TsBOTController extends Controller
         $bot = $this->getBot($id);
         try{
         $this->guildService->insert($bot->tibiaList, $request->only('name')['name'], 1);
+        }catch (GuildDosntExists $e)
+        {
+            return redirect()->route('account.virtual.bot.friend.guild.add' , ['id' => $id])->withErrors(['Guild com esse nome não existe!']);
+        }
+        return redirect()->route('account.virtual.bot.friend.index', ['id' => $id]);
+    }
+
+
+    public function addGuildEnemy($id)
+    {
+        $bot = $this->getBot($id);
+        return view('Client.Bot.insert_guild_enemy', compact('bot'));
+    }
+
+    public function storeGuildEnemy($id, InsertGuildRequest $request)
+    {
+        $bot = $this->getBot($id);
+        try{
+            $this->guildService->insert($bot->tibiaList, $request->only('name')['name'], 0);
         }catch (GuildDosntExists $e)
         {
             return redirect()->route('account.virtual.bot.friend.guild.add' , ['id' => $id])->withErrors(['Guild com esse nome não existe!']);

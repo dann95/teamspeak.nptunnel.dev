@@ -110,7 +110,9 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
                 Route::get('/', ['uses' => 'TsBOTController@listEnemies', 'as' => 'index']);
                 Route::get('/guilds', ['uses' => 'TsBOTController@listGuildsEnemy', 'as' => 'guild.index']);
                 Route::get('/add', ['uses' => 'TsBOTController@addEnemy', 'as' => 'add']);
+                Route::post('/add', ['uses' => 'TsBOTController@storeEnemy', 'as' => 'store']);
                 Route::get('/guild/add', ['uses' => 'TsBOTController@addGuildEnemy', 'as' => 'guild.add']);
+                Route::post('/guild/add', ['uses' => 'TsBOTController@storeGuildEnemy', 'as' => 'guild.store']);
                 Route::get('remove', ['uses' => 'TsBOTController@delEnemy', 'as' => 'del']);
                 Route::get('/guild/remove', ['uses' => 'TsBOTController@delGuildEnemy', 'as' => 'guild.del']);
             });
