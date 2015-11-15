@@ -1,1 +1,1 @@
-hehehehe
+[{{ $char->vocation->short }}][b]{{ $char->name }}[/b]
