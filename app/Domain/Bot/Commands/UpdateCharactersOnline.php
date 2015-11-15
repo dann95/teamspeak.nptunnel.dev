@@ -46,8 +46,11 @@ class UpdateCharactersOnline extends Command
                ->online();
            $chars->each(function($char) use($onlineChars){
                $status = (in_array($char->name , $onlineChars)) ? 1 : 0;
-               $char->online = $status;
-               $char->save();
+               if($char->online != $status)
+               {
+                   $char->online = $status;
+                   $char->save();
+               }
            });
         });
     }
