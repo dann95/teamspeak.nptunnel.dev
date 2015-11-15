@@ -15,6 +15,7 @@ use NpTS\Domain\Bot\Requests\InsertGuildRequest;
 use NpTS\Domain\Bot\Service\Character;
 use NpTS\Domain\Bot\Service\Guild;
 use NpTS\Domain\TeamSpeak\Manager;
+use NpTS\Domain\Bot\Requests\UpdateTibiaSettingsRequest;
 use TeamSpeak3\Ts3Exception;
 
 class TsBOTController extends Controller
@@ -50,6 +51,28 @@ class TsBOTController extends Controller
             $channels = [];
         }
         return view('Client.Bot.index', compact('bot','channels'));
+    }
+
+    public function tibia($id)
+    {
+        $bot = $this->getBot($id);
+        $vserver = $bot->vserver;
+        $manager = new Manager($vserver->server()->get()->first()->credentials);
+        try{
+            $ts = $manager->selectServer($vserver->v_sid);
+            $channels = $ts->channelList();
+        }catch(Ts3Exception $e)
+        {
+            $channels = [];
+        }
+        return view('Client.Bot.tibia', compact('bot','channels'));
+    }
+
+    public function tibiaSettings($id , UpdateTibiaSettingsRequest $request)
+    {
+        $bot = $this->getBot($id);
+        $bot->tibiaList->update($request->only(['enemy_ch_id','friend_ch_id']));
+        return redirect()->route('account.virtual.bot.tibiaSettings',['id' => $id]);
     }
 
     public function settings($id , ChangeTsBotSettingsRequest $request)

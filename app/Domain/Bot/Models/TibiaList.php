@@ -9,6 +9,11 @@ use NpTS\Domain\Bot\Models\Guild;
 class TibiaList extends Model
 {
 
+    protected $fillable = [
+        'enemy_ch_id',
+        'friend_ch_id'
+    ];
+
     public function onlineFriends()
     {
         return $this->friends()->where('online','1');
