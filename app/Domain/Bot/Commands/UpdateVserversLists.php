@@ -4,7 +4,6 @@ namespace NpTS\Domain\Bot\Commands;
 
 use Illuminate\Console\Command;
 use NpTS\Domain\Bot\Models\TsBot;
-use Illuminate\Support\Facades\Queue;
 
 class UpdateVserversLists extends Command
 {
@@ -48,7 +47,18 @@ class UpdateVserversLists extends Command
         $bots->each(function($bot){
             if($bot->tibia_list)
             {
-                Queue::push(new \NpTS\Domain\Bot\Jobs\UpdateVserverList($bot->vserver , $bot->tibiaList , $bot->vserver->server()));
+                $ts = (new \NpTS\Domain\TeamSpeak\Manager($bot->vserver->server()->credentials))->selectServer($bot->vserver->v_sid);
+                //Enemy List:
+                $ts->channelGetById($this->list->enemy_ch_id)
+                    ->modify([
+                        'channel_description' => new \DateTime()
+                    ]);
+
+                //Friend List:
+                $ts->channelGetById($this->list->friend_ch_id)
+                    ->modify([
+                        'channel_description' => new \DateTime()
+                    ]);
             }
         });
 
