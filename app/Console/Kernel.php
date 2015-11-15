@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \NpTS\Console\Commands\Inspire::class,
         \NpTS\Domain\Bot\Commands\UpdateCharactersOnline::class,
+        \NpTS\Domain\Bot\Commands\UpdateVserversLists::class,
     ];
 
     /**
