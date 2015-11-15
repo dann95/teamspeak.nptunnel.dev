@@ -10,7 +10,10 @@ class TsBot extends Model
 {
 
     protected $fillable = [
-        'tibia_list'
+        'tibia_list',
+        'auto_afk',
+        'max_afk_time',
+        'afk_ch_id',
     ];
 
     public function tibiaList()

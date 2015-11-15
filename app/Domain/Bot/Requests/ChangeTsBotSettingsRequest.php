@@ -24,7 +24,10 @@ class ChangeTsBotSettingsRequest extends Request
     public function rules()
     {
         return [
-            'tibia_list'    =>  ['required','boolean']
+            'tibia_list'    =>  ['required','boolean'],
+            'auto_afk'      =>  ['required','boolean'],
+            'afk_ch_id'     =>  ['required','int'],
+            'max_afk_time'  =>  ['required','int','notin:0'],
         ];
     }
 }

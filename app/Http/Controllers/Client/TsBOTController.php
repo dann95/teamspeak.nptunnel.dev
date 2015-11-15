@@ -14,6 +14,8 @@ use NpTS\Domain\Bot\Requests\InsertCharacterRequest;
 use NpTS\Domain\Bot\Requests\InsertGuildRequest;
 use NpTS\Domain\Bot\Service\Character;
 use NpTS\Domain\Bot\Service\Guild;
+use NpTS\Domain\TeamSpeak\Manager;
+use TeamSpeak3\Ts3Exception;
 
 class TsBOTController extends Controller
 {
@@ -38,13 +40,22 @@ class TsBOTController extends Controller
     public function index($id)
     {
         $bot = $this->getBot($id);
-        return view('Client.Bot.index', compact('bot'));
+        $vserver = $bot->vserver;
+        $manager = new Manager($vserver->server()->get()->first()->credentials);
+        try{
+            $ts = $manager->selectServer($vserver->v_sid);
+            $channels = $ts->channelList();
+        }catch(Ts3Exception $e)
+        {
+            $channels = [];
+        }
+        return view('Client.Bot.index', compact('bot','channels'));
     }
 
     public function settings($id , ChangeTsBotSettingsRequest $request)
     {
         $bot = $this->getBot($id);
-        $bot->update($request->only(['tibia_list']));
+        $bot->update($request->only(['tibia_list','auto_afk','afk_ch_id','max_afk_time']));
         return redirect()->route('account.virtual.bot.index',['id' => $id]);
     }
 
