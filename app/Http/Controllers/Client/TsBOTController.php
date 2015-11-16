@@ -138,7 +138,7 @@ class TsBOTController extends Controller
         } catch (CharacterAlreadyInThisList $e) {
             return redirect()->route('account.virtual.bot.friend.add', ['id' => $id])->withErrors([$request->only('name')['name'] . ' Já está nessa lista!']);
         }
-        return redirect()->route('account.virtual.bot.friend.index', ['id' => $id]);
+        return redirect()->route('account.virtual.bot.enemy.index', ['id' => $id]);
     }
 
     public function addGuild($id)
@@ -175,7 +175,7 @@ class TsBOTController extends Controller
         {
             return redirect()->route('account.virtual.bot.friend.guild.add' , ['id' => $id])->withErrors(['Guild com esse nome não existe!']);
         }
-        return redirect()->route('account.virtual.bot.friend.index', ['id' => $id]);
+        return redirect()->route('account.virtual.bot.enemy.index', ['id' => $id]);
     }
 
 
