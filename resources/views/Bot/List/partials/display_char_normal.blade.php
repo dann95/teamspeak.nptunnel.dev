@@ -1,1 +1,4 @@
-[{{ $char->vocation->short }}][b]{{ $char->name }}[/b]
+@inject('vocations','NpTS\Domain\Bot\Models\Vocation')
+@foreach($vocations as $vocation)
+    {{ $vocation->name }}
+@endforeach
