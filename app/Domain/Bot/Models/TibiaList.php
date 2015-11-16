@@ -31,7 +31,7 @@ class TibiaList extends Model
 
     public function enemies()
     {
-        return $this->characters()->where('position','0');
+        return $this->characters->where('position','0');
     }
 
     /**
