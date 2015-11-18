@@ -163,6 +163,6 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('/auth/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout']);
 
 Route::get('/test' , function(){
-   $chars = NpTS\Domain\Bot\Models\Character::all();
+   $chars = NpTS\Domain\Bot\Models\Character::all()->sortByDesc('lvl');
    return view('Bot.List.enemy' , ['chars' => $chars]);
 });

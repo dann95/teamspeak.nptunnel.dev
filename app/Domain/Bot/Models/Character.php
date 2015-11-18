@@ -29,8 +29,33 @@ class Character extends Model
         return $this->belongsTo(Vocation::class);
     }
 
+    /**
+     * An character belongs to a world.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function world()
     {
         return $this->belongsTo(World::class);
+    }
+
+
+    /**
+     * What is the link to view this char at tibia.com?
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        $name = str_replace(' ' , '%20' , $this->name);
+        $name = str_replace("'" , '%27' , $name);
+        return 'https://secure.tibia.com/community/?subtopic=characters&name='.$name;
+    }
+
+    /**
+     * How much lvls this char up or loose since was added to the list?
+     * @return string
+     */
+    public function getChangesLvlAttribute()
+    {
+        return (($this->lvl >= $this->register_lvl)) ? '+'.($this->lvl - $this->register_lvl) : '-'.($this->register_lvl - $this->lvl);
     }
 }

@@ -11,17 +11,26 @@ class TibiaList extends Model
 
     protected $fillable = [
         'enemy_ch_id',
-        'friend_ch_id'
+        'friend_ch_id',
+        'world_id'
     ];
 
     public function onlineFriends()
     {
-        return $this->friends()->where('online','1');
+        return $this->friends()
+            ->where('exists','1')
+            ->where('world_id',$this->world_id)
+            ->where('online','1')
+            ->sortByDesc('lvl');
     }
 
     public function onlineEnemies()
     {
-        return $this->enemies()->where('online','1');
+        return $this->enemies()
+            ->where('exists','1')
+            ->where('world_id',$this->world_id)
+            ->where('online','1')
+            ->sortByDesc('lvl');
     }
 
     public function friends()

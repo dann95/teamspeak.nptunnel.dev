@@ -14,6 +14,7 @@ class CreateTibiaListsTable extends Migration
     {
         Schema::create('tibia_lists', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('world_id')->default(1);
             $table->unsignedInteger('ts_bot_id');
             $table->smallInteger('friend_ch_id');
             $table->smallInteger('enemy_ch_id');

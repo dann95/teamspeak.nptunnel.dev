@@ -16,6 +16,7 @@ class CreateCharactersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('tibia_list_id');
             $table->boolean('online');
+            $table->boolean('exists')->default(1);
             $table->smallInteger('position');
             $table->unsignedInteger('vocation_id');
             $table->unsignedInteger('world_id');
