@@ -194,22 +194,23 @@ class GameSpeakSeeder extends Seeder
     private function vocations()
     {
         $vocs = [
-            "Elder Druid"=>"http://i.imgur.com/I6l1sAf.gif",
-            "Master Sorcerer"=>"http://i.imgur.com/9TyYzhu.png",
-            "Elite Knight"=>"http://i.imgur.com/nb8nrub.png",
-            "Royal Paladin"=>"http://i.imgur.com/JYv7sw3.png",
-            "Knight"=>"http://i.imgur.com/Lx5g53w.png",
-            "Sorcerer"=>"http://i.imgur.com/tZbDxtS.png",
-            "Druid"=>"http://i.imgur.com/eDj9TW2.png",
-            "Paladin"=>"http://i.imgur.com/aRo6CDS.png",
-            "None"=>"http://i.imgur.com/gBMhGlz.gif",
+            "Elder Druid"=> ['url' => "http://i.imgur.com/I6l1sAf.gif" , 'short' => 'ED'],
+            "Master Sorcerer"=> ['url' => "http://i.imgur.com/9TyYzhu.png" , 'short' => 'MS'],
+            "Elite Knight"=> ['url' => "http://i.imgur.com/nb8nrub.png" , 'short' => 'EK'],
+            "Royal Paladin"=> ['url' => "http://i.imgur.com/JYv7sw3.png" , 'short' => 'RP'],
+            "Knight"=> ['url' => "http://i.imgur.com/Lx5g53w.png" , 'short' => 'K'],
+            "Sorcerer"=> ['url' => "http://i.imgur.com/tZbDxtS.png", 'short' => 'S'],
+            "Druid"=> ['url' => "http://i.imgur.com/eDj9TW2.png" , 'short' => 'D'],
+            "Paladin"=> ['url' => "http://i.imgur.com/aRo6CDS.png", 'short' => 'P'],
+            "None"=> ['url' => "http://i.imgur.com/gBMhGlz.gif", 'short' => 'N'],
         ];
 
-        foreach($vocs as $voc => $url)
+        foreach($vocs as $voc => $arr)
         {
             \NpTS\Domain\Bot\Models\Vocation::create([
                 'name' => $voc,
-                'url_icon' => $url,
+                'url_icon' => $arr['url'],
+                'short_name' => $arr['short']
             ]);
         }
     }
