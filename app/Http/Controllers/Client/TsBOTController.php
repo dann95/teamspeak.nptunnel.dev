@@ -17,6 +17,7 @@ use NpTS\Domain\Bot\Service\Guild;
 use NpTS\Domain\TeamSpeak\Manager;
 use NpTS\Domain\Bot\Requests\UpdateTibiaSettingsRequest;
 use TeamSpeak3\Ts3Exception;
+use NpTS\Domain\Bot\Models\World;
 
 class TsBOTController extends Controller
 {
@@ -24,14 +25,15 @@ class TsBOTController extends Controller
     private $guard;
     private $service;
     private $guildService;
-
-    public function __construct(VirtualServerRepositoryContract $repo, Guard $guard, Character $service, Guild $guild)
+    private $worldModel;
+    public function __construct(VirtualServerRepositoryContract $repo, Guard $guard, Character $service, Guild $guild , World $world)
     {
         parent::__construct();
         $this->vserverRepository = $repo;
         $this->guard = $guard;
         $this->service = $service;
         $this->guildService = $guild;
+        $this->worldModel = $world;
     }
 
     /**
@@ -57,6 +59,7 @@ class TsBOTController extends Controller
     {
         $bot = $this->getBot($id);
         $vserver = $bot->vserver;
+        $worlds = $this->worldModel->all();
         $manager = new Manager($vserver->server()->get()->first()->credentials);
         try{
             $ts = $manager->selectServer($vserver->v_sid);
@@ -65,13 +68,13 @@ class TsBOTController extends Controller
         {
             $channels = [];
         }
-        return view('Client.Bot.tibia', compact('bot','channels'));
+        return view('Client.Bot.tibia', compact('bot','channels','worlds'));
     }
 
     public function tibiaSettings($id , UpdateTibiaSettingsRequest $request)
     {
         $bot = $this->getBot($id);
-        $bot->tibiaList->update($request->only(['enemy_ch_id','friend_ch_id']));
+        $bot->tibiaList->update($request->only(['enemy_ch_id','friend_ch_id','world_id']));
         return redirect()->route('account.virtual.bot.tibiaSettings',['id' => $id]);
     }
 

@@ -4,6 +4,14 @@
     <form method="POST" action="{{ route('account.virtual.bot.tibiaSettingsUpdate' , ['id' => $bot->vserver->id]) }}">
         {{ csrf_field() }}
         <div class="form-group">
+            Qual world?:
+            <select class="form-control" name="world_id">
+                @foreach($worlds as $world)
+                    <option value="{{ $world->id }}" @if($bot->tibiaList->world_id == $world->id) selected @endif >{{ $world->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             Channel Friend List:
             <select class="form-control" name="friend_ch_id">
                 @forelse($channels as $channel)

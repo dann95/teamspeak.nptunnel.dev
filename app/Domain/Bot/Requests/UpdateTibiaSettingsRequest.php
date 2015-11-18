@@ -26,6 +26,7 @@ class UpdateTibiaSettingsRequest extends Request
         return [
             'enemy_ch_id'   =>  ['required','int'],
             'friend_ch_id'  =>  ['required','int'],
+            'world_id'      =>  ['required','int']
         ];
     }
 }
