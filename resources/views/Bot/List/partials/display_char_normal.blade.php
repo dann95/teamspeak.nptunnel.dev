@@ -1,4 +1,4 @@
 @inject('vocations','NpTS\Domain\Bot\Models\Vocation')
-@foreach($vocations->all() as $vocation)@foreach($chars->where('vocation_id',$vocation->id) as $char){!! $char->name !!}
+@foreach($vocations->all() as $vocation)@foreach($chars->where('vocation_id',$vocation->id) as $char)[img]{{ $vocation->url_icon }}[/img][{{ $vocation->short_name }}] {{ $char->lvl }} {{ $char->name }} {{ date("[H:i]",time()-$char->updated_at->timestamp) }}
 @endforeach
 @endforeach

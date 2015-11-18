@@ -24,7 +24,7 @@ class GameSpeakSeeder extends Seeder
     private function users()
     {
         // Users:
-        factory(NpTS\Domain\Client\Models\User::class , 100)->create()->each(function($user){
+        factory(NpTS\Domain\Client\Models\User::class , 5)->create()->each(function($user){
             $n = mt_rand(0,10);
             if($n)
             {
@@ -116,35 +116,100 @@ class GameSpeakSeeder extends Seeder
     }
     private function worlds()
     {
-        \NpTS\Domain\Bot\Models\World::create([
-            'name' => 'Garnera'
-        ]);
-        \NpTS\Domain\Bot\Models\World::create([
-            'name' => 'Elera'
-        ]);
-        \NpTS\Domain\Bot\Models\World::create([
-            'name' => 'Silvera'
-        ]);
+
+        $worlds = [
+            "Amera",
+            "Antica",
+            "Astera",
+            "Aurea",
+            "Aurera",
+            "Aurora",
+            "Bellona",
+            "Beneva",
+            "Calmera",
+            "Calva",
+            "Calvera",
+            "Candia",
+            "Celesta",
+            "Chrona",
+            "Danera",
+            "Dolera",
+            "Efidia",
+            "Eldera",
+            "Elera",
+            "Elysia",
+            "Fidera",
+            "Fortera",
+            "Garnera",
+            "Guardia",
+            "Harmonia",
+            "Honera",
+            "Hydera",
+            "Inferna",
+            "Iona",
+            "Irmada",
+            "Julera",
+            "Justera",
+            "Kenora",
+            "Kronera",
+            "Luminera",
+            "Magera",
+            "Menera",
+            "Morta",
+            "Mortera",
+            "Neptera",
+            "Nerana",
+            "Nika",
+            "Olympa",
+            "Pacera",
+            "Premia",
+            "Pythera",
+            "Quilia",
+            "Refugia",
+            "Rowana",
+            "Secura",
+            "Shivera",
+            "Silvera",
+            "Solera",
+            "Tenebra",
+            "Thera",
+            "Umera",
+            "Unitera",
+            "Valoria",
+            "Veludera",
+            "Vinera",
+            "Xantera",
+            "Yanara",
+            "Zanera",
+        ];
+
+       foreach($worlds as $world)
+       {
+           \NpTS\Domain\Bot\Models\World::create([
+               'name' => $world
+           ]);
+       }
     }
 
     private function vocations()
     {
         $vocs = [
-            'None',
-            'Elder Druid',
-            'Master Sorcerer',
-            'Royal Paladin',
-            'Elite Knight',
-            'Druid',
-            'Sorcerer',
-            'Paladin',
-            'Knight'
+            "Elder Druid"=>"http://i.imgur.com/I6l1sAf.gif",
+            "Master Sorcerer"=>"http://i.imgur.com/9TyYzhu.png",
+            "Elite Knight"=>"http://i.imgur.com/nb8nrub.png",
+            "Royal Paladin"=>"http://i.imgur.com/JYv7sw3.png",
+            "Knight"=>"http://i.imgur.com/Lx5g53w.png",
+            "Sorcerer"=>"http://i.imgur.com/tZbDxtS.png",
+            "Druid"=>"http://i.imgur.com/eDj9TW2.png",
+            "Paladin"=>"http://i.imgur.com/aRo6CDS.png",
+            "None"=>"http://i.imgur.com/gBMhGlz.gif",
         ];
 
-        foreach($vocs as $voc)
+        foreach($vocs as $voc => $url)
         {
             \NpTS\Domain\Bot\Models\Vocation::create([
-                'name' => $voc
+                'name' => $voc,
+                'url_icon' => $url,
             ]);
         }
     }

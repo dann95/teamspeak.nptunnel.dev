@@ -57,7 +57,7 @@ class UpdateVserversLists extends Command
                 //Friend List:
                 $ts->channelGetById($bot->tibiaList->friend_ch_id)
                     ->modify([
-                        'channel_description' => ''
+                        'channel_description' => view('Bot.List.enemy' , ['chars' => $bot->tibiaList->onlineFriends()])
                     ]);
             }
         });

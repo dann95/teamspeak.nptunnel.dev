@@ -1,5 +1,5 @@
 [b][size=16]Enemy List[/size][/b]
-@if(count($chars) > 10)
+@if(count($chars) > 100)
 @include('Bot.List.partials.display_char_min')
 @else
 @include('Bot.List.partials.display_char_normal')
