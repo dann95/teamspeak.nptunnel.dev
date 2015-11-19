@@ -49,6 +49,7 @@ class UpdateCharactersOnline extends Command
                if($char->online != $status)
                {
                    $char->online = $status;
+                   $char->online_sice = new \DateTime();
                    $char->save();
                }
            });
