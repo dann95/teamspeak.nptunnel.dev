@@ -18,29 +18,45 @@ class TibiaList extends Model
     public function onlineFriends()
     {
         return $this->friends()
-            ->where('exists','1')
-            ->where('world_id',$this->world_id)
-            ->where('online','1')
+            ->filter(function($char){
+                return $char->world_id == $this->world_id;
+            })
+            ->filter(function($char){
+                return ($char->wasDeleted == 0);
+            })
+            ->filter(function($char){
+            return ($char->online == 1);
+            })
             ->sortByDesc('lvl');
     }
 
     public function onlineEnemies()
     {
         return $this->enemies()
-            ->where('exists','1')
-            ->where('world_id',$this->world_id)
-            ->where('online','1')
+            ->filter(function($char){
+            return $char->world_id == $this->world_id;
+            })
+            ->filter(function($char){
+                return ($char->wasDeleted == 0);
+            })
+            ->filter(function($char){
+                return ($char->online == 1);
+            })
             ->sortByDesc('lvl');
     }
 
     public function friends()
     {
-        return $this->characters->where('position','1');
+        return $this->characters->filter(function($char){
+            return ($char->position == 1);
+        });
     }
 
     public function enemies()
     {
-        return $this->characters->where('position','0');
+        return $this->characters->filter(function($char){
+            return ($char->position == 0);
+        });
     }
 
     /**
