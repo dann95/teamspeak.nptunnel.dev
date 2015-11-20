@@ -13,7 +13,7 @@ class UpdateCharactersOnline extends Command
      *
      * @var string
      */
-    protected $signature = 'r2d2:updateCharacters';
+    protected $signature = 'r2d2:updateCharactersOnline';
 
     /**
      * The console command description.

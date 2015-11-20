@@ -14,4 +14,14 @@ class World extends Model
     {
         return $this->hasMany(Character::class);
     }
+
+    /**
+     * @return Colllection
+     */
+    public function onlineCharacters()
+    {
+        return $this->characters->filter(function($char){
+            return (($char->exists) && ($char->online));
+        });
+    }
 }
