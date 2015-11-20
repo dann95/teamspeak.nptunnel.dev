@@ -1,5 +1,5 @@
 @inject('vocations','NpTS\Domain\Bot\Models\Vocation')
-@foreach($vocations->all() as $vocation)@foreach($chars->where('vocation_id',$vocation->id) as $char)[img]{{ $vocation->url_icon }}[/img]({{ $vocation->short_name }}) {{ $char->lvl }} [url={!! $char->url !!}]{!! $char->name !!}[/url] [{{ $char->changesLvl }}] {{ date("[H:i]",time()-$char->online_since-62280) }}
+@foreach($vocations->all() as $vocation)@foreach($chars->where('vocation_id',$vocation->id) as $char)[img]{{ $vocation->url_icon }}[/img]({{ $vocation->short_name }}) {{ $char->lvl }} [url={!! $char->url !!}]{!! $char->name !!}[/url] [{{ $char->changesLvl }}] {{ date("[H:i]",time()-$char->online_since->timestamp) }}
 @endforeach
 @if(count($chars->where('vocation_id',$vocation->id)))
 

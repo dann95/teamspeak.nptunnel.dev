@@ -8,6 +8,10 @@ use NpTS\Domain\Bot\Models\World;
 
 class Character extends Model
 {
+
+    protected $dateFormat = [
+        'online_since'
+    ];
     protected $fillable = [
         'tibia_list_id',
         'online',
