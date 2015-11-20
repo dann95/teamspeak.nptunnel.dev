@@ -5,6 +5,8 @@ namespace NpTS\Domain\Bot\Commands;
 use Illuminate\Console\Command;
 use NpTS\Domain\Bot\Models\World;
 use NpTS\Domain\Bot\Crawlers\World as WorldCrawler;
+use NpTS\Domain\TeamSpeak\Manager;
+use TeamSpeak3\Ts3Exception;
 
 class UpdateCharactersOnline extends Command
 {
@@ -55,8 +57,25 @@ class UpdateCharactersOnline extends Command
                }
                if(($char->online) && ($char->lvl != $onlineChars[$char->name]))
                {
-                   // check if enemy and poke!
 
+                   if(($char->position == 0) && ($onlineChars[$char->name] > $char->lvl))
+                   {
+                       $vserver = $char->tibiaList->tsBot->vserver;
+                       $credentials = $vserver->sever()->credentials;
+                       $credentials['nick'] = $char->world->name;
+                       $manager = new Manager($credentials);
+                       try
+                       {
+                           $ts = $manager->selectServer($vserver->v_sid);
+                           foreach($ts->clientList() as $client)
+                           {
+                               $client->poke("Enemy ".$char->name." got ".$onlineChars[$char->name]-$char-lvl." lvls");
+                           }
+                       }catch (Ts3Exception $e)
+                       {
+                           //...
+                       }
+                   }
                    $char->lvl = $onlineChars[$char->name];
                    $char->save();
                }
