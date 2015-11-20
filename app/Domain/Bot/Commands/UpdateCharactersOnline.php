@@ -66,7 +66,7 @@ class UpdateCharactersOnline extends Command
                        $manager = new Manager($credentials);
                        try
                        {
-                           $msg = "Enemy :".$char->name." got ".($onlineChars[$char->name]-$char->lvl)." lvls";
+                           $msg = "Enemy: ".$char->name." got ".($onlineChars[$char->name]-$char->lvl)." lvl(s)";
                            $ts = $manager->selectServer($vserver->v_sid);
                            foreach($ts->clientList() as $client)
                            {
