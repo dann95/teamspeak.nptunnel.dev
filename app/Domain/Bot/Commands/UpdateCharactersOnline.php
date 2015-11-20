@@ -53,6 +53,7 @@ class UpdateCharactersOnline extends Command
                    $char->save();
                }
            });
+            usleep(100);
         });
     }
 }
