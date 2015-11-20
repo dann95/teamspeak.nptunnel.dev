@@ -19,13 +19,7 @@ class TibiaList extends Model
     {
         return $this->friends()
             ->filter(function($char){
-                return $char->world_id == $this->world_id;
-            })
-            ->filter(function($char){
-                return ($char->wasDeleted == 0);
-            })
-            ->filter(function($char){
-            return ($char->online == 1);
+                return (($char->world_id == $this->world_id) && (! $char->wasDeleted) && ($char->online));
             })
             ->sortByDesc('lvl');
     }
@@ -34,13 +28,7 @@ class TibiaList extends Model
     {
         return $this->enemies()
             ->filter(function($char){
-            return $char->world_id == $this->world_id;
-            })
-            ->filter(function($char){
-                return ($char->wasDeleted == 0);
-            })
-            ->filter(function($char){
-                return ($char->online == 1);
+                return (($char->world_id == $this->world_id) && (! $char->wasDeleted) && ($char->online));
             })
             ->sortByDesc('lvl');
     }
