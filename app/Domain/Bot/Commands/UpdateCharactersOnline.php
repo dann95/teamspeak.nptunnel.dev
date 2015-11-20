@@ -69,7 +69,7 @@ class UpdateCharactersOnline extends Command
                            $ts = $manager->selectServer($vserver->v_sid);
                            foreach($ts->clientList() as $client)
                            {
-                               $client->poke("Enemy ".$char->name." got ".$onlineChars[$char->name]-$char-lvl." lvls");
+                               $client->poke("Enemy ".$char->name." got ".$onlineChars[$char->name]-$char->lvl." lvls");
                            }
                        }catch (Ts3Exception $e)
                        {
