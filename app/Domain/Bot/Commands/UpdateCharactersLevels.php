@@ -5,6 +5,8 @@ namespace NpTS\Domain\Bot\Commands;
 use Illuminate\Console\Command;
 use NpTS\Domain\Bot\Crawlers\World;
 use NpTS\Domain\Bot\Models\World as WorldModel;
+use NpTS\Domain\TeamSpeak\Manager;
+use TeamSpeak3\Ts3Exception;
 
 class UpdateCharactersLevels extends Command
 {
@@ -52,7 +54,32 @@ class UpdateCharactersLevels extends Command
 
                 if($char->lvl != $lvl)
                 {
-                    //TODO: alert on teamspeak that char has difference of lvl.
+                    if($char->position == 0)
+                    {
+                        if($char->lvl > $lvl)
+                        {
+                            $msg = "loose ".$char->lvl-$lvl." lvls";
+                        }
+                        else
+                        {
+                            $msg = "gain ".$lvl-$char->lvl." lvls";
+                        }
+                        $vserver = $char->tibiaList->tsBot->vserver;
+                        $credentials = $vserver->server->credentials;
+                        $credentials['nick'] = $char->world->name." Hunted List";
+                        $manager = new Manager($credentials);
+                        try{
+                        $ts = $manager->selectServer($vserver->vsid);
+                        foreach($ts->clientList() as $client)
+                        {
+                            $client->poke("Enemy ".$char->name." ".$msg);
+                        }
+                        }catch (Ts3Exception $e)
+                        {
+
+                        }
+                    }
+
                     $char->lvl = $lvl;
                     $char->save();
                 }

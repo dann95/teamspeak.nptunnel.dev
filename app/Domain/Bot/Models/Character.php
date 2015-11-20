@@ -5,6 +5,7 @@ namespace NpTS\Domain\Bot\Models;
 use Illuminate\Database\Eloquent\Model;
 use NpTS\Domain\Bot\Models\Vocation;
 use NpTS\Domain\Bot\Models\World;
+use NpTS\Domain\Bot\Models\TibiaList;
 
 class Character extends Model
 {
@@ -63,5 +64,10 @@ class Character extends Model
     public function getChangesLvlAttribute()
     {
         return (($this->lvl >= $this->register_lvl)) ? '+'.($this->lvl - $this->register_lvl) : '-'.($this->register_lvl - $this->lvl);
+    }
+
+    public function tibiaList()
+    {
+        return $this->belongsTo(TibiaList::class);
     }
 }
