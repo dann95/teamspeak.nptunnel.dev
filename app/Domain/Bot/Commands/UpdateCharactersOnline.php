@@ -61,7 +61,7 @@ class UpdateCharactersOnline extends Command
                    if(($char->position == 0) && ($onlineChars[$char->name] > $char->lvl))
                    {
                        $vserver = $char->tibiaList->tsBot->vserver;
-                       $credentials = $vserver->sever()->credentials;
+                       $credentials = $vserver->server()->credentials;
                        $credentials['nick'] = $char->world->name;
                        $manager = new Manager($credentials);
                        try
