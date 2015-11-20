@@ -45,7 +45,7 @@ class UpdateCharactersOnline extends Command
                ->select($world->name)
                ->online();
            $chars->each(function($char) use($onlineChars){
-               $status = (in_array($char->name , $onlineChars)) ? 1 : 0;
+               $status = (in_array($char->name , array_keys($onlineChars))) ? 1 : 0;
                if($char->online != $status)
                {
                    $char->online = $status;
