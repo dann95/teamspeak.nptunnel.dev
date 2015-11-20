@@ -26,7 +26,13 @@ class World extends AbstractTibiaCrawler
     {
         $html = $this->html;
         $chars = array_map(array($this , 'decodeName') ,$this->extractOnline($html));
-        return $chars;
+        $chars = collect($chars);
+        $onlineCharsWithLevel = [];
+        foreach($chars as $char)
+        {
+            $onlineCharsWithLevel[$char] = $this->getLevelByName($char);
+        }
+        return $onlineCharsWithLevel;
     }
 
     public function getLevelByName($name)

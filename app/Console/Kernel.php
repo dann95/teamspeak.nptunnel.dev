@@ -13,9 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \NpTS\Console\Commands\Inspire::class,
         \NpTS\Domain\Bot\Commands\UpdateCharactersOnline::class,
-        \NpTS\Domain\Bot\Commands\UpdateCharactersLevels::class,
         \NpTS\Domain\Bot\Commands\UpdateVserversLists::class,
     ];
 
@@ -32,9 +30,5 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('r2d2:updateLists')
             ->everyMinute();
-
-        $schedule->command('r2d2:updateCharactersLevel')
-            ->everyFiveMinutes();
-
     }
 }
