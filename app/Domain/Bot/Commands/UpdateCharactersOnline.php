@@ -20,7 +20,7 @@ class UpdateCharactersOnline extends Command
      *
      * @var string
      */
-    protected $description = 'Update all character status (online/offline) and the actual name.';
+    protected $description = 'Update all character status (online/offline) and the actual level.';
 
     private $woldModel;
     private $worldCrawler;
@@ -46,12 +46,21 @@ class UpdateCharactersOnline extends Command
                ->online();
            $chars->each(function($char) use($onlineChars){
                $status = (in_array($char->name , array_keys($onlineChars))) ? 1 : 0;
+
                if($char->online != $status)
                {
                    $char->online = $status;
                    $char->online_since = new \DateTime();
                    $char->save();
                }
+               if(($char->online) && ($char->lvl != $onlineChars[$char->name]))
+               {
+                   // check if enemy and poke!
+
+                   $char->lvl = $onlineChars[$char->name];
+                   $char->save();
+               }
+
            });
             usleep(100);
         });
