@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \NpTS\Domain\Bot\Commands\UpdateCharactersOnline::class,
         \NpTS\Domain\Bot\Commands\UpdateVserversLists::class,
+        \NpTS\Domain\Bot\Commands\UpdateDeaths::class,
     ];
 
     /**
@@ -29,6 +30,9 @@ class Kernel extends ConsoleKernel
             ->everyMinute();
 
         $schedule->command('r2d2:updateLists')
+            ->everyMinute();
+
+        $schedule->command('r2d2:updateDeaths')
             ->everyMinute();
     }
 }
