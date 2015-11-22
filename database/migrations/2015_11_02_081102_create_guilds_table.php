@@ -18,6 +18,7 @@ class CreateGuildsTable extends Migration
             $table->boolean('default_poke_die');
             $table->boolean('default_msg_die');
             $table->smallInteger('position');
+            $table->string('name');
             $table->timestamps();
         });
     }
