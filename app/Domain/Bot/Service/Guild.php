@@ -27,7 +27,7 @@ class Guild
         if ($this->crawler->exists())
             throw new GuildDosntExists;
 
-        if (count($list->guilds()->where(['name' => $name])))
+        if (count($list->guilds()->where(['name' => $name])->get()))
             throw new GuildAlreadyInThisList;
 
         $chars = collect($this->crawler->characters());
