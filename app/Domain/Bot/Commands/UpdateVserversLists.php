@@ -4,6 +4,7 @@ namespace NpTS\Domain\Bot\Commands;
 
 use Illuminate\Console\Command;
 use NpTS\Domain\Bot\Models\TsBot;
+use TeamSpeak3\Ts3Exception;
 
 class UpdateVserversLists extends Command
 {
@@ -47,6 +48,7 @@ class UpdateVserversLists extends Command
         $bots->each(function($bot){
             if($bot->tibia_list)
             {
+                try{
                 $ts = (new \NpTS\Domain\TeamSpeak\Manager($bot->vserver->server()->credentials))->selectServer($bot->vserver->v_sid);
                 //Enemy List:
                 $ts->channelGetById($bot->tibiaList->enemy_ch_id)
@@ -61,6 +63,10 @@ class UpdateVserversLists extends Command
                         'channel_description'   => view('Bot.List.friend' , ['chars' => $bot->tibiaList->onlineFriends()]),
                         'channel_name'          => '[cspacer'.mt_rand(1,9999).'] '.'Friend List ('.count($bot->tibiaList->onlineFriends()).')',
                     ]);
+                }catch (Ts3Exception $e)
+                {
+
+                }
             }
         });
 
