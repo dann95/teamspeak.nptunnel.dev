@@ -26,13 +26,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('r2d2:updateCharactersOnline')
-            ->everyMinute();
-
-        $schedule->command('r2d2:updateLists')
-            ->everyMinute();
-
-        $schedule->command('r2d2:updateDeaths')
-            ->everyMinute();
+//        $schedule->command('r2d2:updateCharactersOnline')
+//            ->everyMinute();
+//
+//        $schedule->command('r2d2:updateLists')
+//            ->everyMinute();
+//
+//        $schedule->command('r2d2:updateDeaths')
+//            ->everyMinute();
     }
 }
