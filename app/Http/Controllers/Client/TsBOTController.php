@@ -5,6 +5,7 @@ namespace NpTS\Http\Controllers\Client;
 use NpTS\Domain\Bot\Requests\ChangeTsBotSettingsRequest;
 use NpTS\Domain\Bot\Service\Exceptions\CharacterDosntExists;
 use NpTS\Domain\Bot\Service\Exceptions\CharacterAlreadyInThisList;
+use NpTS\Domain\Bot\Service\Exceptions\GuildAlreadyInThisList;
 use NpTS\Domain\Bot\Service\Exceptions\GuildDosntExists;
 use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
@@ -137,9 +138,9 @@ class TsBOTController extends Controller
         try {
             $this->service->insert($bot->tibiaList, $request->only('name')['name'], 0);
         } catch (CharacterDosntExists $e) {
-            return redirect()->route('account.virtual.bot.friend.add', ['id' => $id])->withErrors([$request->only('name')['name'] . ' Não existe!']);
+            return redirect()->route('account.virtual.bot.enemy.add', ['id' => $id])->withErrors([$request->only('name')['name'] . ' Não existe!']);
         } catch (CharacterAlreadyInThisList $e) {
-            return redirect()->route('account.virtual.bot.friend.add', ['id' => $id])->withErrors([$request->only('name')['name'] . ' Já está nessa lista!']);
+            return redirect()->route('account.virtual.bot.enemy.add', ['id' => $id])->withErrors([$request->only('name')['name'] . ' Já está nessa lista!']);
         }
         return redirect()->route('account.virtual.bot.enemy.index', ['id' => $id]);
     }
@@ -158,6 +159,9 @@ class TsBOTController extends Controller
         }catch (GuildDosntExists $e)
         {
             return redirect()->route('account.virtual.bot.friend.guild.add' , ['id' => $id])->withErrors(['Guild com esse nome não existe!']);
+        }catch(GuildAlreadyInThisList $e)
+        {
+            return redirect()->route('account.virtual.bot.friend.guild.add' , ['id' => $id])->withErrors(['Guild com esse nome já está na lista!']);
         }
         return redirect()->route('account.virtual.bot.friend.index', ['id' => $id]);
     }
@@ -176,8 +180,12 @@ class TsBOTController extends Controller
             $this->guildService->insert($bot->tibiaList, $request->only('name')['name'], 0);
         }catch (GuildDosntExists $e)
         {
-            return redirect()->route('account.virtual.bot.friend.guild.add' , ['id' => $id])->withErrors(['Guild com esse nome não existe!']);
+            return redirect()->route('account.virtual.bot.enemy.guild.add' , ['id' => $id])->withErrors(['Guild com esse nome não existe!']);
+        }catch(GuildAlreadyInThisList $e)
+        {
+            return redirect()->route('account.virtual.bot.enemy.guild.add' , ['id' => $id])->withErrors(['Guild com esse nome já esta na lista!']);
         }
+
         return redirect()->route('account.virtual.bot.enemy.index', ['id' => $id]);
     }
 
