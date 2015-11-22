@@ -51,13 +51,15 @@ class UpdateVserversLists extends Command
                 //Enemy List:
                 $ts->channelGetById($bot->tibiaList->enemy_ch_id)
                     ->modify([
-                        'channel_description' => view('Bot.List.enemy' , ['chars' => $bot->tibiaList->onlineEnemies()])
+                        'channel_description'   => view('Bot.List.enemy' , ['chars' => $bot->tibiaList->onlineEnemies()]),
+                        'channel_name'          => 'Enemy List ('.count($bot->tibiaList->onlineEnemies()).')',
                     ]);
 
                 //Friend List:
                 $ts->channelGetById($bot->tibiaList->friend_ch_id)
                     ->modify([
-                        'channel_description' => view('Bot.List.enemy' , ['chars' => $bot->tibiaList->onlineFriends()])
+                        'channel_description'   => view('Bot.List.friend' , ['chars' => $bot->tibiaList->onlineFriends()]),
+                        'channel_name'          => 'Friend List ('.count($bot->tibiaList->onlineFriends()).')',
                     ]);
             }
         });
