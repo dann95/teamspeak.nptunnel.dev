@@ -9,15 +9,17 @@ use NpTS\Domain\Bot\Service\Exceptions\CharacterAlreadyInThisList;
 use NpTS\Domain\Bot\Service\Exceptions\CharacterDosntExists;
 use NpTS\Domain\Bot\Service\Exceptions\GuildAlreadyInThisList;
 use NpTS\Domain\Bot\Service\Exceptions\GuildDosntExists;
+use NpTS\Domain\Bot\Models\Guild as GuildModel;
 
 
 class Guild
 {
     private $crawler;
-
+    private $guildModel;
     public function __construct()
     {
         $this->crawler = app(GuildCrawler::class);
+        $this->guildModel = app(GuildModel::class);
     }
 
     public function insert(TibiaList $list , $name , $position)
@@ -27,7 +29,7 @@ class Guild
         if ($this->crawler->exists())
             throw new GuildDosntExists;
 
-        if (count($list->guilds()->where(['name' => $name])->get()))
+        if (count($this->guildModel->where(['name' => $name , 'tibia_list_id' => $list->id])->get()))
             throw new GuildAlreadyInThisList;
 
         $chars = collect($this->crawler->characters());
