@@ -75,7 +75,7 @@ MAIN CONTENT
 
                         </div>
                         <div id="col-sm-3">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Inserir servidor</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Registrar-se</button>
                         </div>
                     </div>
                 </form>
