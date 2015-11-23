@@ -2,7 +2,7 @@
 
 namespace NpTS\Http\Controllers\Client;
 
-use Illuminate\Http\Request;
+use NpTS\Domain\Client\Requests\ChangePasswordRequest;
 use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
 use NpTS\Domain\Client\Repositories\Contracts\InvoiceRepositoryContract;
@@ -33,6 +33,21 @@ class AccountController extends Controller
     public function settings()
     {
         return view('Client.Account.settings');
+    }
+
+    public function password(ChangePasswordRequest $request)
+    {
+        // senha atual incorreta!
+        if(! (\Hash::check($request->only('current_password')['current_password'] , $this->guard->user()->password)))
+        {
+            return redirect()->route('account.settings')->withErrors(['A senha inserida não está correta!']);
+        }
+
+        $user = $this->guard->user();
+
+        $user->password = \Hash::make($request->only('password')['password']);
+        $user->save();
+        return redirect()->route('account.settings');
     }
 
     public function showInvoice($id)

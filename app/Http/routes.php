@@ -63,6 +63,7 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
     Route::get('/', ['uses' => 'AccountController@index', 'as' => 'index']);
 
     Route::get('/settings', ['uses' => 'AccountController@settings', 'as' => 'settings']);
+    Route::post('/password',['uses' => 'AccountController@password' , 'as' => 'password']);
 
     /**
      * Invoices
