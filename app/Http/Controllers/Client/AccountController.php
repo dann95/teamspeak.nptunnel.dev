@@ -3,6 +3,7 @@
 namespace NpTS\Http\Controllers\Client;
 
 use NpTS\Domain\Client\Requests\ChangePasswordRequest;
+use NpTS\Domain\Client\Requests\ChangePersonalDataRequest;
 use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
 use NpTS\Domain\Client\Repositories\Contracts\InvoiceRepositoryContract;
@@ -47,6 +48,12 @@ class AccountController extends Controller
 
         $user->password = \Hash::make($request->only('password')['password']);
         $user->save();
+        return redirect()->route('account.settings');
+    }
+
+    public function personal(ChangePersonalDataRequest $request)
+    {
+        $this->guard->user()->update(['name' => $request->only('name')['name']]);
         return redirect()->route('account.settings');
     }
 

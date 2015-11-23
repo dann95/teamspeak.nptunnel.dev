@@ -5,12 +5,12 @@
     <div class="col-lg-12">
         <div class="form-panel">
             <h4 class="mb"><i class="fa fa-angle-right"></i> Atualizar informações da conta</h4>
-            <form class="form-horizontal style-form" method="POST" action="http://www.gamespeak.r2d2bot.net/account/virtual/1/change-messages">
+            <form class="form-horizontal style-form" method="POST" action="{{ route('account.personal') }}">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Meu nome</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="virtualserver_name" value="{{ $auth->user()->name }}">
+                        <input type="text" class="form-control" name="name" value="{{ $auth->user()->name }}">
                     </div>
                 </div>
 
