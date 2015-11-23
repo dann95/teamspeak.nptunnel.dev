@@ -1,6 +1,7 @@
 @extends('Client.Layout.default')
 @section('title','Inserir uma guild como Enemy')
 @section('content')
+    @include('Client.Bot.partials.menu')
     <form method="POST" action="{{ route('account.virtual.bot.enemy.guild.store' , ['id' => $bot->vserver->id]) }}">
         {{ csrf_field() }}
         <div class="form-group">

@@ -1,6 +1,7 @@
 @extends('Client.Layout.default')
 @section('title','Tibia List Channels')
 @section('content')
+    @include('Client.Bot.partials.menu')
     <form method="POST" action="{{ route('account.virtual.bot.tibiaSettingsUpdate' , ['id' => $bot->vserver->id]) }}">
         {{ csrf_field() }}
         <div class="form-group">

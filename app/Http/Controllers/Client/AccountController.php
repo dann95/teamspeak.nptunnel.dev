@@ -57,6 +57,11 @@ class AccountController extends Controller
         return redirect()->route('account.settings');
     }
 
+    public function subscriptions()
+    {
+        return view('Client.Account.subscriptions');
+    }
+
     public function showInvoice($id)
     {
         $invoice = $this->invoiceRepository

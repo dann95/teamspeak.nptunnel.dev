@@ -72,6 +72,11 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
     Route::get('pedido/{id}', ['uses' => 'AccountController@showInvoice', 'as' => 'invoice.show']);
 
     /**
+     * Subscriptions
+     */
+    Route::get('/subscriptions', ['uses' => 'AccountController@subscriptions' , 'as' => 'subscriptions']);
+
+    /**
      * Virtual Server routes:
      */
     Route::group(['prefix' => 'virtual/{id}', 'as' => 'virtual.'], function () {

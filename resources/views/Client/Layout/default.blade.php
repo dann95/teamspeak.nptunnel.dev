@@ -20,7 +20,7 @@
         </a>
         <ul class="sub">
             <li><a  href="{{ route('account.invoices') }}"><i class="fa fa-folder-open"></i>Meus pedidos</a></li>
-            <li><a  href="{{ route('account.invoices') }}"><i class="fa fa-refresh"></i>Subscrições</a></li>
+            <li><a  href="{{ route('account.subscriptions') }}"><i class="fa fa-refresh"></i>Subscrições</a></li>
         </ul>
     </li>
     @foreach($auth->user()->activeSubscriptions() as $subscription)
