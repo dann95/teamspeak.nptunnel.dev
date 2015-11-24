@@ -167,3 +167,11 @@ Route::get('auth/register', ['uses' => 'Auth\AuthController@getRegister', 'as' =
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('/auth/logout', ['uses' => 'Auth\AuthController@getLogout', 'as' => 'auth.logout']);
+
+// Password reset link request routes...
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', ['uses' => 'Auth\PasswordController@postEmail' , 'as' => 'password.reset']);
+
+// Password reset routes...
+Route::get('password/reset/{token}', ['uses' => 'Auth\PasswordController@getReset' , 'as' => 'password.reset.confirm']);
+Route::post('password/reset', 'Auth\PasswordController@postReset');

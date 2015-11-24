@@ -66,17 +66,20 @@ MAIN CONTENT
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Forgot Password ?</h4>
+                        <h4 class="modal-title">Esqueceu sua senha ?</h4>
                     </div>
+                    <form method="POST" action="{{ route('password.reset') }}">
+                        {{ csrf_field() }}
                     <div class="modal-body">
-                        <p>Enter your e-mail address below to reset your password.</p>
+                        <p>Não tem problema, insira seu e-mail abaixo para poder recuperar sua conta</p>
                         <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
 
                     </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                        <button class="btn btn-theme" type="button">Submit</button>
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+                        <button class="btn btn-theme" type="submit">Enviar</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

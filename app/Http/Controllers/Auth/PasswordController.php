@@ -20,6 +20,9 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
+
+    private $subject = 'Problemas ao logar em gamespeak.com.br?';
+
     /**
      * Create a new password controller instance.
      *
@@ -29,4 +32,10 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function getEmail()
+    {
+        return 'lololo';
+    }
+
 }
