@@ -20,12 +20,10 @@
                             <li class="dropdown-header">Players</li>
                             <li><a href="{{ route('account.virtual.bot.friend.index' , ['id' => $bot->vserver->id]) }}">Listar players</a></li>
                             <li><a href="{{ route('account.virtual.bot.friend.add' , ['id' => $bot->vserver->id]) }}">Adicionar player</a></li>
-                            <li><a href="{{ route('account.virtual.bot.friend.del' , ['id' => $bot->vserver->id]) }}">Remover Player</a></li>
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">Guilds</li>
                             <li><a href="{{ route('account.virtual.bot.friend.guild.index' , ['id' => $bot->vserver->id]) }}">Listar guilds</a></li>
                             <li><a href="{{ route('account.virtual.bot.friend.guild.add' , ['id' => $bot->vserver->id]) }}">Adicionar guild</a></li>
-                            <li><a href="{{ route('account.virtual.bot.friend.guild.del' , ['id' => $bot->vserver->id]) }}">Remover guild</a></li>
                         </ul>
                     </li>
 
@@ -35,12 +33,10 @@
                             <li class="dropdown-header">Players</li>
                             <li><a href="{{ route('account.virtual.bot.enemy.index' , ['id' => $bot->vserver->id]) }}">Listar players</a></li>
                             <li><a href="{{ route('account.virtual.bot.enemy.add' , ['id' => $bot->vserver->id]) }}">Adicionar player</a></li>
-                            <li><a href="{{ route('account.virtual.bot.enemy.del' , ['id' => $bot->vserver->id]) }}">Remover Player</a></li>
                             <li role="separator" class="divider"></li>
                             <li class="dropdown-header">Guilds</li>
                             <li><a href="{{ route('account.virtual.bot.enemy.guild.index' , ['id' => $bot->vserver->id]) }}">Listar guilds</a></li>
                             <li><a href="{{ route('account.virtual.bot.enemy.guild.add' , ['id' => $bot->vserver->id]) }}">Adicionar guild</a></li>
-                            <li><a href="{{ route('account.virtual.bot.enemy.guild.del' , ['id' => $bot->vserver->id]) }}">Remover guild</a></li>
                         </ul>
                     </li>
 

@@ -104,6 +104,8 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
             Route::post('/settings' , ['uses' => 'TsBOTController@settings' , 'as' => 'settings']);
             Route::get('/tibia/settings', ['uses' => 'TsBOTController@tibia', 'as' => 'tibiaSettings']);
             Route::post('/tibia/settings', ['uses' => 'TsBOTController@tibiaSettings', 'as' => 'tibiaSettingsUpdate']);
+
+
             Route::group(['prefix' => 'friend', 'as' => 'friend.'], function () {
                 Route::get('/', ['uses' => 'TsBOTController@listFriends', 'as' => 'index']);
                 Route::get('/guilds', ['uses' => 'TsBOTController@listGuildsFriend', 'as' => 'guild.index']);
@@ -111,9 +113,11 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
                 Route::post('/add', ['uses' => 'TsBOTController@storeFriend', 'as' => 'store']);
                 Route::get('/guild/add', ['uses' => 'TsBOTController@addGuild', 'as' => 'guild.add']);
                 Route::post('/guild/add', ['uses' => 'TsBOTController@storeGuildFriend', 'as' => 'guild.store']);
-                Route::get('remove', ['uses' => 'TsBOTController@del', 'as' => 'del']);
-                Route::get('/guild/remove', ['uses' => 'TsBOTController@delGuild', 'as' => 'guild.del']);
+                Route::get('remove/{char_id}', ['uses' => 'TsBOTController@del', 'as' => 'del']);
+                Route::get('edit/{char_id}', ['uses' => 'TsBOTController@edit', 'as' => 'edit']);
+                Route::get('/guild/remove/{guild_id}', ['uses' => 'TsBOTController@delGuild', 'as' => 'guild.del']);
             });
+
             Route::group(['prefix' => 'enemy', 'as' => 'enemy.'], function () {
                 Route::get('/', ['uses' => 'TsBOTController@listEnemies', 'as' => 'index']);
                 Route::get('/guilds', ['uses' => 'TsBOTController@listGuildsEnemy', 'as' => 'guild.index']);
@@ -121,8 +125,9 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
                 Route::post('/add', ['uses' => 'TsBOTController@storeEnemy', 'as' => 'store']);
                 Route::get('/guild/add', ['uses' => 'TsBOTController@addGuildEnemy', 'as' => 'guild.add']);
                 Route::post('/guild/add', ['uses' => 'TsBOTController@storeGuildEnemy', 'as' => 'guild.store']);
-                Route::get('remove', ['uses' => 'TsBOTController@delEnemy', 'as' => 'del']);
-                Route::get('/guild/remove', ['uses' => 'TsBOTController@delGuildEnemy', 'as' => 'guild.del']);
+                Route::get('remove/{char_id}', ['uses' => 'TsBOTController@delEnemy', 'as' => 'del']);
+                Route::get('edit/{char_id}', ['uses' => 'TsBOTController@editEnemy', 'as' => 'edit']);
+                Route::get('/guild/remove/{guild_id}', ['uses' => 'TsBOTController@delGuildEnemy', 'as' => 'guild.del']);
             });
 
         });

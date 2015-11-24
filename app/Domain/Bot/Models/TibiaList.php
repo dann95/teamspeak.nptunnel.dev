@@ -56,6 +56,21 @@ class TibiaList extends Model
         return $this->hasMany(Character::class);
     }
 
+    public function friendGuilds()
+    {
+        return $this->guilds->filter(function($guild){
+            return ($guild->position == 1);
+        });
+    }
+
+    public function enemyGuilds()
+    {
+        return $this->guilds->filter(function($guild){
+            return ($guild->position == 0);
+        });
+    }
+
+
     public function guilds()
     {
         return $this->hasMany(Guild::class);

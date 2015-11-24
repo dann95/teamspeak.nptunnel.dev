@@ -19,6 +19,7 @@ use NpTS\Domain\TeamSpeak\Manager;
 use NpTS\Domain\Bot\Requests\UpdateTibiaSettingsRequest;
 use TeamSpeak3\Ts3Exception;
 use NpTS\Domain\Bot\Models\World;
+use NpTS\Domain\Bot\Models\Character as CharacterModel;
 
 class TsBOTController extends Controller
 {
@@ -27,7 +28,8 @@ class TsBOTController extends Controller
     private $service;
     private $guildService;
     private $worldModel;
-    public function __construct(VirtualServerRepositoryContract $repo, Guard $guard, Character $service, Guild $guild , World $world)
+    private $characterModel;
+    public function __construct(VirtualServerRepositoryContract $repo, Guard $guard, Character $service, Guild $guild , World $world , CharacterModel $characterModel)
     {
         parent::__construct();
         $this->vserverRepository = $repo;
@@ -35,6 +37,7 @@ class TsBOTController extends Controller
         $this->service = $service;
         $this->guildService = $guild;
         $this->worldModel = $world;
+        $this->characterModel = $characterModel;
     }
 
     /**
@@ -190,6 +193,41 @@ class TsBOTController extends Controller
     }
 
 
+    public function listGuildsFriend($id)
+    {
+        $bot = $this->getBot($id);
+        return view('Client.Bot.list_guilds_friend',compact('bot'));
+    }
+
+    public function listGuildsEnemy($id)
+    {
+        $bot = $this->getBot($id);
+        return view('Client.Bot.list_guilds_enemy',compact('bot'));
+    }
+    public function del($id , $char_id)
+    {
+        $bot = $this->getBot($id);
+        $character = $this->getCharacter($char_id);
+        if(! ($character->tibia_list_id == $bot->tibiaList->id) )
+        {
+            return abort(403);
+        }
+        $character->delete();
+        return redirect()->route('account.virtual.bot.friend.index' , ['id' => $id]);
+    }
+
+    public function delEnemy($id , $char_id)
+    {
+        $bot = $this->getBot($id);
+        $character = $this->getCharacter($char_id);
+        if(! ($character->tibia_list_id == $bot->tibiaList->id) )
+        {
+            return abort(403);
+        }
+        $character->delete();
+        return redirect()->route('account.virtual.bot.enemy.index' , ['id' => $id]);
+    }
+
     /**
      * @param $vserverId
      */
@@ -201,4 +239,14 @@ class TsBOTController extends Controller
         }
         return $vserver->bot;
     }
+    private function getCharacter($id)
+    {
+        $char = $this->characterModel->find($id);
+        if(! $char)
+        {
+            return abort(403);
+        }
+        return $char;
+    }
 }
+
