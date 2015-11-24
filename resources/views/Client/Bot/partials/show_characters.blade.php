@@ -22,7 +22,7 @@
                         <td>{{ $char->world->name }}</td>
                         <td>
                             <div class="pull-right">
-                            <a href="{{ route("account.virtual.bot.{$position}.edit" , ['id' => $vserver_id , 'char_id' => $char->id]) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                            <a href="{{ route("account.virtual.bot.char.edit" , ['id' => $vserver_id , 'char_id' => $char->id]) }}"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
                             <a href="{{ route("account.virtual.bot.{$position}.del" , ['id' => $vserver_id , 'char_id' => $char->id]) }}"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
                             </div>
                         </td>

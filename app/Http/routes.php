@@ -106,6 +106,9 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
             Route::post('/tibia/settings', ['uses' => 'TsBOTController@tibiaSettings', 'as' => 'tibiaSettingsUpdate']);
 
 
+            Route::get('/character/{char_id}/edit' , ['uses' => 'TsBOTController@editChar' , 'as' => 'char.edit']);
+            Route::post('/character/{char_id}/edit' , ['uses' => 'TsBOTController@updateChar' , 'as' => 'char.update']);
+
             Route::group(['prefix' => 'friend', 'as' => 'friend.'], function () {
                 Route::get('/', ['uses' => 'TsBOTController@listFriends', 'as' => 'index']);
                 Route::get('/guilds', ['uses' => 'TsBOTController@listGuildsFriend', 'as' => 'guild.index']);

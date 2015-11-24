@@ -20,6 +20,7 @@ use NpTS\Domain\Bot\Requests\UpdateTibiaSettingsRequest;
 use TeamSpeak3\Ts3Exception;
 use NpTS\Domain\Bot\Models\World;
 use NpTS\Domain\Bot\Models\Character as CharacterModel;
+use NpTS\Domain\Client\Requests\UpdateCharacterRequest;
 
 class TsBOTController extends Controller
 {
@@ -226,6 +227,29 @@ class TsBOTController extends Controller
         }
         $character->delete();
         return redirect()->route('account.virtual.bot.enemy.index' , ['id' => $id]);
+    }
+
+    public function editChar($id , $char_id)
+    {
+        $bot = $this->getBot($id);
+        $character = $this->getCharacter($char_id);
+        if(! ($character->tibia_list_id == $bot->tibiaList->id) )
+        {
+            return abort(403);
+        }
+        return view('Client.Bot.edit_char' , compact('bot','character'));
+    }
+
+    public function updateChar($id , $char_id , UpdateCharacterRequest $request)
+    {
+        $bot = $this->getBot($id);
+        $character = $this->getCharacter($char_id);
+        if(! ($character->tibia_list_id == $bot->tibiaList->id) )
+        {
+            return abort(403);
+        }
+        $character->update($request->only('position'));
+        return redirect()->back();
     }
 
     /**
