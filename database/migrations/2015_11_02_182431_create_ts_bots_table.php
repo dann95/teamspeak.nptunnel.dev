@@ -14,6 +14,7 @@ class CreateTsBotsTable extends Migration
     {
         Schema::create('ts_bots', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('api_code',16)->unique();
             $table->unsignedInteger('vserver_id');
             $table->boolean('auto_afk');
             $table->smallInteger('max_afk_time');

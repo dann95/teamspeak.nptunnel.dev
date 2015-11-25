@@ -21,6 +21,16 @@ class CreateTibiaListsTable extends Migration
             $table->smallInteger('neutral_ch_id');
             $table->boolean('default_msg_die');
             $table->boolean('default_poke_die');
+            $table->boolean('show_rashid')->default(0);
+            $table->boolean('show_blue')->default(0);
+            $table->boolean('show_green')->default(0);
+            $table->boolean('show_resp_numbers')->default(0);
+            $table->boolean('show_tibia_map')->default(0);
+            $table->unsignedInteger('rashid_ch_id');
+            $table->unsignedInteger('blue_ch_id');
+            $table->unsignedInteger('green_ch_id');
+            $table->unsignedInteger('resp_ch_id');
+            $table->unsignedInteger('tibia_map_id');
             $table->timestamps();
         });
     }

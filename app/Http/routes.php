@@ -197,3 +197,7 @@ Route::post('password/email', ['uses' => 'Auth\PasswordController@postEmail' , '
 // Password reset routes...
 Route::get('password/reset/{token}', ['uses' => 'Auth\PasswordController@getReset' , 'as' => 'password.reset.confirm']);
 Route::post('password/reset', 'Auth\PasswordController@postReset');
+
+Route::group(['prefix' => 'r2d2'] , function(){
+    // All routes for r2d2 api will come here...
+});

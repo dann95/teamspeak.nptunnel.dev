@@ -13,7 +13,12 @@ class TibiaList extends Model
     protected $fillable = [
         'enemy_ch_id',
         'friend_ch_id',
-        'world_id'
+        'world_id',
+        'rashid_ch_id',
+        'blue_ch_id',
+        'green_ch_id',
+        'resp_ch_id',
+        'tibia_map_id',
     ];
 
     public function onlineFriends()

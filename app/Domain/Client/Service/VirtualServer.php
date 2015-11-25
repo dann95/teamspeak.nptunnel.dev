@@ -35,7 +35,7 @@ class VirtualServer
             ]);
             // TODO: create the tsBot and TibiaList..
             $server->bot()->create([
-
+                'api_code' => str_random(16),
             ])->tibiaList()->create([
 
             ]);
