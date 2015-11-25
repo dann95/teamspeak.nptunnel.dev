@@ -105,10 +105,21 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
             Route::get('/tibia/settings', ['uses' => 'TsBOTController@tibia', 'as' => 'tibiaSettings']);
             Route::post('/tibia/settings', ['uses' => 'TsBOTController@tibiaSettings', 'as' => 'tibiaSettingsUpdate']);
 
-
+            /**
+             * Edit Character
+             */
             Route::get('/character/{char_id}/edit' , ['uses' => 'TsBOTController@editChar' , 'as' => 'char.edit']);
             Route::post('/character/{char_id}/edit' , ['uses' => 'TsBOTController@updateChar' , 'as' => 'char.update']);
 
+            /**
+             * Edit Guild
+             */
+            Route::get('/guild/{guild_id}/edit' , ['uses' => 'TsBOTController@editGuild' , 'as' => 'guild.edit']);
+            Route::post('/guild/{guild_id}/edit' , ['uses' => 'TsBOTController@updateGuild' , 'as' => 'guild.update']);
+
+            /**
+             * Friend List
+             */
             Route::group(['prefix' => 'friend', 'as' => 'friend.'], function () {
                 Route::get('/', ['uses' => 'TsBOTController@listFriends', 'as' => 'index']);
                 Route::get('/guilds', ['uses' => 'TsBOTController@listGuildsFriend', 'as' => 'guild.index']);
@@ -121,6 +132,9 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
                 Route::get('/guild/remove/{guild_id}', ['uses' => 'TsBOTController@delGuild', 'as' => 'guild.del']);
             });
 
+            /**
+             * Enemy List
+             */
             Route::group(['prefix' => 'enemy', 'as' => 'enemy.'], function () {
                 Route::get('/', ['uses' => 'TsBOTController@listEnemies', 'as' => 'index']);
                 Route::get('/guilds', ['uses' => 'TsBOTController@listGuildsEnemy', 'as' => 'guild.index']);

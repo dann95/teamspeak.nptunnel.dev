@@ -26,7 +26,7 @@ class Guild
     {
         $this->crawler->select($name);
 
-        if ($this->crawler->exists())
+        if (! $this->crawler->exists())
             throw new GuildDosntExists;
 
         if (count($this->guildModel->where(['name' => $name , 'tibia_list_id' => $list->id])->get()))
@@ -41,5 +41,24 @@ class Guild
             'name' => $name,
             'position' => $position
         ]);
+    }
+
+    public function remove(GuildModel $guild)
+    {
+        $crawler = $this->crawler->select($guild->name);
+        if(! ($crawler->exists()))
+            return $guild->delete();
+
+        $chars = $crawler->characters();
+
+        $guild->tibiaList
+            ->characters
+            ->filter(function($char) use($chars){
+                return in_array($char->name , $chars);
+            })
+            ->each(function($char){
+            $char->delete();
+        });
+        return $guild->delete();
     }
 }

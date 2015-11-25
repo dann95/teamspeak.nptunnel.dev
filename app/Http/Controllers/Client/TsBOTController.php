@@ -19,6 +19,7 @@ use NpTS\Domain\TeamSpeak\Manager;
 use NpTS\Domain\Bot\Requests\UpdateTibiaSettingsRequest;
 use TeamSpeak3\Ts3Exception;
 use NpTS\Domain\Bot\Models\World;
+use NpTS\Domain\Bot\Models\Guild as GuildModel;
 use NpTS\Domain\Bot\Models\Character as CharacterModel;
 use NpTS\Domain\Client\Requests\UpdateCharacterRequest;
 
@@ -30,7 +31,7 @@ class TsBOTController extends Controller
     private $guildService;
     private $worldModel;
     private $characterModel;
-    public function __construct(VirtualServerRepositoryContract $repo, Guard $guard, Character $service, Guild $guild , World $world , CharacterModel $characterModel)
+    public function __construct(VirtualServerRepositoryContract $repo, Guard $guard, Character $service, Guild $guild , World $world , CharacterModel $characterModel , GuildModel $guildModel)
     {
         parent::__construct();
         $this->vserverRepository = $repo;
@@ -39,6 +40,7 @@ class TsBOTController extends Controller
         $this->guildService = $guild;
         $this->worldModel = $world;
         $this->characterModel = $characterModel;
+        $this->guildModel = $guildModel;
     }
 
     /**
@@ -252,6 +254,18 @@ class TsBOTController extends Controller
         return redirect()->back();
     }
 
+    public function delGuild($id , $guild_id)
+    {
+        $bot = $this->getBot($id);
+        $guild = $this->getGuild($guild_id);
+        if(! ($guild->tibia_list_id == $bot->tibiaList->id))
+        {
+            return abort(403);
+        }
+        $this->guildService->remove($guild);
+        return redirect()->back();
+    }
+
     /**
      * @param $vserverId
      */
@@ -263,6 +277,8 @@ class TsBOTController extends Controller
         }
         return $vserver->bot;
     }
+
+
     private function getCharacter($id)
     {
         $char = $this->characterModel->find($id);
@@ -271,6 +287,16 @@ class TsBOTController extends Controller
             return abort(403);
         }
         return $char;
+    }
+
+    private function getGuild($id)
+    {
+        $guild = $this->guildModel->find($id);
+        if(! $guild)
+        {
+            return abort(403);
+        }
+        return $guild;
     }
 }
 

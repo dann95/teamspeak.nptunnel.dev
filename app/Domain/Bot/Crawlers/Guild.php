@@ -24,7 +24,7 @@ class Guild extends AbstractTibiaCrawler
     {
         $html = $this->getHtml(self::baseUrl.$this->name);
         $expExists = explode('<td>An internal error has occurred. Please try again later!</td>' , $html);
-        return (count($expExists) > 1) ? TRUE : FALSE;
+        return (count($expExists) > 1) ? FALSE : TRUE;
     }
 
     private function extractCharacters($html)
