@@ -33,9 +33,11 @@ class TsBot extends Model
     public function getCredentialsAttribute()
     {
         return [
-            'user'  => $this->login,
+            'user'  =>  $this->login,
             'pass'  =>  $this->password,
-            'nick'  =>  $this->name
+            'nick'  =>  $this->name,
+            'port'  =>  $this->vserver->port,
+            'ip'    =>  $this->vserver->server()->ip,
         ];
     }
 }
