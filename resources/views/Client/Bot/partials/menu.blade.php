@@ -12,8 +12,11 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('account.virtual.bot.index' , ['id' => $bot->vserver->id]) }}">Ajustes</a></li>
+                @if($bot->auto_afk)
+                <li><a href="{{ route('account.virtual.bot.afk.settings' , ['id' => $bot->vserver->id]) }}">Auto-AFK</a></li>
+                @endif
                 @if($bot->tibia_list)
-                    <li><a href="{{ route('account.virtual.bot.tibiaSettings' , ['id' => $bot->vserver->id]) }}">Ajustes Channels Tibia List</a></li>
+                    <li><a href="{{ route('account.virtual.bot.tibiaSettings' , ['id' => $bot->vserver->id]) }}">Ajustes TibiaBot</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Friend list <span class="caret"></span></a>
                         <ul class="dropdown-menu">

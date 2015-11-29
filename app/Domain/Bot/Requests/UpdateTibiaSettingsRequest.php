@@ -24,9 +24,14 @@ class UpdateTibiaSettingsRequest extends Request
     public function rules()
     {
         return [
-            'enemy_ch_id'   =>  ['required','int'],
-            'friend_ch_id'  =>  ['required','int'],
-            'world_id'      =>  ['required','int']
+            'enemy_ch_id'       =>  ['required','int'],
+            'friend_ch_id'      =>  ['required','int'],
+            'world_id'          =>  ['required','int'],
+            'rashid_ch_id'      =>  ['required','int'],
+            'blue_ch_id'        =>  ['required','int'],
+            'green_ch_id'       =>  ['required','int'],
+            'resp_ch_id'        =>  ['required','int'],
+            'resp_num_ch_id'    =>  ['required','int'],
         ];
     }
 }

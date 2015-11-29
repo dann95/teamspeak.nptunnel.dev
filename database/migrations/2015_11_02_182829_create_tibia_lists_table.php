@@ -30,6 +30,7 @@ class CreateTibiaListsTable extends Migration
             $table->unsignedInteger('blue_ch_id');
             $table->unsignedInteger('green_ch_id');
             $table->unsignedInteger('resp_ch_id');
+            $table->unsignedInteger('resp_num_ch_id');
             $table->unsignedInteger('tibia_map_id');
             $table->timestamps();
         });

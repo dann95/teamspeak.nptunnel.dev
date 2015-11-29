@@ -1,10 +1,10 @@
 <?php
 
-namespace NpTS\Domain\Bot\Requests;
+namespace NpTS\Domain\Client\Requests;
 
 use NpTS\Http\Requests\Request;
 
-class ChangeTsBotSettingsRequest extends Request
+class InstallTsBOTRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,16 @@ class ChangeTsBotSettingsRequest extends Request
     public function rules()
     {
         return [
-            'tibia_list'    =>  ['required','boolean'],
-            'auto_afk'      =>  ['required','boolean'],
+            'name' => ['required','min:4','max:16'],
+            'login' => ['required','min:3','max:32'],
+            'password' => ['required','min:1','max:64']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            //...
         ];
     }
 }

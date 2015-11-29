@@ -14,6 +14,10 @@ class TsBot extends Model
         'auto_afk',
         'max_afk_time',
         'afk_ch_id',
+        'login',
+        'name',
+        'is_installed',
+        'password'
     ];
 
     public function tibiaList()
@@ -24,5 +28,14 @@ class TsBot extends Model
     public function vserver()
     {
         return $this->belongsTo(VirtualServer::class);
+    }
+
+    public function getCredentialsAttribute()
+    {
+        return [
+            'user'  => $this->login,
+            'pass'  =>  $this->password,
+            'nick'  =>  $this->name
+        ];
     }
 }

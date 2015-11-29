@@ -101,6 +101,9 @@ Route::group(['prefix' => 'account', 'namespace' => 'Client', 'as' => 'account.'
          */
         Route::group(['prefix' => 'ts-bot', 'as' => 'bot.'], function () {
             Route::get('/', ['uses' => 'TsBOTController@index', 'as' => 'index']);
+            Route::get('/auto-afk', ['uses' => 'TsBOTController@afk', 'as' => 'afk.settings']);
+            Route::get('/install', ['uses' => 'TsBOTController@setup', 'as' => 'install']);
+            Route::post('/install' , ['uses' => 'TsBOTController@install']);
             Route::post('/settings' , ['uses' => 'TsBOTController@settings' , 'as' => 'settings']);
             Route::get('/tibia/settings', ['uses' => 'TsBOTController@tibia', 'as' => 'tibiaSettings']);
             Route::post('/tibia/settings', ['uses' => 'TsBOTController@tibiaSettings', 'as' => 'tibiaSettingsUpdate']);
@@ -198,6 +201,6 @@ Route::post('password/email', ['uses' => 'Auth\PasswordController@postEmail' , '
 Route::get('password/reset/{token}', ['uses' => 'Auth\PasswordController@getReset' , 'as' => 'password.reset.confirm']);
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::group(['prefix' => 'r2d2'] , function(){
-    // All routes for r2d2 api will come here...
+Route::group(['prefix' => 'api'] , function(){
+    // All routes for api will come here...
 });

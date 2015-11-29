@@ -22,7 +22,7 @@ use NpTS\Domain\Bot\Models\World;
 use NpTS\Domain\Bot\Models\Guild as GuildModel;
 use NpTS\Domain\Bot\Models\Character as CharacterModel;
 use NpTS\Domain\Client\Requests\UpdateCharacterRequest;
-
+use NpTS\Domain\Client\Requests\InstallTsBOTRequest;
 class TsBOTController extends Controller
 {
     private $vserverRepository;
@@ -50,16 +50,28 @@ class TsBOTController extends Controller
     public function index($id)
     {
         $bot = $this->getBot($id);
-        $vserver = $bot->vserver;
-        $manager = new Manager($vserver->server()->get()->first()->credentials);
-        try{
-            $ts = $manager->selectServer($vserver->v_sid);
-            $channels = $ts->channelList();
-        }catch(Ts3Exception $e)
-        {
-            $channels = [];
-        }
-        return view('Client.Bot.index', compact('bot','channels'));
+        if(! $bot->is_installed)
+            return redirect()->route('account.virtual.bot.install',['id' => $id]);
+
+        return view('Client.Bot.index', compact('bot'));
+    }
+
+    public function setup($id)
+    {
+        $vserver = $this->getVserver($id);
+        return view('Client.Bot.install' , compact('id'));
+    }
+
+    public function install($id , InstallTsBOTRequest $request)
+    {
+        $vserver = $this->getVserver($id);
+        $vserver->bot->update([
+            'name'      =>  $request->name,
+            'login'     =>  $request->login,
+            'password'  =>  $request->password,
+            'is_installed' =>  true,
+        ]);
+        return redirect()->route('account.virtual.bot.index',['id' => $id]);
     }
 
     public function tibia($id)
@@ -81,17 +93,38 @@ class TsBOTController extends Controller
     public function tibiaSettings($id , UpdateTibiaSettingsRequest $request)
     {
         $bot = $this->getBot($id);
-        $bot->tibiaList->update($request->only(['enemy_ch_id','friend_ch_id','world_id']));
+        $settings = array_map(function($element){
+            if($element === null)
+                return false;
+            return $element;
+        } , $request->only(['enemy_ch_id','friend_ch_id','world_id','rashid_ch_id','blue_ch_id','green_ch_id','resp_ch_id','resp_num_ch_id','show_resp','show_rashid','show_green','show_blue']));
+        $bot->tibiaList->update($settings);
         return redirect()->route('account.virtual.bot.tibiaSettings',['id' => $id]);
     }
 
     public function settings($id , ChangeTsBotSettingsRequest $request)
     {
         $bot = $this->getBot($id);
-        $bot->update($request->only(['tibia_list','auto_afk','afk_ch_id','max_afk_time']));
+        $bot->update($request->only(['tibia_list','auto_afk']));
         return redirect()->route('account.virtual.bot.index',['id' => $id]);
     }
 
+
+    public function afk($id)
+    {
+        $bot = $this->getBot($id);
+        $vserver = $bot->vserver;
+        $manager = new Manager($vserver->server()->get()->first()->credentials);
+        try{
+            $ts = $manager->selectServer($vserver->v_sid);
+            $channels = $ts->channelList();
+        }catch(Ts3Exception $e)
+        {
+            $channels = [];
+        }
+
+        return view('Client.Bot.afk' , compact('bot','channels'));
+    }
 
     /**
      * @param $id
@@ -297,6 +330,15 @@ class TsBOTController extends Controller
             return abort(403);
         }
         return $guild;
+    }
+
+    private function getVserver($id)
+    {
+        $vserver = $this->vserverRepository->find($id);
+        if (!$vserver or !($this->guard->user()->id == $vserver->user_id)) {
+            return abort(403);
+        }
+        return $vserver;
     }
 }
 

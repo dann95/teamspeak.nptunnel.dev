@@ -74,7 +74,7 @@ MAIN CONTENT
                         <div class="col-sm-9">
 
                         </div>
-                        <div id="col-sm-3">
+                        <div class="col-sm-3">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Registrar-se</button>
                         </div>
                     </div>

@@ -32,6 +32,59 @@
                 @endforelse
             </select>
         </div>
+
+        <div class="form-group">
+            <input name="show_rashid" type="checkbox" value="1" checked> Mostrar Channel Rashid:
+            <select class="form-control" name="rashid_ch_id">
+                @forelse($channels as $channel)
+                    <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->rashid_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>
+                @empty
+                    <option value="0">Nenhum Channel, server desligado.</option>
+                @endforelse
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input name="show_blue" type="checkbox" value="1" checked>Channel Blue Djin:
+            <select class="form-control" name="blue_ch_id">
+                @forelse($channels as $channel)
+                    <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->blue_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>
+                @empty
+                    <option value="0">Nenhum Channel, server desligado.</option>
+                @endforelse
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input name="show_green" type="checkbox" value="1" checked>Channel Green Djin:
+            <select class="form-control" name="green_ch_id">
+                @forelse($channels as $channel)
+                    <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->green_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>
+                @empty
+                    <option value="0">Nenhum Channel, server desligado.</option>
+                @endforelse
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input name="show_resp" type="checkbox" value="1" checked>Channel Respawn List:
+            <select class="form-control" name="resp_ch_id">
+                @forelse($channels as $channel)
+                    <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->resp_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>
+                @empty
+                    <option value="0">Nenhum Channel, server desligado.</option>
+                @endforelse
+            </select>
+            Numeros de respawn no channel:
+            <select class="form-control" name="resp_num_ch_id">
+                @forelse($channels as $channel)
+                    <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->resp_num_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>
+                @empty
+                    <option value="0">Nenhum Channel, server desligado.</option>
+                @endforelse
+            </select>
+        </div>
+
         <div class="form-group">
             <button type="submit" class="btn btn-success">Editar configurações de channel da tibia list</button>
         </div>
