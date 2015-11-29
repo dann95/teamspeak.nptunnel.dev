@@ -19,6 +19,10 @@ class TibiaList extends Model
         'green_ch_id',
         'resp_ch_id',
         'tibia_map_id',
+        'show_rashid',
+        'show_blue',
+        'show_green',
+        'show_resp'
     ];
 
     public function onlineFriends()

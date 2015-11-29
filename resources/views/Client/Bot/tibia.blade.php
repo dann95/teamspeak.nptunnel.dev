@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            <input name="show_rashid" type="checkbox" value="1" checked> Mostrar Channel Rashid:
+            <input name="show_rashid" type="checkbox" value="1" @if($bot->tibiaList->show_rashid) checked @endif> Mostrar Channel Rashid:
             <select class="form-control" name="rashid_ch_id">
                 @forelse($channels as $channel)
                     <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->rashid_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            <input name="show_blue" type="checkbox" value="1" checked>Channel Blue Djin:
+            <input name="show_blue" type="checkbox" value="1" @if($bot->tibiaList->show_blue) checked @endif>Channel Blue Djin:
             <select class="form-control" name="blue_ch_id">
                 @forelse($channels as $channel)
                     <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->blue_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="form-group">
-            <input name="show_green" type="checkbox" value="1" checked>Channel Green Djin:
+            <input name="show_green" type="checkbox" value="1" @if($bot->tibiaList->show_green) checked @endif>Channel Green Djin:
             <select class="form-control" name="green_ch_id">
                 @forelse($channels as $channel)
                     <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->green_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>
@@ -67,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            <input name="show_resp" type="checkbox" value="1" checked>Channel Respawn List:
+            <input name="show_resp" type="checkbox" value="1" @if($bot->tibiaList->show_resp) checked @endif>Channel Respawn List:
             <select class="form-control" name="resp_ch_id">
                 @forelse($channels as $channel)
                     <option value="{{ $channel['cid'] }}" @if($bot->tibiaList->resp_ch_id == $channel['cid']) selected @endif >{{ $channel['channel_name'] }}</option>

@@ -24,7 +24,7 @@ class CreateTibiaListsTable extends Migration
             $table->boolean('show_rashid')->default(0);
             $table->boolean('show_blue')->default(0);
             $table->boolean('show_green')->default(0);
-            $table->boolean('show_resp_numbers')->default(0);
+            $table->boolean('show_resp')->default(0);
             $table->boolean('show_tibia_map')->default(0);
             $table->unsignedInteger('rashid_ch_id');
             $table->unsignedInteger('blue_ch_id');
