@@ -17,7 +17,17 @@ class TsBot extends Model
         'login',
         'name',
         'is_installed',
-        'password'
+        'password',
+        'api_code'
+    ];
+
+    protected $hidden = [
+        'api_code',
+        'created_at',
+        'updated_at',
+        'id',
+        'vserver_id',
+        'tibia_list',
     ];
 
     public function tibiaList()

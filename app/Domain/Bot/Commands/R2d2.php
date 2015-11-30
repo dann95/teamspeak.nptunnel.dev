@@ -53,22 +53,25 @@ class R2d2 extends Command
 
 
         $bots->each(function($bot){
-            $credentials = $bot->vserver->server()->credentials;
-
-            $ts = TeamSpeak3::factory("serverquery://{$credentials['user']}:{$credentials['password']}@{$credentials['ip']}:10011/?server_port={$bot->vserver->port}&blocking=0&nick=TS_BOT");
+            $credentials = $bot->credentials;
+            $this->ts = TeamSpeak3::factory("serverquery://{$credentials['user']}:{$credentials['pass']}@{$credentials['ip']}:10011/?server_port={$credentials['port']}&blocking=0&nickname={$credentials['nick']}#no_query_clients");
 
             // get notified on incoming private messages
-            $ts->notifyRegister("textprivate");
+            $this->ts->notifyRegister("textprivate");
+            $this->ts->notifyRegister("textserver");
+            $this->ts->notifyRegister("server");
             Signal::getInstance()->subscribe("notifyTextmessage", array($this,'onTextmessage'));
 
-            dd(Signal::getInstance());
+            Signal::getInstance()->subscribe("notifyEvent", array($this,"onEvent"));
 
             while(true)
             {
-                $ts->getAdapter()->wait();
+                $this->ts->getAdapter()->wait();
             }
 
         });
+
+        echo "123456";
 
     }
 
@@ -86,5 +89,23 @@ class R2d2 extends Command
                 echo "New Server Message from " . $info["invokername"]->toString() . ": " . $info["msg"] . "\n";
                 break;
         }
+    }
+    public function onUserJoin()
+    {
+        echo 123;
+    }
+    public function onEvent(Event $event, Host $host)
+    {
+        if($event->getType() == "cliententerview")
+        {
+            $data = $event->getData();
+            try{
+            $this->ts->clientGetByName($data['client_nickname']->toString())->message("ola!");
+            }catch (Ts3Exception $e)
+            {
+                //..
+            }
+        }
+        //$event->getMessage() . "\n";
     }
 }

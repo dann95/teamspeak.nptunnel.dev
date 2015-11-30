@@ -201,6 +201,9 @@ Route::post('password/email', ['uses' => 'Auth\PasswordController@postEmail' , '
 Route::get('password/reset/{token}', ['uses' => 'Auth\PasswordController@getReset' , 'as' => 'password.reset.confirm']);
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::group(['prefix' => 'api'] , function(){
-    // All routes for api will come here...
+Route::group(['prefix' => 'api' , 'namespace' => 'Api'] , function(){
+    Route::group(['prefix' => 'r2d2/{api_key}'] , function(){
+        Route::get('/credentials' , ['uses' => 'R2d2@credentials']);
+        Route::post('/request' , ['uses' => 'R2d2@request']);
+    });
 });
