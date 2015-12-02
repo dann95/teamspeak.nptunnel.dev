@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssignedRespawnsTable extends Migration
+class CreateAllowedClaimRespawnGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,10 @@ class CreateAssignedRespawnsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assigned_respawns', function (Blueprint $table) {
+        Schema::create('allowed_claim_respawn_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tibia_list_id');
-            $table->unsignedInteger('respawn_id');
-            $table->smallInteger('state');
-            $table->string('uid');
-            $table->unsignedInteger('cid');
-            $table->string('nick');
+            $table->unsignedInteger('group_id');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateAssignedRespawnsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('assigned_respawns');
+        Schema::drop('allowed_claim_respawn_groups');
     }
 }

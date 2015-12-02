@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use NpTS\Http\Requests;
 use NpTS\Http\Controllers\Controller;
 use NpTS\Domain\Bot\Models\TsBot;
+use NpTS\Domain\Bot\Inteligence\Commands;
 
 class R2d2 extends Controller
 {
@@ -22,8 +23,8 @@ class R2d2 extends Controller
         return $credentials->credentials;
     }
 
-    public function request($api_key)
+    public function request($api_key , Request $request)
     {
-        return "allahu akbar!";
+        return (new Commands($api_key , $request))->execute();
     }
 }

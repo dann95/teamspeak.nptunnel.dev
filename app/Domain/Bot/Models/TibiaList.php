@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use NpTS\Domain\Bot\Models\Character;
 use NpTS\Domain\Bot\Models\Guild;
 use NpTS\Domain\Bot\Models\TsBot;
+use NpTS\Domain\Bot\Models\AllowedClaimRespawnGroup;
+use NpTS\Domain\Bot\Models\AssignedRespawn;
 
 class TibiaList extends Model
 {
@@ -88,5 +90,15 @@ class TibiaList extends Model
     public function tsBot()
     {
         return $this->belongsTo(TsBot::class);
+    }
+
+    public function allowedGroupsClaimResp()
+    {
+        return $this->hasMany(AllowedClaimRespawnGroup::class);
+    }
+
+    public function claimedRespawns()
+    {
+        return $this->hasMany(AssignedRespawn::class);
     }
 }
