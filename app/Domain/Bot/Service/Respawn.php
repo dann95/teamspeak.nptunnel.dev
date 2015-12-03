@@ -2,10 +2,12 @@
 
 namespace NpTS\Domain\Bot\Service;
 
+use NpTS\Domain\Bot\Service\Exceptions\RespawnIsNotClaimed;
 use NpTS\Domain\Bot\Service\Exceptions\RespawnNumberDosntExists;
 use NpTS\Domain\Bot\Models\Respawn as RespawnModel;
 use NpTS\Domain\Bot\Models\TsBot as BotModel;
 use NpTS\Domain\Bot\Service\Exceptions\UserDontHavePermissionToClaimRespawn;
+use NpTS\Domain\Bot\Service\Exceptions\YouAreNotTheOwnerOfTheRespawn;
 
 class Respawn
 {
@@ -39,7 +41,7 @@ class Respawn
 
         if($this->isRespawnBusy($resp_code , 1))
         {
-            return "[b][color=red]{$this->getRespawnByCode($resp_code)->respawn->name} ocupado a ".date("H:i",time()-$this->getRespawnByCode($resp_code)->created_at->timestamp)." por {$this->getRespawnByCode($resp_code)->client} [/color][/b]";
+            return "[b][color=red]{$this->getRespawnByCode($resp_code)->respawn->name} ocupado a ".date("H:i",time()-$this->getRespawnByCode($resp_code)->created_at->timestamp)." por {$this->getRespawnByCode($resp_code)->client} [/color] , !respnext {$resp_code}[/b]";
         }
 
         $this->getTibiaList()->claimedRespawns()
@@ -55,12 +57,33 @@ class Respawn
 
     }
 
-    public function respnext()
+    public function deleteRespawn($resp_code , $cid , $uid , $groups)
     {
-        //...
+        // O respawn existe?
+        if(! in_array($resp_code , $this->getRespawnsList()))
+        {
+            throw new RespawnNumberDosntExists;
+        }
+
+        // Esse resp está memso ocupado?
+        $resp = $this->getRespawnByCode($resp_code);
+
+        if(!$resp)
+        {
+            throw new RespawnIsNotClaimed;
+        }
+
+        // Você é o dono?
+
+        if(! ($resp->uid == $uid))
+        {
+            throw new YouAreNotTheOwnerOfTheRespawn;
+        }
+
+        $resp->delete();
     }
 
-    public function respdel()
+    public function respnext()
     {
         //...
     }
@@ -103,8 +126,16 @@ class Respawn
 
     private function getRespawnByCode($code)
     {
-        return $this->getClaimedRespawns()->filter(function($respawn) use($code){
+        $resp = $this->getClaimedRespawns()->filter(function($respawn) use($code){
             return (($respawn->respawn_id == $code));
-        })->first();
+        });
+
+        if(count($resp->toArray()) == 0)
+        {
+            return false;
+        }
+
+        return $resp->first();
+
     }
 }
